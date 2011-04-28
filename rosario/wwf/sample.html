@@ -1,37 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Columnizer JQuery Plugin sample page</title>
-	<meta name="author" content="Adam Wulf, Matt Wilson">
-	<!-- Date: 2008-07-12 -->
-	<style>
-		.column{ padding: 5px; }
 
-
-		body { font-size: 9pt; }
-		#wrapper { margin: 0px 100px; }
-		.wide, .thin { clear:both; }
-	</style>
-	<script type="text/javascript" src="jquery.js"></script>
-	<script src="jquery.columnizer.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		$(function(){
 			$('.wide').columnize({
-				width : 500,
-				buildOnce : true,
-				overflow : {
-					id : ".thin",
-					height : 300,
-					doneFunc : function(){
-						$('.thin').columnize({ width : 300 });
-					}
-				}
-			})
+					width : 320,
+					height: 420
+			});
+			
+			// $('.wide').columnize({
+			// 	width : 500,
+			// 	buildOnce : true,
+			// 	overflow : {
+			// 		id : ".thin",
+			// 		height : 300,
+			// 		doneFunc : function(){
+			// 			$('.thin').columnize({ width : 300 });
+			// 		}
+			// 	}
+			// })
 		});
 	</script>
-</head>
-<body>
+	<style>
+	</style>
+
 <div id="wrapper">
 	<div class="wide">
 		<h1>A True Newspaper Layout</h1>
@@ -75,5 +65,3 @@
 	</div>
 	<div class="thin"></div>
 </div>
-</body>
-</html>
