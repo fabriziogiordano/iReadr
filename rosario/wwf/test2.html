@@ -1,21 +1,11 @@
 <div data-role="page">
 
 <script>
-  function ready (fn) {
-    document.addEventListener('DOMContentLoaded', fn, false);
-  }
 
-  ready(function() {
-		$('#page').columnize({ width: 200 });
-	
-    window.addEventListener("load",function() {
-      // Set a timeout...
-      setTimeout(function(){
-        // Hide the address bar!
-        window.scrollTo(0, 1);
-      }, 120);
-    });
-  });
+$(function() {
+	$('#page').columnize({ width: 200 });
+});
+
 </script>
 
 
