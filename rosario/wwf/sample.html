@@ -5,28 +5,66 @@
 					width : 320,
 					height: 420
 			});
-			
-			// $('.wide').columnize({
-			// 	width : 500,
-			// 	buildOnce : true,
-			// 	overflow : {
-			// 		id : ".thin",
-			// 		height : 300,
-			// 		doneFunc : function(){
-			// 			$('.thin').columnize({ width : 300 });
-			// 		}
-			// 	}
-			// })
 		});
 	</script>
 	<style>
+
+	/*HORIZONTAL SCROLLER*/
+
+
+	.app-screen {
+	  border:0;
+	  background-color: black;
+	  margin:0px !important;
+	  padding:10px !important;
+	/*  -moz-box-shadow: inset 0 0 5px 2px #666;
+	  -webkit-box-shadow: inset 0 0 5px 2px #666;
+	  box-shadow: inner 0 0 5px 2px #666;
+	*/
+	}
+
+
+	.square {
+		padding:5px;
+		border:2px solid white;
+	  width: 286px;
+	  text-align: center;
+	  font-size: 16px;
+	  background-color: #2e4e4e;
+		color:#eee;
+	  margin:0 !important;
+		float:left;
+	}
+
+	.square p {font-size:13px;}
+
+
+
+	/* LATERAL SCROLL, ONE LARGE IMAGE */
+	.oneByone > .ui-scrollview-view {
+		/* Given that we have 3 images, 320 x 3 = 960px width*/
+		width: 900px; 
+		background-color: transparent;
+	}
+
+	.oneByone {
+	  overflow: hidden;
+	  height: 340px;
+	  background-color: transparent;
+	}
+
+	.oneByone img {
+		margin-top:20px;
+	}
+
+	#header h1{font-size:14px;}
 	</style>
 
-<div id="wrapper">
+
+	<div class="app-screen grid_4">
+		<div data-scroll="xp" class="oneByone">
 	<div class="wide">
-		<h1>A True Newspaper Layout</h1>
-		<p>All of the content in this layout is auto-overflowing from the top columns into the bottom columns. View the source to check it out!</p>
-		<p></p>
+		
 		<p>Bonorum has. His ut cibo quas tantas, vis ut probo adhuc definiebas, has at meis debet vulputate. No sed velit essent suavitate, in pro decore ceteros temporibus, usu in odio offendit theophrastus. Mel labore indoctum cu, ad soleat admodum delicatissimi sed, mei viris tritani ullamcorper eu. Ut vim simul aperiam.</p>
 		<p>Eu eleifend repudiandae has. Mea eu ridens aliquam. Nisl aeque sit ut, posse dolor utinam cum in. Ad timeam sapientem eos, et eripuit inermis nam. Eos integre voluptaria ne, iriure concludaturque ut eum.</p>
 		<p>Vis erant intellegat in. Soleat legere no ius, usu ex laoreet molestie. Sit eu sint inermis. Ea zzril scribentur pro.</p>
@@ -63,5 +101,4 @@
 		<p>Per ne solum vivendo, fabulas dolorem vivendo in pro. Nec duis ignota cotidieque no, an per possit nostrum. Pro detraxit definitionem eu. Vivendo officiis no nam, eu has reque maiestatis percipitur, dolore reprimique accommodare cum ad. No utinam voluptua oportere pri, augue sonet dicant ei sea.</p>
 		<p>Sit et, an ius nihil apeirian. Eu posse tempor iuvaret cum. No diam dolor sea, postea mnesarchum ne ius, vel no utinam ignota dolores. Malis suscipit accusamus his ne, utinam assentior prodesset ea eam, facer partem antiopam et cum.</p>
 	</div>
-	<div class="thin"></div>
-</div>
+</div></div>
