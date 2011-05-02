@@ -7,11 +7,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>Book Reader</title>
 
-<script src="./src/polyfill.js"></script>
-<script src="./src/zepto.js"></script>
-<script src="./src/event.js"></script>
-<script src="./src/touch.js"></script>
-
+<!-- <script src="./src/polyfill.js"></script> -->
+<!-- <script src="./src/zepto.js"></script> -->
+<!-- <script src="./src/event.js"></script> -->
+<!-- <script src="./src/touch.js"></script> -->
+<script src="./src/jquery.js"></script>
 
 </head>
 <body>
@@ -53,6 +53,39 @@ body {
          -o-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
 }
 </style>
+
+
+<script>
+
+
+$(document).ready(function() {
+	
+
+  document.a = document.getElementById('lorem').scrollWidth / 320 ;
+  console.log(document.a);
+
+  // Handler for .ready() called.
+});
+
+
+		    // $('#scroller')
+		    // 	    .swipeLeft(function(event){
+		    // 	        sposta(-1);
+		    // 	    })
+		    // 	    .swipeRight(function(event){
+		    // 	        sposta(1);
+		    // 	    });
+
+		    // document.getElementById('lorem').addEventListener( 'webkitTransitionEnd', 
+		    //     function( event ) {
+		    //         if(event.propertyName === '-webkit-column-width') return false;
+		    //         console.log(event);
+		    //         alert( "Finished transition!" );
+		    //         document.a = document.getElementById('lorem').scrollWidth / 120 ;
+		    //         alert(document.a);
+		    //     }, false );
+</script>
+
 <script>
 var page = 1;
 var move = 0;
@@ -102,30 +135,7 @@ function cambia_css(){
 }
 
 
-$(document).ready(function(){
 
-    
-    document.a = document.getElementById('lorem').scrollWidth / 320 ;
-    console.log(document.a);
-
-    // $('#scroller')
-    // 	    .swipeLeft(function(event){
-    // 	        sposta(-1);
-    // 	    })
-    // 	    .swipeRight(function(event){
-    // 	        sposta(1);
-    // 	    });
-    
-    // document.getElementById('lorem').addEventListener( 'webkitTransitionEnd', 
-    //     function( event ) {
-    //         if(event.propertyName === '-webkit-column-width') return false;
-    //         console.log(event);
-    //         alert( "Finished transition!" );
-    //         document.a = document.getElementById('lorem').scrollWidth / 120 ;
-    //         alert(document.a);
-    //     }, false );
-    
-});
 
 </script>
 <a href="#" onmousedown="sposta(1);">boh</a>
