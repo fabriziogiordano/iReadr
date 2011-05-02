@@ -78,7 +78,7 @@ function sposta(d)
 		console.log("Move = "+ move);
     document.getElementById('page').innerHTML = page + ' ' + d + ' ' + move;
 
-    var v = "translate3d("+ move +"px, 0 , 0px)";
+    var v = "translate3d("+ -move +"px, 0 , 0px)";
 		$('#lorem').css({
 			"-moz-transform": v,
 			"-webkit-transform": v,
