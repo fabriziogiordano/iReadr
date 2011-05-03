@@ -1,19 +1,3 @@
-/**
- * 
- * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * iScroll v4.0 Beta 4
- * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *
- * Copyright (c) 2010 Matteo Spinelli, http://cubiq.org/
- * Released under MIT license
- * http://cubiq.org/dropbox/mit-license.txt
- * 
- * Last updated: 2011.03.10
- * 
- * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 
- */
-
 (function(){
 function iScroll (el, options) {
 	var that = this, doc = document, div, i;
@@ -21,7 +5,13 @@ function iScroll (el, options) {
 	that.wrapper = typeof el == 'object' ? el : doc.getElementById(el);
 	that.wrapper.style.overflow = 'hidden';
 	that.scroller = that.wrapper.children[0];
-
+	
+	/*Esport some interesting variables*/
+  that.has3d = has3d;
+  that.hasTouch = hasTouch;
+  that.isIDevice = isIDevice;
+  that.isAndroid = isAndroid;
+  	
 	// Default options
 	that.options = {
 		HWTransition: true,		// Experimental, internal use only
@@ -1042,7 +1032,7 @@ var has3d = 'WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix(),
 	trnOpen = 'translate' + (has3d ? '3d(' : '('),
 	trnClose = has3d ? ',0)' : ')',
 	m = Math;
-
+  
 if (typeof exports !== 'undefined') exports.iScroll = iScroll;
 else window.iScroll = iScroll;
 

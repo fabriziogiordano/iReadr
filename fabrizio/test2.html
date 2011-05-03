@@ -4,9 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>Book Reader Fabrizio</title>
-
-<script src="./iscroll.js"></script>
-
 <style>
 * {
   margin: 0px;
@@ -100,9 +97,6 @@ document.addEventListener('DOMContentLoaded', function(){
   var num_pages = Math.ceil(book_height / 300);
 
   document.getElementById('totpages').innerHTML = num_pages;
-	
-  // alert(book_height);
-  // alert(num_pages);
   
   for (i=1; i<=num_pages; i++) {
     var clone = book.cloneNode(true);
@@ -141,29 +135,11 @@ function sposta(d) {
   move = move + 320*d;
   // document.getElementById('scroller').style.webkitTransform = "translate("+ -move +"px, 0px)";
   // document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
-  //document.getElementById('book'+page).style.webkitTransform = "rotateY(-90deg)";
-  // document.getElementById('book'+page).style.webkitTransform = "perspective(800) rotate3d(1, 0, 0, -45deg)";
-  //document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
+  // document.getElementById('book'+page).style.webkitTransform = "rotateY(-90deg)";
+  document.getElementById('book'+page).style.webkitTransform = "perspective(800) rotate3d(1, 0, 0, -45deg)";
+  document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
   
 }
-
-
-
-function loaded() {
-	myScroll = new iScroll('wrapper', {
-		snap: true,
-		momentum: false,
-		hScrollbar: false,
-		onScrollEnd: function () {
-			document.querySelector('#indicator > li.active').className = '';
-			document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
-			document.getElementById('page').innerHTML = this.currPageX;
-      
-		}
-	 });
-}
-
-document.addEventListener('DOMContentLoaded', loaded, false);
 
 </script>
 

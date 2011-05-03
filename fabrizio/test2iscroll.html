@@ -1,8 +1,17 @@
+<!--
+TODO:
+- 
+
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
 <title>Book Reader Fabrizio</title>
 
 <script src="./iscroll.js"></script>
@@ -11,29 +20,52 @@
 * {
   margin: 0px;
   padding: 0px;
+  font-family: Helvetica;
+  font-size:10px;
 }
 
 body {
+  height:100%;
   -webkit-perspective: 800;
   -webkit-text-size-adjust: none;
   -webkit-transform-style: preserve-3d;
   -webkit-user-select: none;
 }
 
-
-#scroller {
-  width:9999px;
-  height:100%;
-  display:block;
-  margin-left:0px;
-  -webkit-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
+#header {
+	top:0; left:0;
+	width:100%;
+	height:45px;
+	line-height:45px;
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #fe96c9), color-stop(0.05, #d51875), color-stop(1, #7b0a2e));
+	padding:0;
+	color:#eee;
+	font-size:20px;
+	text-align:center;
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+	color:#f3f3f3;
 }
 
-h1 {line-height:40px;}
+#wrapper {
+	z-index:1;
+	top:45px; bottom:48px; left:0;
+	width:100%;
+	overflow:auto;
+}
+
+#scroller {
+	position:relative;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	float:left;
+	width:100%;
+}
+
+.pages h1 {line-height:40px;}
+
 .pages {
   font-size: 18px;
   line-height:20px;
-  height:300px;
   overflow:hidden;
   float:left;
   width:320px;
@@ -46,6 +78,7 @@ h1 {line-height:40px;}
 #nav {
 	width:320px;
 	float:left;
+	height:46px;
 }
 
 #prev, #next {
@@ -94,73 +127,58 @@ h1 {line-height:40px;}
 </style>
 
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function(){
+var page = 0;
+var move = 0;
+
+function si(){
+  //alert('cci');
+  setTimeout(scrollTo, 0, 0, 1);
+  
+  var bar=0;
+  if ( ("standalone" in window.navigator) && window.navigator.standalone ) {
+    bar=0;
+  }
+  else {
+    bar=40;
+  }
+  
+  var w = window.innerWidth;
+  var h = window.innerHeight;
+  var space = screen.height - 50 - 50 - bar;
+  
   var book = document.getElementById('book0');
   var book_height = book.scrollHeight;
-  var num_pages = Math.ceil(book_height / 300);
-
+  var num_pages = Math.ceil(book_height / space);
+  
   document.getElementById('totpages').innerHTML = num_pages;
-	
-  // alert(book_height);
-  // alert(num_pages);
+  document.getElementById('scroller').style.width = 320+320*num_pages+"px";
   
   for (i=1; i<=num_pages; i++) {
     var clone = book.cloneNode(true);
     var page = book.parentNode.appendChild(clone);
     page.id = "book"+i;
-    page.scrollTop = i*300;
+    page.style.height = space + "px";
+    page.scrollTop = i*space;
   }
   
-  document.getElementById('scroller').style.width = 320+320*num_pages+"px";
+  document.getElementById('scroller').style.height = space + "px";
   
-  document.getElementById('scroller').addEventListener( 'webkitTransitionEnd', function( event ) {
-    //alert(event.propertyName);
-    // if(event.propertyName === '-webkit-column-width') return false;
-    // console.log(event);
-    // alert( "Finished transition!" );
-    // document.a = document.getElementById('lorem').scrollWidth / 120 ;
-    // alert(document.a);
-  }, false );
-  
-  
-  // document.getElementById('wrapper').addEventListener('touchmove', function (e) {
-  //   e.preventDefault();
-  //   sposta(1);
-  //   
-  // }, false);
-  
-  
-}, false);
-
-var page = 0;
-var move = 0;
-function sposta(d) {
-  page = page+d;
-  document.getElementById('page').innerHTML = page;
-  if(page < 0 ) return;
-  move = move + 320*d;
-  // document.getElementById('scroller').style.webkitTransform = "translate("+ -move +"px, 0px)";
-  // document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
-  //document.getElementById('book'+page).style.webkitTransform = "rotateY(-90deg)";
-  // document.getElementById('book'+page).style.webkitTransform = "perspective(800) rotate3d(1, 0, 0, -45deg)";
-  //document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
+  bookScroll = new iScroll('wrapper', {
+    snap: true,
+    momentum: false,
+    hScrollbar: false,
+    vScrollbar: false,
+    onScrollEnd: function () {
+      document.querySelector('#indicator > li.active').className = '';
+      document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+      document.getElementById('page').innerHTML = this.currPageX;
+    }
+  });
   
 }
 
-
-
 function loaded() {
-	myScroll = new iScroll('wrapper', {
-		snap: true,
-		momentum: false,
-		hScrollbar: false,
-		onScrollEnd: function () {
-			document.querySelector('#indicator > li.active').className = '';
-			document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
-			document.getElementById('page').innerHTML = this.currPageX;
-      
-		}
-	 });
+  setTimeout(si, 500);
 }
 
 document.addEventListener('DOMContentLoaded', loaded, false);
@@ -168,39 +186,41 @@ document.addEventListener('DOMContentLoaded', loaded, false);
 </script>
 
 </head>
-<body>
-<a href="#" onmousedown="sposta(-1);"><- sposta</a> <a href="#" onmousedown="sposta(1);">sposta -></a>
-<div id="wrapper">
-    <div id="scroller">
-        <div class="pages" id="book0">
-            <h1>Lorem Ipsum Text</h1>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <img src="http://dummyimage.com/120x120/000/fff" width="120px" height="120px"> Nam cursus. Morbi ut mi. Nullam enim leo, <strong>egestas id, condimentum at</strong>, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.
-            Pellentesque habitant morbi tristique senectus et <img src="http://dummyimage.com/120x120/000/fff" width="120px" height="120px"> netus et malesuada fames ac turpis egestas. In posuere felis nec tortor. Pellentesque faucibus. Ut accumsan ultricies elit. Maecenas at justo id velit placerat molestie. Donec dictum lectus non odio. Cras a ante vitae enim iaculis aliquam. Mauris nunc quam, venenatis nec, euismod sit amet, egestas placerat, est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras id elit. Integer quis urna. Ut ante enim, dapibus malesuada, fringilla eu, condimentum quis, tellus. Aenean porttitor eros vel dolor. Donec convallis pede venenatis nibh. Duis quam. Nam eget lacus. Aliquam erat volutpat. Quisque dignissim congue leo.
-            Mauris vel lacus vitae felis vestibulum volutpat. <img src="http://dummyimage.com/120x120/000/fff" width="120px" height="120px"> Etiam est nunc, venenatis in, tristique eu, imperdiet ac, nisl. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In iaculis facilisis massa. Etiam eu urna. Sed porta. Suspendisse quam leo, molestie sed, luctus quis, feugiat in, pede. Fusce tellus. Sed metus augue, convallis et, vehicula ut, pulvinar eu, ante. Integer orci tellus, tristique vitae, consequat nec, porta vel, lectus. Nulla sit amet diam. Duis non nunc. Nulla rhoncus dictum metus. Curabitur tristique mi condimentum orci. Phasellus pellentesque aliquam enim. Proin dui lectus, cursus eu, mattis laoreet, viverra sit amet, quam. Curabitur vel dolor ultrices ipsum dictum tristique. Praesent vitae lacus. Ut velit enim, vestibulum non, fermentum nec, hendrerit quis, leo. Pellentesque rutrum malesuada neque.
-            Nunc tempus felis vitae urna. Vivamus porttitor, <img src="http://dummyimage.com/120x120/000/fff" width="120px" height="120px"> neque at volutpat rutrum, purus nisi eleifend libero, a tempus libero lectus feugiat felis. Morbi diam mauris, viverra in, gravida eu, mattis in, ante. Morbi eget arcu. Morbi porta, libero id ullamcorper nonummy, nibh ligula pulvinar metus, eget consectetuer augue nisi quis lacus. Ut ac mi quis lacus mollis aliquam. Curabitur iaculis tempus eros. Curabitur vel mi sit amet magna malesuada ultrices. Ut nisi erat, fermentum vel, congue id, euismod in, elit. Fusce ultricies, orci ac feugiat suscipit, leo massa sodales velit, et scelerisque mi tortor at ipsum. Proin orci odio, commodo ac, gravida non, tristique vel, tellus. Pellentesque nibh libero, ultricies eu, sagittis non, mollis sed, justo. Praesent metus ipsum, pulvinar pulvinar, porta id, fringilla at, est.
-            Phasellus felis dolor, scelerisque a, tempus eget, lobortis id, libero. <img src="http://dummyimage.com/120x120/000/fff" width="120px" height="120px"> Donec scelerisque leo ac risus. Praesent sit amet est. In dictum, dolor eu dictum porttitor, enim felis viverra mi, eget luctus massa purus quis odio. Etiam nulla massa, pharetra facilisis, volutpat in, imperdiet sit amet, sem. Aliquam nec erat at purus cursus interdum. Vestibulum ligula augue, bibendum accumsan, vestibulum ut, commodo a, mi. Morbi ornare gravida elit. Integer congue, augue et malesuada iaculis, ipsum dui aliquet felis, at cursus magna nisl nec elit. Donec iaculis diam a nisi accumsan viverra. Duis sed tellus et tortor vestibulum gravida. Praesent elementum elit at tellus. Curabitur metus ipsum, luctus eu, malesuada ut, tincidunt sed, diam. Donec quis mi sed magna hendrerit accumsan. Suspendisse risus nibh, ultricies eu, volutpat non, condimentum hendrerit, augue. Etiam eleifend, metus vitae adipiscing semper, mauris ipsum iaculis elit, congue gravida elit mi egestas orci. Curabitur pede.
-            Maecenas aliquet velit vel turpis. Mauris neque metus, malesuada nec, ultricies sit amet, <img src="http://dummyimage.com/120x120/000/fff" width="120px" height="120px"> porttitor mattis, enim. In massa libero, interdum nec, interdum vel, blandit sed, nulla. In ullamcorper, est eget tempor cursus, neque mi consectetuer mi, a ultricies massa est sed nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Proin nulla arcu, nonummy luctus, dictum eget, fermentum et, lorem. Nunc porta convallis pede.
-        </div>
-    </div>
-</div>
+<body id="ciccio">
+  <div id="header">
+    prova
+  </div>
+  <div id="wrapper">
+      <div id="scroller">
+          <div class="pages" id="book0">
+              <h1>Lorem Ipsum Text</h1>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <img src="./120.gif" width="120px" height="120px"> Nam cursus. Morbi ut mi. Nullam enim leo, <strong>egestas id, condimentum at</strong>, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.
+              Pellentesque habitant morbi tristique senectus et <img src="./120.gif" width="120px" height="120px"> netus et malesuada fames ac turpis egestas. In posuere felis nec tortor. Pellentesque faucibus. Ut accumsan ultricies elit. Maecenas at justo id velit placerat molestie. Donec dictum lectus non odio. Cras a ante vitae enim iaculis aliquam. Mauris nunc quam, venenatis nec, euismod sit amet, egestas placerat, est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras id elit. Integer quis urna. Ut ante enim, dapibus malesuada, fringilla eu, condimentum quis, tellus. Aenean porttitor eros vel dolor. Donec convallis pede venenatis nibh. Duis quam. Nam eget lacus. Aliquam erat volutpat. Quisque dignissim congue leo.
+              Mauris vel lacus vitae felis vestibulum volutpat. <img src="./120.gif" width="120px" height="120px"> Etiam est nunc, venenatis in, tristique eu, imperdiet ac, nisl. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In iaculis facilisis massa. Etiam eu urna. Sed porta. Suspendisse quam leo, molestie sed, luctus quis, feugiat in, pede. Fusce tellus. Sed metus augue, convallis et, vehicula ut, pulvinar eu, ante. Integer orci tellus, tristique vitae, consequat nec, porta vel, lectus. Nulla sit amet diam. Duis non nunc. Nulla rhoncus dictum metus. Curabitur tristique mi condimentum orci. Phasellus pellentesque aliquam enim. Proin dui lectus, cursus eu, mattis laoreet, viverra sit amet, quam. Curabitur vel dolor ultrices ipsum dictum tristique. Praesent vitae lacus. Ut velit enim, vestibulum non, fermentum nec, hendrerit quis, leo. Pellentesque rutrum malesuada neque.
+              Nunc tempus felis vitae urna. Vivamus porttitor, <img src="./120.gif" width="120px" height="120px"> neque at volutpat rutrum, purus nisi eleifend libero, a tempus libero lectus feugiat felis. Morbi diam mauris, viverra in, gravida eu, mattis in, ante. Morbi eget arcu. Morbi porta, libero id ullamcorper nonummy, nibh ligula pulvinar metus, eget consectetuer augue nisi quis lacus. Ut ac mi quis lacus mollis aliquam. Curabitur iaculis tempus eros. Curabitur vel mi sit amet magna malesuada ultrices. Ut nisi erat, fermentum vel, congue id, euismod in, elit. Fusce ultricies, orci ac feugiat suscipit, leo massa sodales velit, et scelerisque mi tortor at ipsum. Proin orci odio, commodo ac, gravida non, tristique vel, tellus. Pellentesque nibh libero, ultricies eu, sagittis non, mollis sed, justo. Praesent metus ipsum, pulvinar pulvinar, porta id, fringilla at, est.
+              Phasellus felis dolor, scelerisque a, tempus eget, lobortis id, libero. <img src="./120.gif" width="120px" height="120px"> Donec scelerisque leo ac risus. Praesent sit amet est. In dictum, dolor eu dictum porttitor, enim felis viverra mi, eget luctus massa purus quis odio. Etiam nulla massa, pharetra facilisis, volutpat in, imperdiet sit amet, sem. Aliquam nec erat at purus cursus interdum. Vestibulum ligula augue, bibendum accumsan, vestibulum ut, commodo a, mi. Morbi ornare gravida elit. Integer congue, augue et malesuada iaculis, ipsum dui aliquet felis, at cursus magna nisl nec elit. Donec iaculis diam a nisi accumsan viverra. Duis sed tellus et tortor vestibulum gravida. Praesent elementum elit at tellus. Curabitur metus ipsum, luctus eu, malesuada ut, tincidunt sed, diam. Donec quis mi sed magna hendrerit accumsan. Suspendisse risus nibh, ultricies eu, volutpat non, condimentum hendrerit, augue. Etiam eleifend, metus vitae adipiscing semper, mauris ipsum iaculis elit, congue gravida elit mi egestas orci. Curabitur pede.
+              Maecenas aliquet velit vel turpis. Mauris neque metus, malesuada nec, ultricies sit amet, <img src="./120.gif" width="120px" height="120px"> porttitor mattis, enim. In massa libero, interdum nec, interdum vel, blandit sed, nulla. In ullamcorper, est eget tempor cursus, neque mi consectetuer mi, a ultricies massa est sed nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Proin nulla arcu, nonummy luctus, dictum eget, fermentum et, lorem. Nunc porta convallis pede.
+          </div>
+      </div>
+  </div>
 
-<div id="nav">
-	<div id="prev" onclick="myScroll.scrollToPage('prev', 0);return false">&larr; prev</div>
-	<ul id="indicator">
-		<li class="active">1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>6</li>
-		<li>7</li>
-		<li>8</li>
-		<li>9</li>
-		<li>10</li>
-	</ul>
-	<span id="page"> 0 </span>
-	<span id="totpages"> 0 </span>
-	<div id="next" onclick="myScroll.scrollToPage('next', 0);return false">next &rarr;</div>
-</div>
+  <div id="nav">
+  	<div id="prev" onclick="bookScroll.scrollToPage('prev', 0);return false">&larr; prev</div>
+  	<ul id="indicator">
+  		<li class="active">1</li>
+  		<li>2</li>
+  		<li>3</li>
+  		<li>4</li>
+  		<li>5</li>
+  		<li>6</li>
+  		<li>7</li>
+  		<li>8</li>
+  		<li>9</li>
+  		<li>10</li>
+  	</ul>
+  	<span id="page"> 0 </span>
+  	<span id="totpages"> 0 </span>
+  	<div id="next" onclick="bookScroll.scrollToPage('next', 0);return false">next &rarr;</div>
+  </div>
 </body>
 </html>
