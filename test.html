@@ -18,40 +18,42 @@
 
 
 <style>
-* {
-  margin: 0px;
-  padding: 0px;
-}
+	* {
+	  margin: 0px;
+	  padding: 0px;
+	}
 
-body {
-  -webkit-perspective: 800;
-  -webkit-text-size-adjust: none;
-  -webkit-transform-style: preserve-3d;
-  -webkit-user-select: none;
-  font-family: Helvetica;
-  overflow-x: hidden;
-  height: 100%;
-  width: 100%;
-}
+	body {
+	  -webkit-perspective: 800;
+	  -webkit-text-size-adjust: none;
+	  -webkit-transform-style: preserve-3d;
+	  -webkit-user-select: none;
+	  font-family: Helvetica;
+	  overflow-x: hidden;
+	  height: 100%;
+	  width: 100%;
+	}
 
 
-#scroller {
-    /*width:320px;*/
-    height:200px;
-    display:block;
-    overflow:hidden;
-}
+	#scroller {
+	    /*width:320px;*/
+	    height:200px;
+	    display:block;
+	    overflow:hidden;
+	}
 
-#lorem {  
-    /*-webkit-column-count: 200;*/
-    -webkit-column-width: 320px;
-    -webkit-column-gap: 0px;
-    height:200px;
-    display:block;
-    -webkit-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
-       -moz-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
-         -o-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
-}
+	#lorem {  
+			font-size: 12px;
+	    /*-webkit-column-count: 200;*/
+	    -webkit-column-width: 160px;
+	    -webkit-column-gap: 0px;
+	    height:200px;
+	    display:block;
+	    -webkit-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
+	       -moz-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
+	         -o-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
+	}
+
 </style>
 
 
@@ -63,6 +65,12 @@ $(document).ready(function() {
 
   document.a = document.getElementById('lorem').scrollWidth / 320 ;
   console.log(document.a);
+	//   $('#lorem').css({
+	// 	"font-size": "12px",
+	// 	"-webkit-column-width" : "160px",
+	//     "-webkit-column-gap" : "0px",
+	//     "height" : "200px"
+	// });
 
   // Handler for .ready() called.
 });
@@ -127,11 +135,11 @@ function sposta(d)
 
 function cambia_css(){
     $('#lorem').css({
-		"font-size": "25px",
-		"-webkit-column-width" : "120px",
-        "-webkit-column-gap" : "0px",
-        "height" : "200px"
-	});
+			"font-size": "12px",
+			"-webkit-column-width" : "120px",
+	    "-webkit-column-gap" : "0px",
+	    "height" : "200px"
+		});
 }
 
 
@@ -139,7 +147,7 @@ function cambia_css(){
 
 </script>
 <a href="#" onmousedown="sposta(1);">boh</a>
-<a href="#" onmousedown="javascript:cambia_css(); return false">font</a>
+<a href="#" onmousedown="cambia_css();">font</a>
 <span id="page"></span>
 
 <div id="wrapper">
