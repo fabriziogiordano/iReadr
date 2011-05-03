@@ -12,9 +12,11 @@
 }
 
 body {
-
+  -webkit-perspective: 800;
+  -webkit-text-size-adjust: none;
+  -webkit-transform-style: preserve-3d;
+  -webkit-user-select: none;
 }
-
 
 #scroller {
   width:320px;
@@ -29,6 +31,7 @@ body {
   -webkit-column-width: 320px;
   -webkit-column-gap: 10px;
   height:300px;
+  -webkit-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
 }
 </style>
 

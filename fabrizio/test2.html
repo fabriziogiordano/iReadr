@@ -12,7 +12,10 @@
 }
 
 body {
-
+  -webkit-perspective: 800;
+  -webkit-text-size-adjust: none;
+  -webkit-transform-style: preserve-3d;
+  -webkit-user-select: none;
 }
 
 
@@ -21,6 +24,7 @@ body {
   height:100%;
   display:block;
   margin-left:0px;
+  -webkit-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
 }
 
 .pages {
@@ -53,10 +57,22 @@ document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('scroller').style.width = 320+320*num_pages+"px";
 
 }, false);
+
+
+
+var page = 1;
+var move = 0;
+function sposta(d) {
+  move = move + 320*d;
+  // document.getElementById('scroller').style.webkitTransform = "translate("+ -move +"px, 0px)";
+  document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
+  // var v = "translate3d("+ -move +"px, 0px , 0px)";
+}
 </script>
 
 </head>
 <body>
+<a href="#" onmousedown="sposta(1);">sposta</a>
 <div id="wrapper">
     <div id="scroller">
         <div class="pages" id="book">
