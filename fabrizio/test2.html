@@ -26,16 +26,14 @@ body {
 
 #lorem {
   font-size: 12px;
-  -webkit-column-width: 320px;
-  -webkit-column-gap: 10px;
-  height:300px;
+  line-height:20px;
 }
 </style>
 
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function(){
-  var a = document.getElementById('lorem').scrollWidth;
-  //alert(a);
+  var a = document.getElementById('lorem').scrollHeight;
+  alert(a);
 }, false);
 </script>
 
