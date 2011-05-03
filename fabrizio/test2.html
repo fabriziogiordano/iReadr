@@ -65,8 +65,8 @@ var move = 0;
 function sposta(d) {
   move = move + 320*d;
   // document.getElementById('scroller').style.webkitTransform = "translate("+ -move +"px, 0px)";
-  document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
-  // var v = "translate3d("+ -move +"px, 0px , 0px)";
+  //document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px)";
+  document.getElementById('scroller').style.webkitTransform = "translate3d("+ -move +"px, 0px, 0px) rotateY(-90deg) translate3d(-100%, 0, 0)";
 }
 </script>
 
