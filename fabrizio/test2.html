@@ -36,7 +36,14 @@ body {
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function(){
   var a = document.getElementById('lorem').scrollHeight;
-  alert(a);
+  //alert(a);
+  
+  
+  els = document.querySelectorAll('div.testo');
+  for (i=0, l=els.length; i<l; i++) {
+    els[i].scrollTop =  i*300;
+  }
+
 }, false);
 </script>
 
