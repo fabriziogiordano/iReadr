@@ -1,290 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Book Reader Fabrizio</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<title>Book Reader</title>
 
-<!-- <script type="text/javascript" src="iscroll.min.js"></script>
-<script type="text/javascript" src="jquery.js"></script> -->
-<script src="./src/polyfill.js"></script>
-<script src="./src/zepto.js"></script>
-<script src="./src/event.js"></script>
-<script src="./src/touch.js"></script>
+<script src="./assets/iscroll.js"></script>
+<script src="./assets/book.js"></script>
 
-<!-- <script type="text/javascript">
-var myScroll;
-var longishstring;
-var pages;
-function go() 
-{ 
-    var elem = createElem(); 
-    var arr = longishstring.split(' '); 
-    for (var i = 0; i < arr.length; i++) 
-    { 
-        elem.innerHTML += (arr[i] + ' '); 
-        if (elem.scrollHeight > 340) 
-            elem = createElem();
-    }
-} 
-
-function createElem() 
-{ 
-    var elem = document.createElement('li');
-    document.getElementById('thelist').appendChild(elem);
-    return elem; 
-}
-
-function size() {
-    var li = document.getElementById('thelist').querySelectorAll('li');
-    pages = li.length;
-    
-    document.getElementById('wrapper').style.height = (window.innerHeight-75) + 'px';
-    document.getElementById('scroller').style.width = (window.innerWidth*pages) + 'px';
-    
-    console.log(pages);
-    
-    for (var i=0; i<li.length; i++){
-        li[i].style.width = window.innerWidth + 'px';
-        li[i].style.height = '230px';
-    }
-}
-
-function loaded() {
-    myScroll = new iScroll('wrapper', {
-        snap: false,
-        momentum: false,
-        hScrollbar: false,
-        onScrollEnd: function () {
-            // document.querySelector('#indicator > li.active').className = '';
-            // document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
-            // document.querySelector('#pags').innerHTML = this.currPageX;
-        }
-     });
-     //document.querySelector('#pags').innerHTML = pages;
-      console.log(myScroll);
-}
-
-function pag() {
-    myScroll.scrollToPage(20);
-    return false;
-} 
-
-// document.addEventListener('DOMContentLoaded', function(){ longishstring = document.getElementById('lorem').innerHTML;}, false); 
-// document.addEventListener('DOMContentLoaded', function(){setTimeout(scrollTo, 0, 0, 1);}, false);
-// document.addEventListener('DOMContentLoaded', function(){setTimeout(go, 100);}, false);
-// document.addEventListener('DOMContentLoaded', function(){setTimeout(size, 200);}, false);
-// document.addEventListener('DOMContentLoaded', function(){setTimeout(loaded, 1000);}, false);
-// document.addEventListener('DOMContentLoaded', function(){setTimeout(pag,2000);}, false);
-// document.addEventListener('DOMContentLoaded', function(){setTimeout(colo,1000);}, false);
-
-function colo()
-{
-    console.log(document.getElementById('lorem').style.webkitColumnCount);
-    console.log(document.getElementById('lorem').scrollWidth);
-    return false;
-}
-
-</script>
-
-<link rel="stylesheet"  href="1style.css" media="all" />
--->
-
+<link rel="stylesheet"type="text/css" href="./assets/style.css" title="originale" />
+<link rel="alternate stylesheet"type="text/css" href="./assets/style2.css" title="doppio" />
 </head>
 <body>
 
-<!-- <div id="header"><a href="http://cubiq.org/iscroll">QuickBooks</a></div>
+  <div id="header">
+    <span>QuickBook</span>
+    <span>aA</span>
+    <span>Bookmark</span>
+    
+    <!-- <span style="position:relative; top:20px; left: 40px; width:200px; height:200px;"> <a href="#" onclick="alert(1); return false;">PROVA</a><br/>PROVA<br/>PROVA<br/> </span> -->
+  </div>
 
-<div id="wrapper">
-    <div id="scroller">
-       <ul id="thelist">
-        </ul>
-    </div>
-</div>
-<div id="nav">
-    <div id="prev" onclick="myScroll.scrollToPage('prev', 0);return false">&larr; prev</div>
+  <div id="wrapper">
+      <div id="scroller">
+          <div class="pages" id="book0">
+              <?php include('book.html'); ?>
+          </div>
+      </div>
+  </div>
+
+  <div id="nav">
+    <div id="prev" onclick="bookScroll.scrollToPage('prev', 0);return false">&larr;</div>
+    <div id="next" onclick="bookScroll.scrollToPage('next', 0);return false">&rarr;</div>
     <ul id="indicator">
-        <li class="active">1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
+      <li class="active">1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
     </ul>
-    <span id="pags"></span>
-    <div id="next" onclick="myScroll.scrollToPage('next', 0);return false">next &rarr;</div>
-</div>
-
--->
-
-<style>
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
-body {
-  -webkit-perspective: 800;
-  -webkit-text-size-adjust: none;
-  -webkit-transform-style: preserve-3d;
-  -webkit-user-select: none;
-  font-family: Helvetica;
-  overflow-x: hidden;
-  height: 100%;
-  width: 100%;
-}
-
-
-#scroller {
-    /*width:320px;*/
-    height:200px;
-    display:block;
-    overflow:hidden;
-}
-
-#lorem {  
-    /*-webkit-column-count: 200;*/
-    -webkit-column-width: 320px;
-    -webkit-column-gap: 0px;
-    height:200px;
-    display:block;
-    -webkit-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
-       -moz-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
-         -o-transition: all 800ms cubic-bezier(.08, 1, .08, 1);
-}
-</style>
-<script>
-var page = 1;
-var move = 0;
-function sposta(d)
-{
-    //alert(document.a);
-    page = page - d;
-     
-    if(page<=1) 
-    {
-        page = 1;
-        return;
-    }
-    
-    if(page>=document.a) 
-    {
-        page = document.a;
-        return;
-    }
-    
-    move = move + 320*d;
-    document.getElementById('page').innerHTML = page + ' ' + d + ' ' + move;
-
-    
-    var v = "translate3d("+ move +"px, 0 , 0px)";
-	$('#lorem').css({
-		"-moz-transform": v,
-		"-webkit-transform": v,
-		"transform": v
-	});
-
-   
-
-}
-
-function cambia_css(){
-    $('#lorem').css({
-		"font-size": "25px",
-		"-webkit-column-width" : "120px",
-        "-webkit-column-gap" : "0px",
-        "height" : "200px"
-	});
-}
-
-
-$(document).ready(function(){
-    // console.log($('#lorem').css('-webkit-column-count'));
-    // console.log($('#lorem').css('columnCount'));
-    // console.log($('#lorem').css('width'));
-    // console.log($('#lorem')[0].clientWidth);
-    // console.log($('#scroller'));
-    // console.log($('#scroller').width());
-    // console.log(document.getElementById('lorem').offsetLeft);
-    // console.log(document.getElementById('scroller').offsetLeft);
-    
-    // console.log(document.getElementById('lorem').scrollWidth);
-    // console.log($('lorem').scrollWidth);
-    
-    document.a = document.getElementById('lorem').scrollWidth / 320 ;
-    alert(document.a);
-    $('#scroller')
-    .swipeLeft(function(event){
-        sposta(-1);
-        
-       //  console.log(document.getElementById('lorem').offsetLeft);
-       //  console.log(document.getElementById('scroller').offsetLeft);
-       //  
-       //  console.log(document.getElementById('lorem').offsetRight);
-       //  console.log(document.getElementById('scroller').offsetRight);
-       //  
-       //  
-       //  
-       // console.log(document.getElementById('lorem').style.pixelWidth);
-       // console.log(document.getElementById('lorem').offsetWidth);
-       // console.log(document.getElementById('lorem').clientWidth);
-       // console.log(document.getElementById('lorem').scrollWidth);
-    })
-    .swipeRight(function(event){
-        sposta(1);
-    });
-    
-    document.getElementById('lorem').addEventListener( 'webkitTransitionEnd', 
-        function( event ) {
-            if(event.propertyName === '-webkit-column-width') return false;
-            console.log(event);
-            alert( "Finished transition!" );
-            document.a = document.getElementById('lorem').scrollWidth / 120 ;
-            alert(document.a);
-        }, false );
-    
-});
-</script>
-<a href="#" onmousedown="javascript:sposta(); return false">boh</a>
-<a href="#" onmousedown="javascript:cambia_css(); return false">font</a>
-<span id="page"></span>
-<div id="wrapper">
-    <div id="scroller">
-        <div id="lorem">
-            <h1>Lorem Ipsum Text</h1>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, <strong>egestas id, condimentum at</strong>, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In posuere felis nec tortor. Pellentesque faucibus. Ut accumsan ultricies elit. Maecenas at justo id velit placerat molestie. Donec dictum lectus non odio. Cras a ante vitae enim iaculis aliquam. Mauris nunc quam, venenatis nec, euismod sit amet, egestas placerat, est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras id elit. Integer quis urna. Ut ante enim, dapibus malesuada, fringilla eu, condimentum quis, tellus. Aenean porttitor eros vel dolor. Donec convallis pede venenatis nibh. Duis quam. Nam eget lacus. Aliquam erat volutpat. Quisque dignissim congue leo.
-<!--
-            Mauris vel lacus vitae felis vestibulum volutpat. Etiam est nunc, venenatis in, tristique eu, imperdiet ac, nisl. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In iaculis facilisis massa. Etiam eu urna. Sed porta. Suspendisse quam leo, molestie sed, luctus quis, feugiat in, pede. Fusce tellus. Sed metus augue, convallis et, vehicula ut, pulvinar eu, ante. Integer orci tellus, tristique vitae, consequat nec, porta vel, lectus. Nulla sit amet diam. Duis non nunc. Nulla rhoncus dictum metus. Curabitur tristique mi condimentum orci. Phasellus pellentesque aliquam enim. Proin dui lectus, cursus eu, mattis laoreet, viverra sit amet, quam. Curabitur vel dolor ultrices ipsum dictum tristique. Praesent vitae lacus. Ut velit enim, vestibulum non, fermentum nec, hendrerit quis, leo. Pellentesque rutrum malesuada neque.
-            Nunc tempus felis vitae urna. Vivamus porttitor, neque at volutpat rutrum, purus nisi eleifend libero, a tempus libero lectus feugiat felis. Morbi diam mauris, viverra in, gravida eu, mattis in, ante. Morbi eget arcu. Morbi porta, libero id ullamcorper nonummy, nibh ligula pulvinar metus, eget consectetuer augue nisi quis lacus. Ut ac mi quis lacus mollis aliquam. Curabitur iaculis tempus eros. Curabitur vel mi sit amet magna malesuada ultrices. Ut nisi erat, fermentum vel, congue id, euismod in, elit. Fusce ultricies, orci ac feugiat suscipit, leo massa sodales velit, et scelerisque mi tortor at ipsum. Proin orci odio, commodo ac, gravida non, tristique vel, tellus. Pellentesque nibh libero, ultricies eu, sagittis non, mollis sed, justo. Praesent metus ipsum, pulvinar pulvinar, porta id, fringilla at, est.
-            Phasellus felis dolor, scelerisque a, tempus eget, lobortis id, libero. Donec scelerisque leo ac risus. Praesent sit amet est. In dictum, dolor eu dictum porttitor, enim felis viverra mi, eget luctus massa purus quis odio. Etiam nulla massa, pharetra facilisis, volutpat in, imperdiet sit amet, sem. Aliquam nec erat at purus cursus interdum. Vestibulum ligula augue, bibendum accumsan, vestibulum ut, commodo a, mi. Morbi ornare gravida elit. Integer congue, augue et malesuada iaculis, ipsum dui aliquet felis, at cursus magna nisl nec elit. Donec iaculis diam a nisi accumsan viverra. Duis sed tellus et tortor vestibulum gravida. Praesent elementum elit at tellus. Curabitur metus ipsum, luctus eu, malesuada ut, tincidunt sed, diam. Donec quis mi sed magna hendrerit accumsan. Suspendisse risus nibh, ultricies eu, volutpat non, condimentum hendrerit, augue. Etiam eleifend, metus vitae adipiscing semper, mauris ipsum iaculis elit, congue gravida elit mi egestas orci. Curabitur pede.
-            Maecenas aliquet velit vel turpis. Mauris neque metus, malesuada nec, ultricies sit amet, porttitor mattis, enim. In massa libero, interdum nec, interdum vel, blandit sed, nulla. In ullamcorper, est eget tempor cursus, neque mi consectetuer mi, a ultricies massa est sed nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Proin nulla arcu, nonummy luctus, dictum eget, fermentum et, lorem. Nunc porta convallis pede.
-
-
-<!--             <strong>Lorem ipsum dolor sit amet</strong>, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In posuere felis nec tortor. Pellentesque faucibus. Ut accumsan ultricies elit. Maecenas at justo id velit placerat molestie. Donec dictum lectus non odio. Cras a ante vitae enim iaculis aliquam. Mauris nunc quam, venenatis nec, euismod sit amet, egestas placerat, est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras id elit. Integer quis urna. Ut ante enim, dapibus malesuada, fringilla eu, condimentum quis, tellus. Aenean porttitor eros vel dolor. Donec convallis pede venenatis nibh. Duis quam. Nam eget lacus. Aliquam erat volutpat. Quisque dignissim congue leo.
-            Mauris vel lacus vitae felis vestibulum volutpat. Etiam est nunc, venenatis in, tristique eu, imperdiet ac, nisl. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In iaculis facilisis massa. Etiam eu urna. Sed porta. Suspendisse quam leo, molestie sed, luctus quis, feugiat in, pede. Fusce tellus. Sed metus augue, convallis et, vehicula ut, pulvinar eu, ante. Integer orci tellus, tristique vitae, consequat nec, porta vel, lectus. Nulla sit amet diam. Duis non nunc. Nulla rhoncus dictum metus. Curabitur tristique mi condimentum orci. Phasellus pellentesque aliquam enim. Proin dui lectus, cursus eu, mattis laoreet, viverra sit amet, quam. Curabitur vel dolor ultrices ipsum dictum tristique. Praesent vitae lacus. Ut velit enim, vestibulum non, fermentum nec, hendrerit quis, leo. Pellentesque rutrum malesuada neque.
-            Nunc tempus felis vitae urna. Vivamus porttitor, neque at volutpat rutrum, purus nisi eleifend libero, a tempus libero lectus feugiat felis. Morbi diam mauris, viverra in, gravida eu, mattis in, ante. Morbi eget arcu. Morbi porta, libero id ullamcorper nonummy, nibh ligula pulvinar metus, eget consectetuer augue nisi quis lacus. Ut ac mi quis lacus mollis aliquam. Curabitur iaculis tempus eros. Curabitur vel mi sit amet magna malesuada ultrices. Ut nisi erat, fermentum vel, congue id, euismod in, elit. Fusce ultricies, orci ac feugiat suscipit, leo massa sodales velit, et scelerisque mi tortor at ipsum. Proin orci odio, commodo ac, gravida non, tristique vel, tellus. Pellentesque nibh libero, ultricies eu, sagittis non, mollis sed, justo. Praesent metus ipsum, pulvinar pulvinar, porta id, fringilla at, est.
-            Phasellus felis dolor, scelerisque a, tempus eget, lobortis id, libero. Donec scelerisque leo ac risus. Praesent sit amet est. In dictum, dolor eu dictum porttitor, enim felis viverra mi, eget luctus massa purus quis odio. Etiam nulla massa, pharetra facilisis, volutpat in, imperdiet sit amet, sem. Aliquam nec erat at purus cursus interdum. Vestibulum ligula augue, bibendum accumsan, vestibulum ut, commodo a, mi. Morbi ornare gravida elit. Integer congue, augue et malesuada iaculis, ipsum dui aliquet felis, at cursus magna nisl nec elit. Donec iaculis diam a nisi accumsan viverra. Duis sed tellus et tortor vestibulum gravida. Praesent elementum elit at tellus. Curabitur metus ipsum, luctus eu, malesuada ut, tincidunt sed, diam. Donec quis mi sed magna hendrerit accumsan. Suspendisse risus nibh, ultricies eu, volutpat non, condimentum hendrerit, augue. Etiam eleifend, metus vitae adipiscing semper, mauris ipsum iaculis elit, congue gravida elit mi egestas orci. Curabitur pede.
-            Maecenas aliquet velit vel turpis. Mauris neque metus, malesuada nec, ultricies sit amet, porttitor mattis, enim. In massa libero, interdum nec, interdum vel, blandit sed, nulla. In ullamcorper, est eget tempor cursus, neque mi consectetuer mi, a ultricies massa est sed nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Proin nulla arcu, nonummy luctus, dictum eget, fermentum et, lorem. Nunc porta convallis pede.
-
-
-
-
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In posuere felis nec tortor. Pellentesque faucibus. Ut accumsan ultricies elit. Maecenas at justo id velit placerat molestie. Donec dictum lectus non odio. Cras a ante vitae enim iaculis aliquam. Mauris nunc quam, venenatis nec, euismod sit amet, egestas placerat, est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras id elit. Integer quis urna. Ut ante enim, dapibus malesuada, fringilla eu, condimentum quis, tellus. Aenean porttitor eros vel dolor. Donec convallis pede venenatis nibh. Duis quam. Nam eget lacus. Aliquam erat volutpat. Quisque dignissim congue leo.
-            Mauris vel lacus vitae felis vestibulum volutpat. Etiam est nunc, venenatis in, tristique eu, imperdiet ac, nisl. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In iaculis facilisis massa. Etiam eu urna. Sed porta. Suspendisse quam leo, molestie sed, luctus quis, feugiat in, pede. Fusce tellus. Sed metus augue, convallis et, vehicula ut, pulvinar eu, ante. Integer orci tellus, tristique vitae, consequat nec, porta vel, lectus. Nulla sit amet diam. Duis non nunc. Nulla rhoncus dictum metus. Curabitur tristique mi condimentum orci. Phasellus pellentesque aliquam enim. Proin dui lectus, cursus eu, mattis laoreet, viverra sit amet, quam. Curabitur vel dolor ultrices ipsum dictum tristique. Praesent vitae lacus. Ut velit enim, vestibulum non, fermentum nec, hendrerit quis, leo. Pellentesque rutrum malesuada neque.
-            Nunc tempus felis vitae urna. Vivamus porttitor, neque at volutpat rutrum, purus nisi eleifend libero, a tempus libero lectus feugiat felis. Morbi diam mauris, viverra in, gravida eu, mattis in, ante. Morbi eget arcu. Morbi porta, libero id ullamcorper nonummy, nibh ligula pulvinar metus, eget consectetuer augue nisi quis lacus. Ut ac mi quis lacus mollis aliquam. Curabitur iaculis tempus eros. Curabitur vel mi sit amet magna malesuada ultrices. Ut nisi erat, fermentum vel, congue id, euismod in, elit. Fusce ultricies, orci ac feugiat suscipit, leo massa sodales velit, et scelerisque mi tortor at ipsum. Proin orci odio, commodo ac, gravida non, tristique vel, tellus. Pellentesque nibh libero, ultricies eu, sagittis non, mollis sed, justo. Praesent metus ipsum, pulvinar pulvinar, porta id, fringilla at, est.
-            Phasellus felis dolor, scelerisque a, tempus eget, lobortis id, libero. Donec scelerisque leo ac risus. Praesent sit amet est. In dictum, dolor eu dictum porttitor, enim felis viverra mi, eget luctus massa purus quis odio. Etiam nulla massa, pharetra facilisis, volutpat in, imperdiet sit amet, sem. Aliquam nec erat at purus cursus interdum. Vestibulum ligula augue, bibendum accumsan, vestibulum ut, commodo a, mi. Morbi ornare gravida elit. Integer congue, augue et malesuada iaculis, ipsum dui aliquet felis, at cursus magna nisl nec elit. Donec iaculis diam a nisi accumsan viverra. Duis sed tellus et tortor vestibulum gravida. Praesent elementum elit at tellus. Curabitur metus ipsum, luctus eu, malesuada ut, tincidunt sed, diam. Donec quis mi sed magna hendrerit accumsan. Suspendisse risus nibh, ultricies eu, volutpat non, condimentum hendrerit, augue. Etiam eleifend, metus vitae adipiscing semper, mauris ipsum iaculis elit, congue gravida elit mi egestas orci. Curabitur pede.
-            Maecenas aliquet velit vel turpis. Mauris neque metus, malesuada nec, ultricies sit amet, porttitor mattis, enim. In massa libero, interdum nec, interdum vel, blandit sed, nulla. In ullamcorper, est eget tempor cursus, neque mi consectetuer mi, a ultricies massa est sed nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Proin nulla arcu, nonummy luctus, dictum eget, fermentum et, lorem. Nunc porta convallis pede.
--->
-
-        </div>
-    </div>
-</div>
-
+    <br/>
+    <div id="page-counter"> page <span id="page"> 0 </span> of <span id="totpages"> 0 </span> </div>
+  </div>
 </body>
 </html>

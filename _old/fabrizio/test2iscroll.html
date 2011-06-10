@@ -1,7 +1,7 @@
 <!--
 TODO:
-- 
-
+- SCROLLER DINAMICO NELLA BARRA IN BASSO
+- INSERIRE IL MARKUP
 -->
 
 <!DOCTYPE html>
@@ -147,12 +147,12 @@ window.onload = function(){
   
   var book = document.getElementById('book0');
   var book_height = book.scrollHeight;
-  alert(book_height);
-  alert(space);
+  //alert(book_height);
+  //alert(space);
   
   var num_pages = Math.ceil(book_height / (space+25));
   
-  alert(num_pages);
+  //alert(num_pages);
   
   document.getElementById('totpages').innerHTML = num_pages;
   document.getElementById('scroller').style.width = 320+320*num_pages+"px";
@@ -178,11 +178,13 @@ window.onload = function(){
     }
   });
 
+  bookScroll.scrollToPage(5, 0, 500);
+
 };
 </script>
 
 </head>
-<body id="ciccio">
+<body>
   <div id="header">
     prova
   </div>
