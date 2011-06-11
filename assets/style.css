@@ -54,10 +54,11 @@ body {
   line-height:25px;
   overflow:hidden;
   float:left;
-  width:320px;
   -webkit-box-sizing:border-box;
+  margin:0;
   padding:0px 15px 20px 20px;
   text-align:justify;
+  position:absolute;
 }
 .pages h1 {font-size: 22px; line-height:25px;}
 .pages h2 {font-size: 12px; line-height:25px;}

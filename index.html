@@ -18,13 +18,19 @@
 <script src="./assets/book.js"></script>
 
 <script>
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('DOMContentLoaded', loadBook, false);
+</script>
 
-  // store.set('user', { name: 'marcus', likes: 'javascript' })
-  // document.addEventListener('DOMContentLoaded', go, false);
-  // function go () {
-  //   document.getElementById('indicatorpage').innerHTML = store.get('user').name + store.get('user').likes;
-  // }
-  
+<style type="text/css">
+  #errorOutput {display:none; position:relative; top:20px; left: 20px; line-height:20px; background-color:white; z-index:100;}
+  #errorOutput div { color: red; }
+</style>
+
+<script>
+var log = (function() {
+  return {  error : function(msg) { document.getElementById('errorOutput').appendChild(document.createElement('div')).innerHTML = msg } }
+})();
 </script>
 
 </head>
@@ -34,6 +40,7 @@
     <span>QuickBook</span>
     <span>aA</span>
     <span>Bookmark</span>
+    <div id="errorOutput"></div>
 <!--
     <span style="position:relative; top:20px; left: 40px; background-color:red; width:100px; height:100px;">
       <a href="#" onclick="alert(1); return false;">PROVA</a>
@@ -46,7 +53,7 @@
   <div id="wrapper">
     <div id="scroller">
       <div class="pages" id="book0">
-        <?php include('book.html'); ?>
+        <?php include('lines.html'); ?>
       </div>
     </div>
   </div>
@@ -55,7 +62,7 @@
     <div id="prev" onclick="bookScroll.scrollToPage('prev', 0);return false">&larr;</div>
     <div id="next" onclick="bookScroll.scrollToPage('next', 0);return false">&rarr;</div>
     <div id="indicator"><span id="indicatorpage">*</span></div>
-    <div id="page-counter"> page <span id="page"> 0 </span> of <span id="totpages"> 0 </span> </div>
+    <div id="page-counter"> page <span id="page"> 1 </span> of <span id="totpages"> 0 </span> </div>
   </div>
 </body>
 </html>
