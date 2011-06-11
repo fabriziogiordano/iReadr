@@ -1,8 +1,6 @@
 var bookScroll;
 //loadBook
 window.onload = function (){
-  setTimeout(scrollTo, 0, 0, 1);
-  
   var page = 0,
       lineheight,
       barheight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 40;
@@ -23,6 +21,7 @@ window.onload = function (){
   book.style.width = screen.width + "px";
   
   document.getElementById('bookfooter').style.height = bookFooterHeight + "px";
+  document.getElementById('book').style.height = screen.height + 50 + "px";
   
   document.getElementById('totpages').innerHTML = num_pages;
   document.getElementById('scroller').style.width = screen.width * num_pages + "px";
@@ -68,7 +67,8 @@ window.onload = function (){
   log.error('scroller height: ' + document.getElementById('scroller').style.height);
   
   // bookScroll.scrollToPage(5, 0, 500);
-
+  
+  setTimeout(scrollTo, 0, 0, 1);
 };
 
 
