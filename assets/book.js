@@ -1,19 +1,63 @@
+var bookScroll;
+
+/*
 window.onload = function(){
+  
+  
+  bookScroll = new iScroll('wrapper', {
+    snap: true,
+    momentum: false,
+    hScrollbar: false,
+    vScrollbar: false,
+    onScrollEnd: function () {
+      document.querySelector('#indicator > li.active').className = '';
+      document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+      document.getElementById('page').innerHTML = this.currPageX;
+    }
+  });
+  
+  
+};
+*/
+
+/*
+(function(){
+  
+  bookScroll = new iScroll('wrapper', {
+    snap: true,
+    momentum: false,
+    hScrollbar: false,
+    vScrollbar: false,
+    onScrollEnd: function () {
+      document.querySelector('#indicator > li.active').className = '';
+      document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+      document.getElementById('page').innerHTML = this.currPageX;
+    }
+  });
+  
+})();
+*/
+
+window.onload =  function (){
   var lineheight = document.defaultView.getComputedStyle(document.getElementById('book0'),null).getPropertyValue('line-height');
   lineheight = Number(lineheight.replace(/px$/, ''));
   
   setTimeout(scrollTo, 0, 0, 1);
   
-  var page = 0;
-  var move = 0;
-  var bar=0;
+  var page = 0,
+      move = 0.
+      bar=0;
 
-  if ( ("standalone" in window.navigator) && window.navigator.standalone ) bar=0;
-  else bar=40;
+  if ( ("standalone" in window.navigator) && window.navigator.standalone ) {
+    bar = 0;
+  }
+  else {
+    bar = 40;
+  }
   
   // alert(document.getElementById('header').offsetHeight)
   // alert(document.getElementById('nav').offsetHeight)
-  var space = screen.height - document.getElementById('header').offsetHeight - document.getElementById('nav').offsetHeight - bar;
+  var space = screen.height - document.getElementById('header').offsetHeight - document.getElementById('footer').offsetHeight - bar;
   space = Math.floor(space / lineheight) * lineheight;
   
   var book = document.getElementById('book0');
@@ -42,13 +86,18 @@ window.onload = function(){
     momentum: false,
     hScrollbar: false,
     vScrollbar: false,
+    onScrollStart: function () {
+      
+    },
     onScrollEnd: function () {
-      document.querySelector('#indicator > li.active').className = '';
-      document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
       document.getElementById('page').innerHTML = this.currPageX;
     }
   });
 
-  bookScroll.scrollToPage(5, 0, 500);
+  // bookScroll.scrollToPage(5, 0, 500);
 
 };
+
+
+//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+//document.addEventListener('DOMContentLoaded', book, false);

@@ -12,7 +12,7 @@ body {
   -webkit-user-select: none;
   background-color:#F0E8D1;
   color:#463220;
-  -webkit-box-shadow: inset 5px 0px 10px #888888;
+/*  -webkit-box-shadow: inset 5px 0px 10px #888888;*/
 }
 
 #header {
@@ -30,6 +30,7 @@ body {
   padding:4px;
   -webkit-border-radius:4px;
 }
+
 #wrapper {
   z-index:1;
   top:45px;
@@ -64,9 +65,8 @@ body {
 
 
 
-#nav {
-	width:320px;
-	float:left;
+#footer {
+	width:auto;
 	height:48px;
 }
 

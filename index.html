@@ -7,45 +7,54 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+<link title="default" rel="stylesheet" type="text/css" href="./assets/style.css" />
+<link title="doppio" rel="alternate stylesheet" type="text/css" href="./assets/style2.css" />
+
 <script src="./assets/iscroll.js"></script>
+<script src="./assets/styleswitcher.js"></script>
+<script src="./assets/json.js"></script>
+<script src="./assets/store.js"></script>
+
 <script src="./assets/book.js"></script>
 
-<link rel="stylesheet"type="text/css" href="./assets/style.css" title="originale" />
-<link rel="alternate stylesheet"type="text/css" href="./assets/style2.css" title="doppio" />
+<script>
+
+  // store.set('user', { name: 'marcus', likes: 'javascript' })
+  // document.addEventListener('DOMContentLoaded', go, false);
+  // function go () {
+  //   document.getElementById('indicatorpage').innerHTML = store.get('user').name + store.get('user').likes;
+  // }
+  
+</script>
+
 </head>
 <body>
-
+  
   <div id="header">
     <span>QuickBook</span>
     <span>aA</span>
     <span>Bookmark</span>
-    
-    <!-- <span style="position:relative; top:20px; left: 40px; width:200px; height:200px;"> <a href="#" onclick="alert(1); return false;">PROVA</a><br/>PROVA<br/>PROVA<br/> </span> -->
+<!--
+    <span style="position:relative; top:20px; left: 40px; background-color:red; width:100px; height:100px;">
+      <a href="#" onclick="alert(1); return false;">PROVA</a>
+      <p>PROVA
+      <p>PROVA
+    </span>
+-->
   </div>
 
   <div id="wrapper">
-      <div id="scroller">
-          <div class="pages" id="book0">
-              <?php include('book.html'); ?>
-          </div>
+    <div id="scroller">
+      <div class="pages" id="book0">
+        <?php include('book.html'); ?>
       </div>
+    </div>
   </div>
 
-  <div id="nav">
+  <div id="footer">
     <div id="prev" onclick="bookScroll.scrollToPage('prev', 0);return false">&larr;</div>
     <div id="next" onclick="bookScroll.scrollToPage('next', 0);return false">&rarr;</div>
-    <ul id="indicator">
-      <li class="active">1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-    </ul>
-    <br/>
+    <div id="indicator"><span id="indicatorpage">*</span></div>
     <div id="page-counter"> page <span id="page"> 0 </span> of <span id="totpages"> 0 </span> </div>
   </div>
 </body>
