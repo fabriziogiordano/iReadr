@@ -19,7 +19,7 @@ window.onload = function (){
   var bookHeight = book.offsetHeight;
   var num_pages = Math.ceil( bookHeight / spaceHeight );
   var bookFooterHeight = spaceHeight * num_pages - bookHeight + lineheight;
-  alert(bookFooterHeight);
+  
   book.style.width = screen.width + "px";
   
   document.getElementById('bookfooter').style.height = bookFooterHeight + "px";
