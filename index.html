@@ -19,7 +19,7 @@
 
 <script>
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-document.addEventListener('DOMContentLoaded', loadBook, false);
+//document.addEventListener('DOMContentLoaded', loadBook, false);
 </script>
 
 <style type="text/css">
@@ -53,7 +53,8 @@ var log = (function() {
   <div id="wrapper">
     <div id="scroller">
       <div class="pages" id="book0">
-        <?php include('lines.html'); ?>
+        <?php include('book.html'); ?>
+        <div id="bookfooter">&nbsp;</div>
       </div>
     </div>
   </div>

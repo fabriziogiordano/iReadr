@@ -58,7 +58,7 @@ body {
   margin:0;
   padding:0px 15px 20px 20px;
   text-align:justify;
-  position:absolute;
+/*  position:absolute;*/
 }
 .pages h1 {font-size: 22px; line-height:25px;}
 .pages h2 {font-size: 12px; line-height:25px;}

@@ -1,6 +1,6 @@
 var bookScroll;
-
-function loadBook(){
+//loadBook
+window.onload = function (){
   setTimeout(scrollTo, 0, 0, 1);
   
   var page = 0,
@@ -18,6 +18,11 @@ function loadBook(){
   //var bookHeight = book.scrollHeight;
   var bookHeight = book.offsetHeight;
   var num_pages = Math.ceil( bookHeight / spaceHeight );
+  var bookFooterHeight = spaceHeight * num_pages - bookHeight + lineheight;
+  alert(bookFooterHeight);
+  book.style.width = screen.width + "px";
+  
+  document.getElementById('bookfooter').style.height = bookFooterHeight + "px";
   
   document.getElementById('totpages').innerHTML = num_pages;
   document.getElementById('scroller').style.width = screen.width * num_pages + "px";
@@ -27,11 +32,11 @@ function loadBook(){
     var clone = book.cloneNode(true);
     var page = book.parentNode.appendChild(clone);
     page.id = "book"+i;
-    //page.style.height = spaceHeight + "px";
+    page.style.height = spaceHeight + "px";
     page.style.width = screen.width + "px";
-    page.style.left = screen.width*i + "px";
-    page.style.top = -spaceHeight*i + "px";
-    //page.scrollTop = i*spaceHeight;
+    //page.style.left = screen.width*i + "px";
+    // page.style.top = -spaceHeight*i + "px";
+    page.scrollTop = i*spaceHeight;
     //alert(i*spaceHeight);
   }
   
