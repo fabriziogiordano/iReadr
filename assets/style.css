@@ -5,7 +5,6 @@
 }
 
 body {
-  height:150%;
   background-color:#F0E8D1;
   color:#463220;
   -webkit-perspective: 800;
@@ -21,8 +20,9 @@ body {
   width:100%;
   height:45px;
   line-height:45px;
-  padding:0;
+  padding:0 20px;
   height:45px;
+  -webkit-box-sizing:border-box;
 }
 
 #header span {
@@ -41,36 +41,51 @@ body {
 }
 
 #scroller {
-	position:relative;
-	-webkit-tap-highlight-color:rgba(0,0,0,0);
-	-webkit-box-sizing:border-box;
-	float:left;
-	width:100%;
-	margin-top:10px;
+  position:relative;
+  float:left;
+  width:100%;
+  margin-top:10px;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-box-sizing:border-box;
 }
 
 .pages {
-  font-size: 16px;
-  line-height:25px;
-  overflow:hidden;
   float:left;
-  -webkit-box-sizing:border-box;
   margin:0;
   padding:0px 15px 20px 20px;
+  overflow:hidden;
   text-align:justify;
-/*  position:absolute;*/
+  font-size: 11px;
+  line-height:20px;
+  -webkit-box-sizing:border-box;
 }
-.pages h1 {font-size: 22px; line-height:25px;}
-.pages h2 {font-size: 12px; line-height:25px;}
+.pages h1 {font-size: 22px; line-height:20px;}
+.pages h2 {font-size: 12px; line-height:20px;}
 .pages img {float:right; margin:0 0 0 10px;}
 
 
 
 #footer {
 	width:auto;
-	height:48px;
+	height:40px;
+	background-color:red;
 }
 
+#footer #indicator {
+  text-align:center;
+  position:relative;
+  margin:0 50px;
+  height:10px;
+  background-image: url('http://dummyimage.com/200x10/000/fff');
+}
+
+#footer #indicator img {
+  position:absolute;
+  top:0px;
+  left:0px;
+  margin:0; padding:0;
+  -webkit-transition: all 100ms ease-in-out;
+}
 #footerhidden {
 	width:auto;
 	height:200px;
@@ -79,20 +94,22 @@ body {
 #prev, #next {
 	float:left;
 	font-weight:bold;
-	font-size:14px;
-	padding:5px 0;
 	width:50px;
+	height:40px;
+	text-align:center;
 	-webkit-touch-callout: none;
+	background: orange url('http://dummyimage.com/10x10/4e9e06/4e9e06') no-repeat 20px 5px;
 }
 
 #next {
 	float:right;
-	text-align:right;
+	background: orange url('http://dummyimage.com/10x10/4e9e06/4e9e06') no-repeat 20px 5px;
 }
 
-#page-counter {
+#pagecounter {
   font-size:9px;
+  text-align:center;
 }
 
-#errorOutput {display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100;}
+#errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
 #errorOutput div { color: red; }

@@ -1,15 +1,10 @@
 var bookScroll;
 
-function scr () {
-  document.getElementById('book').style.height = screen.width + 100 + "px";
-  window.scrollTo(0,1);
-}
-
 function book (){
   var doc = document,
       sH = screen.height,
       sW = screen.width,
-      barHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 40,
+      barsHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50,
       hH = doc.getElementById('header').offsetHeight,
       fH = doc.getElementById('footer').offsetHeight,
       pagenumber = doc.getElementById('page'),
@@ -19,7 +14,7 @@ function book (){
       scroller = doc.getElementById('scroller'),
       lineHeight = doc.defaultView.getComputedStyle(book,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
       bookHeight = book.offsetHeight, //scrollHeight
-      spaceHeight = Math.floor( (sH - hH - fH - barHeight) / lineHeight ) * lineHeight,
+      spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
       debug = false;
@@ -30,6 +25,11 @@ function book (){
   totpages.innerHTML = numPages;
   scroller.style.height = spaceHeight + "px";
   scroller.style.width = sW * numPages + "px";
+  
+  var indicator = doc.getElementById('indicator'),
+      indicatorimg = doc.getElementById('indicatorimg'),
+      iW = doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0,
+      indicatorstep = iW / numPages;
   
   bookScroll = new iScroll('wrapper', {
     snap: true,
@@ -42,6 +42,7 @@ function book (){
     onScrollEnd: function () {
       pagenumber.innerHTML = this.currPageX+1;
       store.set('page', this.currPageX);
+      indicatorimg.style.left = (indicatorstep * this.currPageX) + "px";
     }
   });
   
@@ -53,6 +54,17 @@ function book (){
     page.style.width = sW + "px";
     page.scrollTop = i*spaceHeight;
   }
+  
+  if(store.get('page')) {
+    bookScroll.scrollToPage( store.get('page') , 0, 1);
+  }
+  else {
+    bookScroll.scrollToPage(0, 0, 1);
+  }
+  setTimeout(function(){window.scrollTo(0,1);}, 10);
+  
+  
+  
   
   if(debug) {
     var errorOutput = document.createElement('div');
@@ -81,12 +93,6 @@ function book (){
     log.error('scroller width: ' + document.getElementById('scroller').style.width);
     log.error('scroller height: ' + document.getElementById('scroller').style.height);
   }
-  
-  setTimeout(function(){window.scrollTo(0,1);}, 10);
-  
-  if(store.get('page')) {
-    bookScroll.scrollToPage( store.get('page') , 0, 100);
-  }
 
 };
 
@@ -95,27 +101,13 @@ var log = (function() {
 })();
 
 window.onload = function(){
-  //setTimeout(scr, 10);
-  setTimeout(book, 100);
-}; 
+  if((/iphone|android/gi).test(navigator.appVersion)) {
+    setTimeout(book, 100);
+  }
+  else {
+    //document.getElementById('footer').style.display = "none";
+  }
+};
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 //document.addEventListener('DOMContentLoaded', book, false);
-
-/*
-var clone = book.cloneNode(true),
-    frag = document.createDocumentFragment(),
-    el;
-
-for (i=1; i<numPages; i++) {
-  page = clone;
-  page.id = "book"+i;
-  page.style.height = spaceHeight + "px";
-  page.style.width = sW + "px";
-  page.scrollTop = i*spaceHeight;
-  frag.appendChild(page); // better!
-}
-
-book.parentNode.appendChild(frag);
-
-*/
