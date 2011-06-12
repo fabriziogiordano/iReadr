@@ -71,10 +71,6 @@ function book (){
     }
   });
   
-  doc.getElementById('header').style.visibility = "visible";
-  doc.getElementById('footer').style.visibility = "visible";
-  
-  
   if(debug) {
     log.error('lineHeight: ' + lineHeight);
 
@@ -98,13 +94,14 @@ function book (){
     log.error('scroller height: ' + document.getElementById('scroller').style.height);
   }
   
+  setTimeout(function(){window.scrollTo(0,1);}, 10);
   // bookScroll.scrollToPage(5, 0, 500);
 
 };
 
 window.onload = function(){
-  setTimeout(scr, 100);
-  setTimeout(book, 1000);
+  //setTimeout(scr, 10);
+  setTimeout(book, 100);
 }; 
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
