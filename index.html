@@ -28,19 +28,16 @@
   <div id="header">
     <span id="bookmark">Bookmark</span>
     <span id="aa">aA</span>
-    
     <span id="quickbook"><a href="http://google.com">QuickBook</a></span>
     
-    
-<!--
-    <span style="position:relative; top:20px; left: 40px; background-color:red; width:100px; height:100px;">
-      <a href="#" onclick="alert(1); return false;">PROVA</a>
-      <p>PROVA
-      <p>PROVA
-    </span>
--->
+    <div id="addToHomeScreen">
+      <p>Arial</p>
+      <p>Helvetica</p>
+      <p>Tahoma</p>
+      <span class="arrow"></span>
+    </div>
   </div>
-
+  
   <div id="wrapper">
     <div id="scroller">
       <div class="pages" id="book0">
@@ -54,7 +51,7 @@
     <div id="prev" onclick="bookScroll.scrollToPage('prev', 0);return false"> </div>
     <div id="next" onclick="bookScroll.scrollToPage('next', 0);return false"> </div>
     <div id="indicator">
-      <img src="http://dummyimage.com/20x10/4e9e06/4e9e06" id="indicatorimg" />
+      <span id="indicatorimg">&nbsp;</span>
     </div>
     <div id="pagecounter"> page <span id="page"> 1 </span> of <span id="totpages"> 0 </span> </div>
   </div>

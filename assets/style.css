@@ -25,16 +25,44 @@ body {
   -webkit-box-sizing:border-box;
 }
 
-#header span {
-  border:1px solid #463220;
-  padding:4px;
-  -webkit-border-radius:4px;
+#header #quickbook {
+  float:left;
+  height:23px;
+  width:100px;
+  margin-top:8px;
+  text-indent: -9999px;
+  background: orange url('http://dummyimage.com/100x23/4e9e06/4e9e06') no-repeat 0px 0px;
 }
 
-#header #bookmark,  #header #aa{
+#header #quickbook a{
+  display:block;
+  height:23px;
+  width:100px;
+}
+
+
+#header #bookmark,#header #aa{
   float:right;
+  text-indent: -9999px;
+  margin-top:8px;
+  margin-right:10px;
 }
 
+#header #bookmark {
+  height:23px;
+  width:18px;
+  background: transparent url('bookmark.png') no-repeat 0px 0px;
+  -webkit-transition: all 100ms linear;
+}
+#header #bookmark.active {
+  background-position: -18px 0px;
+  }
+  
+#header #aa{
+  height:20px;
+  width:20px;
+  background: orange url('http://dummyimage.com/20x20/4e9e06/4e9e06') no-repeat 0px 0px;
+}
 
 #wrapper {
   z-index:1;
@@ -60,12 +88,12 @@ body {
   padding:0px 15px 20px 20px;
   overflow:hidden;
   text-align:justify;
-  font-size: 11px;
-  line-height:20px;
+  font-size: 13px;
+  line-height:25px;
   -webkit-box-sizing:border-box;
 }
-.pages h1 {font-size: 22px; line-height:20px;}
-.pages h2 {font-size: 12px; line-height:20px;}
+.pages h1 {font-size: 22px; line-height:25px;}
+.pages h2 {font-size: 12px; line-height:25px;}
 .pages img {float:right; margin:0 0 0 10px;}
 
 
@@ -79,16 +107,19 @@ body {
 #footer #indicator {
   text-align:center;
   position:relative;
-  margin:0 50px;
-  height:10px;
-  background-image: url('http://dummyimage.com/200x10/000/fff');
+  margin:0 55px 0 50px;
+  height:14px;
+  background-image: url('http://dummyimage.com/200x14/000/fff');
 }
 
-#footer #indicator img {
+#footer #indicator span {
   position:absolute;
+  height:14px;
+  width:20px;
   top:0px;
   left:0px;
   margin:0; padding:0;
+  background-image: url('http://dummyimage.com/20x14/4e9e06/4e9e06');
   -webkit-transition: all 100ms ease-in-out;
 }
 #footerhidden {
@@ -101,20 +132,69 @@ body {
 	font-weight:bold;
 	width:50px;
 	height:40px;
-	text-align:center;
 	-webkit-touch-callout: none;
-	background: orange url('http://dummyimage.com/10x10/4e9e06/4e9e06') no-repeat 20px 5px;
+	background: orange url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
 }
 
 #next {
 	float:right;
-	background: orange url('http://dummyimage.com/10x10/4e9e06/4e9e06') no-repeat 20px 5px;
+	background: orange url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
 }
 
 #pagecounter {
   font-size:9px;
   text-align:center;
 }
+
+
+
+#addToHomeScreen {
+  display:none;
+  position:absolute;
+  top:40px;
+  right:20px;
+  /*left:-9999px;*/
+  -webkit-transition-property:-webkit-transform,opacity;
+  -webkit-transition-duration:0;
+  -webkit-transform:translate3d(0,0,0);
+  
+	z-index:9999;
+	-webkit-user-select:none;
+	-webkit-box-sizing:border-box;
+	width:208px;
+	font-size:13px;
+	padding:10px;
+	text-align:left;
+	font-family:helvetica;
+	background-image:-webkit-gradient(linear,0 0,0 100%,color-stop(0,#fff),color-stop(0.02,#eee),color-stop(0.98,#ccc),color-stop(1,#a3a3a3));
+	border:1px solid #505050;
+	-webkit-border-radius:4px;
+	-webkit-background-clip:padding-box;
+	color:#333;
+	text-shadow:0 1px 0 rgba(255,255,255,0.75);
+	line-height:130%;
+	-webkit-box-shadow:0 0 2px rgba(0,0,0,0.5);
+}
+
+#addToHomeScreen .arrow {
+	position:absolute;
+	border-width:0 1px 1px 0;
+	border-style:solid;
+	border-color:#505050;
+	width:16px; height:16px;
+	-webkit-transform:rotateZ(45deg);
+	margin-left:-8px;
+	-webkit-box-shadow:inset -1px -1px 0 #a9a9a9;
+	-webkit-border-bottom-right-radius:2px;
+	
+	-webkit-transform:rotateZ(-135deg);
+	background-image:-webkit-gradient(linear,0 0,100% 100%,color-stop(0,rgba(238,238,238,0)),color-stop(0.4,rgba(238,238,238,0)),color-stop(0.4,#eee));
+	-webkit-box-shadow:inset -1px -1px 0 #fff;
+	top:-9px; bottom:auto; right:40px;
+}
+
+
+
 
 #errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
 #errorOutput div { color: red; }

@@ -43,6 +43,14 @@ function book (){
       pagenumber.innerHTML = this.currPageX+1;
       store.set('page', this.currPageX);
       indicatorimg.style.left = (indicatorstep * this.currPageX) + "px";
+      window.currPage = this.currPageX;
+      
+      if(store.get('bookmark') === this.currPageX) {
+        document.getElementById('bookmark').setAttribute("class", "active");
+      }
+      else {
+        document.getElementById('bookmark').setAttribute("class", "");
+      }
     }
   });
   
@@ -61,7 +69,7 @@ function book (){
   else {
     bookScroll.scrollToPage(0, 0, 1);
   }
-  setTimeout(function(){window.scrollTo(0,1);}, 10);
+  setTimeout(function(){window.scrollTo(0,1);}, 1000);
 
   
   if(debug) {
@@ -98,6 +106,20 @@ var log = (function() {
   return {  error : function(msg) { document.getElementById('errorOutput').appendChild(document.createElement('div')).innerHTML = msg } }
 })();
 
+
+function fonts() {
+  var div = document.createElement('div'),
+      close,
+      link = options.touchIcon ? document.querySelectorAll('head link[rel=apple-touch-icon],head link[rel=apple-touch-icon-precomposed]') : [],
+      sizes, touchIcon = '';
+
+  div.id = 'addToHomeScreen';
+  div.style.cssText += 'position:absolute;-webkit-transition-property:-webkit-transform,opacity;-webkit-transition-duration:0;-webkit-transform:translate3d(0,0,0);';
+  div.style.left = '-9999px';
+  
+}
+
+
 window.onload = function(){
   if((/iphone|android/gi).test(navigator.appVersion)) {
     setTimeout(book, 100);
@@ -109,15 +131,34 @@ window.onload = function(){
   document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);
   document.getElementById('next').addEventListener('touchstart', function(){bookScroll.scrollToPage('next', 0);return false;}, false);
   
-  document.getElementById('bookmark').addEventListener('touchstart', function(){alert('fatto');}, false);
+  document.getElementById('bookmark').addEventListener('touchstart', function bok (e){
+    e.preventDefault();
+    var bookmarkclass = document.getElementById('bookmark').getAttribute("class");
+    if(bookmarkclass === 'active') {
+      store.set('bookmark', '');
+      document.getElementById('bookmark').setAttribute("class", "");
+    }
+    else {
+      store.set('bookmark', window.currPage);
+      document.getElementById('bookmark').setAttribute("class", "active");
+    }
+    return false;
+  }, false);
   
-  /*
-  new NoClickDelay(document.getElementById('header'));
-  new NoClickDelay(document.getElementById('footer'));
-  */
+  
+  document.getElementById('aa').addEventListener('touchstart', function bok (e){
+    e.preventDefault();
+    var aaclass = document.defaultView.getComputedStyle(document.getElementById('addToHomeScreen'), null).getPropertyValue('display');
+    if(aaclass === 'block') {
+      document.getElementById('addToHomeScreen').style.display = "none";
+    }
+    else {
+      document.getElementById('addToHomeScreen').style.display = "block";
+    }
+    return false;
+  }, false);
   
 };
-
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 //document.addEventListener('DOMContentLoaded', book, false);
