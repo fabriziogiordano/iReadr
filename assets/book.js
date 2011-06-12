@@ -23,40 +23,13 @@ function book (){
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
       debug = false;
-  
+
   book.style.width = sW + "px";
   book.style.height = spaceHeight + "px";
   bookfooter.style.height = bookFooterHeight + "px";
   totpages.innerHTML = numPages;
   scroller.style.height = spaceHeight + "px";
   scroller.style.width = sW * numPages + "px";
-  
-  for (i = 1; i < numPages; i++) {
-    var clone = book.cloneNode(true);
-    var page = book.parentNode.appendChild(clone);
-    page.id = "book"+i;
-    page.style.height = spaceHeight + "px";
-    page.style.width = sW + "px";
-    page.scrollTop = i*spaceHeight;
-  }
-  
-  /*
-  var clone = book.cloneNode(true),
-      frag = document.createDocumentFragment(),
-      el;
-
-  for (i=1; i<numPages; i++) {
-    page = clone;
-    page.id = "book"+i;
-    page.style.height = spaceHeight + "px";
-    page.style.width = sW + "px";
-    page.scrollTop = i*spaceHeight;
-    frag.appendChild(page); // better!
-  }
-
-  book.parentNode.appendChild(frag);
-  
-  */
   
   bookScroll = new iScroll('wrapper', {
     snap: true,
@@ -70,6 +43,15 @@ function book (){
       document.getElementById('page').innerHTML = this.currPageX+1;
     }
   });
+  
+  for (i = 1; i < numPages; i++) {
+    var clone = book.cloneNode(true);
+    var page = book.parentNode.appendChild(clone);
+    page.id = "book"+i;
+    page.style.height = spaceHeight + "px";
+    page.style.width = sW + "px";
+    page.scrollTop = i*spaceHeight;
+  }
   
   if(debug) {
     log.error('lineHeight: ' + lineHeight);
@@ -106,3 +88,21 @@ window.onload = function(){
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 //document.addEventListener('DOMContentLoaded', book, false);
+
+/*
+var clone = book.cloneNode(true),
+    frag = document.createDocumentFragment(),
+    el;
+
+for (i=1; i<numPages; i++) {
+  page = clone;
+  page.id = "book"+i;
+  page.style.height = spaceHeight + "px";
+  page.style.width = sW + "px";
+  page.scrollTop = i*spaceHeight;
+  frag.appendChild(page); // better!
+}
+
+book.parentNode.appendChild(frag);
+
+*/
