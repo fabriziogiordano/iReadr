@@ -53,8 +53,16 @@ window.onload = function (){
   });
   
   log.error('lineheight: ' + lineheight);
+  
   log.error('screen.height: ' + screen.height);
   log.error('screen.width: ' + screen.width);
+  
+  log.error('document.height: ' + document.height);
+  log.error('document.width: ' + document.width);
+  
+  log.error('window.height: ' + window.height);
+  log.error('window.width: ' + window.width);
+  
   log.error('header offsetHeight: '+ document.getElementById('header').offsetHeight);
   log.error('footer offsetHeight: '+ document.getElementById('footer').offsetHeight);
   log.error('num_pages: ' + num_pages);
