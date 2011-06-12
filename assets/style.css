@@ -23,6 +23,7 @@ body {
   line-height:45px;
   padding:0;
   height:45px;
+  visibility:hidden;
 }
 
 #header span {
@@ -69,6 +70,7 @@ body {
 #footer {
 	width:auto;
 	height:48px;
+	visibility:hidden;
 }
 
 #prev, #next {

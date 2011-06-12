@@ -1,5 +1,4 @@
 var bookScroll;
-//loadBook
 
 function scr () {
   document.getElementById('book').style.height = screen.width + 100 + "px";
@@ -31,7 +30,6 @@ function book (){
   totpages.innerHTML = numPages;
   scroller.style.height = spaceHeight + "px";
   scroller.style.width = sW * numPages + "px";
-  
   
   for (i = 1; i < numPages; i++) {
     var clone = book.cloneNode(true);
@@ -72,6 +70,10 @@ function book (){
       document.getElementById('page').innerHTML = this.currPageX+1;
     }
   });
+  
+  doc.getElementById('header').style.visibility = "visible";
+  doc.getElementById('footer').style.visibility = "visible";
+  
   
   if(debug) {
     log.error('lineHeight: ' + lineHeight);
