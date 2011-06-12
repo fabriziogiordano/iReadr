@@ -1,6 +1,12 @@
 var bookScroll;
 //loadBook
-window.onload = function (){
+
+function scr () {
+  document.getElementById('book').style.height = "1000px";
+  window.scrollTo(0,1);
+}
+
+function book (){
   var page = 0,
       lineheight,
       barheight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 40;
@@ -26,6 +32,7 @@ window.onload = function (){
   document.getElementById('totpages').innerHTML = num_pages;
   document.getElementById('scroller').style.width = screen.width * num_pages + "px";
   document.getElementById('scroller').style.height = spaceHeight + "px";
+  
   
   for (i=1; i<num_pages; i++) {
     var clone = book.cloneNode(true);
@@ -79,6 +86,10 @@ window.onload = function (){
   setTimeout(scrollTo, 0, 0, 1);
 };
 
+window.onload = function(){
+  setTimeout(scr, 100);
+  setTimeout(book, 1000);
+}; 
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 //document.addEventListener('DOMContentLoaded', book, false);
