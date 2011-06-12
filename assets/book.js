@@ -6,13 +6,13 @@ function scr () {
 }
 
 function book (){
-  var page = 0,
-      doc = document,
+  var doc = document,
       sH = screen.height,
       sW = screen.width,
       barHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 40,
       hH = doc.getElementById('header').offsetHeight,
       fH = doc.getElementById('footer').offsetHeight,
+      pagenumber = doc.getElementById('page'),
       book = doc.getElementById('book0'),
       bookfooter = doc.getElementById('bookfooter'),
       totpages = doc.getElementById('totpages'),
@@ -40,7 +40,8 @@ function book (){
       
     },
     onScrollEnd: function () {
-      document.getElementById('page').innerHTML = this.currPageX+1;
+      pagenumber.innerHTML = this.currPageX+1;
+      store.set('page', this.currPageX);
     }
   });
   
@@ -54,6 +55,11 @@ function book (){
   }
   
   if(debug) {
+    var errorOutput = document.createElement('div');
+    errorOutput.id = "errorOutput";
+    errorOutput.style.display = "block";
+    document.getElementById('book').appendChild(errorOutput);
+    
     log.error('lineHeight: ' + lineHeight);
 
     log.error('screen.height: ' + screen.height);
@@ -77,9 +83,16 @@ function book (){
   }
   
   setTimeout(function(){window.scrollTo(0,1);}, 10);
-  // bookScroll.scrollToPage(5, 0, 500);
+  
+  if(store.get('page')) {
+    bookScroll.scrollToPage( store.get('page') , 0, 100);
+  }
 
 };
+
+var log = (function() {
+  return {  error : function(msg) { document.getElementById('errorOutput').appendChild(document.createElement('div')).innerHTML = msg } }
+})();
 
 window.onload = function(){
   //setTimeout(scr, 10);

@@ -23,25 +23,12 @@
 //document.addEventListener('DOMContentLoaded', loadBook, false);
 </script>
 
-<style type="text/css">
-  #errorOutput {display:none; position:relative; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100;}
-  #errorOutput div { color: red; }
-</style>
-
-<script>
-var log = (function() {
-  return {  error : function(msg) { document.getElementById('errorOutput').appendChild(document.createElement('div')).innerHTML = msg } }
-})();
-</script>
-
 </head>
 <body id="book">
-  
   <div id="header">
     <span>QuickBook</span>
     <span>aA</span>
     <span>Bookmark</span>
-    <div id="errorOutput"></div>
 <!--
     <span style="position:relative; top:20px; left: 40px; background-color:red; width:100px; height:100px;">
       <a href="#" onclick="alert(1); return false;">PROVA</a>
