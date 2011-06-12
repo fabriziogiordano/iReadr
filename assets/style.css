@@ -31,6 +31,11 @@ body {
   -webkit-border-radius:4px;
 }
 
+#header #bookmark,  #header #aa{
+  float:right;
+}
+
+
 #wrapper {
   z-index:1;
   top:45px;

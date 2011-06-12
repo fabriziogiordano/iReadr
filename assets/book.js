@@ -62,9 +62,7 @@ function book (){
     bookScroll.scrollToPage(0, 0, 1);
   }
   setTimeout(function(){window.scrollTo(0,1);}, 10);
-  
-  
-  
+
   
   if(debug) {
     var errorOutput = document.createElement('div');
@@ -107,7 +105,19 @@ window.onload = function(){
   else {
     //document.getElementById('footer').style.display = "none";
   }
+  
+  document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);
+  document.getElementById('next').addEventListener('touchstart', function(){bookScroll.scrollToPage('next', 0);return false;}, false);
+  
+  document.getElementById('bookmark').addEventListener('touchstart', function(){alert('fatto');}, false);
+  
+  /*
+  new NoClickDelay(document.getElementById('header'));
+  new NoClickDelay(document.getElementById('footer'));
+  */
+  
 };
+
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 //document.addEventListener('DOMContentLoaded', book, false);
