@@ -2,7 +2,9 @@ var bookScroll;
 
 function book (){
   var doc = document,
-      sH = screen.height,
+      isAndroid = (/android/gi).test(navigator.appVersion),
+      isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
+      sH = (isIDevice) ? screen.height : window.outerHeight,
       sW = screen.width,
       barsHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50,
       hH = doc.getElementById('header').offsetHeight,
@@ -47,7 +49,6 @@ function book (){
       pagenumber.innerHTML = this.currPageX+1;
       store.set('page', this.currPageX);
       indicatorimg.style.left = Math.floor(indicatorstep * this.currPageX) + "px";
-      alert(indicatorimg.style.left);
       window.currPage = this.currPageX;
       
       if(store.get('bookmark') === this.currPageX) {

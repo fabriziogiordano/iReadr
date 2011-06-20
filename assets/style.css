@@ -6,8 +6,12 @@
 
 body {
   background:
+    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') left top no-repeat,
     url('http://dummyimage.com/10x10/4E483E/4E483E') left top repeat-y,
+    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') right top no-repeat,
+    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') right bottom no-repeat,
     url('http://dummyimage.com/10x10/EA8D5F/EA8D5F') right top repeat-y,
+    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') left bottom no-repeat,
     url('http://dummyimage.com/10x10/F0E8D1/F0E8D1') left top;
     /*
     url(bg-left.png) left top repeat-y,
