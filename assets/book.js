@@ -12,12 +12,13 @@ function book (){
       bookfooter = doc.getElementById('bookfooter'),
       totpages = doc.getElementById('totpages'),
       scroller = doc.getElementById('scroller'),
+      bookmark = doc.getElementById('bookmark'),
       lineHeight = doc.defaultView.getComputedStyle(book,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
       bookHeight = book.offsetHeight, //scrollHeight
       spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
-      debug = false;
+      debug = true;
 
   book.style.width = sW + "px";
   book.style.height = spaceHeight + "px";
@@ -37,19 +38,23 @@ function book (){
     hScrollbar: false,
     vScrollbar: false,
     onScrollStart: function () {
-      
+      //pagenumber.innerHTML = this.dirX;
+    },
+    onBeforeScrollMove: function() {
+      //totpages.innerHTML = this.dirX;
     },
     onScrollEnd: function () {
       pagenumber.innerHTML = this.currPageX+1;
       store.set('page', this.currPageX);
-      indicatorimg.style.left = (indicatorstep * this.currPageX) + "px";
+      indicatorimg.style.left = Math.floor(indicatorstep * this.currPageX) + "px";
+      alert(indicatorimg.style.left);
       window.currPage = this.currPageX;
       
       if(store.get('bookmark') === this.currPageX) {
-        document.getElementById('bookmark').setAttribute("class", "active");
+        bookmark.setAttribute("class", "active");
       }
       else {
-        document.getElementById('bookmark').setAttribute("class", "");
+        bookmark.setAttribute("class", "");
       }
     }
   });
@@ -69,8 +74,8 @@ function book (){
   else {
     bookScroll.scrollToPage(0, 0, 1);
   }
-  setTimeout(function(){window.scrollTo(0,1);}, 1000);
-
+  
+  setTimeout(function(){window.scrollTo(0,1);}, 100);
   
   if(debug) {
     var errorOutput = document.createElement('div');
@@ -82,6 +87,8 @@ function book (){
 
     log.error('screen.height: ' + screen.height);
     log.error('screen.width: ' + screen.width);
+    
+    log.error('window.outerHeight: ' + window.outerHeight);
 
     log.error('document.height: ' + document.height);
     log.error('document.width: ' + document.width);
@@ -102,6 +109,27 @@ function book (){
 
 };
 
+/*
+hideAddressBar = function() {
+
+	console.log('removing android address bar...');
+	console.log(document.height+'');
+
+	window.scrollTo(0,0);
+	var nPageH = document.height;
+        var nViewH = window.outerHeight;
+        if (nViewH > nPageH) {
+            nViewH -= 250;
+            document.body.style.height = nViewH + 'px';
+        }
+
+	window.scrollTo(0,1);
+}
+
+hideAddressBar();
+document.getElementById('book').style.height = document.body.clientHeight;
+*/
+
 var log = (function() {
   return {  error : function(msg) { document.getElementById('errorOutput').appendChild(document.createElement('div')).innerHTML = msg } }
 })();
@@ -121,11 +149,11 @@ function fonts() {
 
 
 window.onload = function(){
-  if((/iphone|android/gi).test(navigator.appVersion)) {
-    setTimeout(book, 100);
+  if((/iphone|ipad|android/gi).test(navigator.appVersion)) {
+    setTimeout(book, 10);
   }
   else {
-    //document.getElementById('footer').style.display = "none";
+    document.getElementById('footer').style.display = "none";
   }
   
   document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);

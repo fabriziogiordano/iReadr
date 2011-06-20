@@ -5,6 +5,15 @@
 }
 
 body {
+  background:
+    url('http://dummyimage.com/10x10/4E483E/4E483E') left top repeat-y,
+    url('http://dummyimage.com/10x10/EA8D5F/EA8D5F') right top repeat-y,
+    url('http://dummyimage.com/10x10/F0E8D1/F0E8D1') left top;
+    /*
+    url(bg-left.png) left top repeat-y,
+    url(bg-right.png) right top repeat-y,
+    url(bg-main.png) left top;
+    */
   background-color:#F0E8D1;
   color:#463220;
   -webkit-perspective: 800;
@@ -27,16 +36,16 @@ body {
 
 #header #quickbook {
   float:left;
-  height:23px;
+  height:25px;
   width:100px;
   margin-top:8px;
   text-indent: -9999px;
-  background: orange url('http://dummyimage.com/100x23/4e9e06/4e9e06') no-repeat 0px 0px;
+  background: orange url('http://dummyimage.com/100x25/EF4327/EF4327') no-repeat 0px 0px;
 }
 
 #header #quickbook a{
   display:block;
-  height:23px;
+  height:25px;
   width:100px;
 }
 
@@ -49,9 +58,9 @@ body {
 }
 
 #header #bookmark {
-  height:23px;
+  height:25px;
   width:18px;
-  background: transparent url('bookmark.png') no-repeat 0px 0px;
+  background: transparent url('http://dummyimage.com/50x25/D23F18/D23F18') no-repeat 0px 0px;
   -webkit-transition: all 100ms linear;
 }
 #header #bookmark.active {
@@ -59,9 +68,9 @@ body {
   }
   
 #header #aa{
-  height:20px;
+  height:25px;
   width:20px;
-  background: orange url('http://dummyimage.com/20x20/4e9e06/4e9e06') no-repeat 0px 0px;
+  background: orange url('http://dummyimage.com/20x25/D79038/D79038') no-repeat 0px 0px;
 }
 
 #wrapper {
@@ -101,7 +110,7 @@ body {
 #footer {
 	width:auto;
 	height:40px;
-	background-color:red;
+/*  background-color:red;*/
 }
 
 #footer #indicator {
@@ -133,12 +142,12 @@ body {
 	width:50px;
 	height:40px;
 	-webkit-touch-callout: none;
-	background: orange url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
+  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
 }
 
 #next {
 	float:right;
-	background: orange url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
+  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
 }
 
 #pagecounter {
