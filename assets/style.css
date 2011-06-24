@@ -6,18 +6,20 @@
 
 body {
   background:
-    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') left top no-repeat,
-    url('http://dummyimage.com/10x10/4E483E/4E483E') left top repeat-y,
-    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') right top no-repeat,
-    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') right bottom no-repeat,
-    url('http://dummyimage.com/10x10/EA8D5F/EA8D5F') right top repeat-y,
-    url('http://dummyimage.com/10x10/FFFFFF/FFFFFF') left bottom no-repeat,
-    url('http://dummyimage.com/10x10/F0E8D1/F0E8D1') left top;
+    url('./images/bg-top-left.png') left top no-repeat,
+    url('./images/bg-left.png') left top repeat-y,
+    url('./images/bg-top-right.png') right top no-repeat,
+    url('./images/.png') right bottom no-repeat,
+    url('./images/bg-right.png') right top repeat-y,
+    url('./images/.png') left bottom no-repeat;
+    /*,
+    url('./images/bg-top-left.png') left top;
     /*
     url(bg-left.png) left top repeat-y,
     url(bg-right.png) right top repeat-y,
     url(bg-main.png) left top;
     */
+  padding:0 15px;
   background-color:#F0E8D1;
   color:#463220;
   -webkit-perspective: 800;
@@ -33,48 +35,49 @@ body {
   width:100%;
   height:45px;
   line-height:45px;
-  padding:0 20px;
   height:45px;
   -webkit-box-sizing:border-box;
 }
 
-#header #quickbook {
+#header #logo {
   float:left;
-  height:25px;
+  height:45px;
   width:100px;
-  margin-top:8px;
   text-indent: -9999px;
-  background: orange url('http://dummyimage.com/100x25/EF4327/EF4327') no-repeat 0px 0px;
+  background: orange url('./images/logo.png') no-repeat 0px 8px; /*transparent*/
 }
 
-#header #quickbook a{
+#header #logo a{
   display:block;
-  height:25px;
+  height:45px;
   width:100px;
 }
 
-
-#header #bookmark,#header #aa{
+#header #bookmark, #header #aa{
   float:right;
   text-indent: -9999px;
-  margin-top:8px;
   margin-right:10px;
 }
 
 #header #bookmark {
-  height:25px;
-  width:18px;
-  background: transparent url('http://dummyimage.com/50x25/D23F18/D23F18') no-repeat 0px 0px;
+  margin-right:0px;
+}
+
+#header #bookmark {
+  height:45px;
+  width:35px;
+  background: orange url('./images/bookmark.png') no-repeat 0px 0px; /*transparent*/
   -webkit-transition: all 100ms linear;
 }
+
 #header #bookmark.active {
   background-position: -18px 0px;
-  }
+}
   
 #header #aa{
-  height:25px;
-  width:20px;
-  background: orange url('http://dummyimage.com/20x25/D79038/D79038') no-repeat 0px 0px;
+  height:45px;
+  width:35px;
+  background: orange url('./images/aa.png') no-repeat 0px 0px; /*transparent*/
 }
 
 #wrapper {
@@ -84,21 +87,24 @@ body {
   left:0;
   width:100%;
   overflow:auto;
+  margin:5px 0 5px 0;
+/*  border:1px solid red;*/
+  -webkit-box-sizing:border-box;
 }
 
 #scroller {
   position:relative;
   float:left;
   width:100%;
-  margin-top:10px;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
   -webkit-box-sizing:border-box;
+/*  border:1px solid red;*/
 }
 
 .pages {
   float:left;
-  margin:0;
-  padding:0px 15px 20px 20px;
+/*  margin:0px 20px 0px 0px;*/
+  padding:0px 10px 0px 0px;
   overflow:hidden;
   text-align:justify;
   font-size: 13px;
@@ -122,7 +128,8 @@ body {
   position:relative;
   margin:0 55px 0 50px;
   height:14px;
-  background-image: url('http://dummyimage.com/200x14/000/fff');
+  background-image: url('./images/bg-indicator.png');
+  background-color:red;
 }
 
 #footer #indicator span {
@@ -132,12 +139,18 @@ body {
   top:0px;
   left:0px;
   margin:0; padding:0;
-  background-image: url('http://dummyimage.com/20x14/4e9e06/4e9e06');
+  background-image: url('./images/bg-indicator-span.png');
+  background-color:green;
   -webkit-transition: all 100ms ease-in-out;
 }
+
+#footer #indicatorimg {
+  left:200px;
+}
+
 #footerhidden {
 	width:auto;
-	height:200px;
+/*  height:200px;*/
 }
 
 #prev, #next {
@@ -146,12 +159,12 @@ body {
 	width:50px;
 	height:40px;
 	-webkit-touch-callout: none;
-  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
+/*  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;*/
 }
 
 #next {
 	float:right;
-  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;
+/*  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;*/
 }
 
 #pagecounter {
@@ -205,9 +218,6 @@ body {
 	-webkit-box-shadow:inset -1px -1px 0 #fff;
 	top:-9px; bottom:auto; right:40px;
 }
-
-
-
 
 #errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
 #errorOutput div { color: red; }

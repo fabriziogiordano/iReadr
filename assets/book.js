@@ -4,24 +4,29 @@ function book (){
   var doc = document,
       isAndroid = (/android/gi).test(navigator.appVersion),
       isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
-      sH = (isIDevice) ? screen.height : window.outerHeight,
-      sW = screen.width,
-      barsHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50,
-      hH = doc.getElementById('header').offsetHeight,
-      fH = doc.getElementById('footer').offsetHeight,
+      density = window.devicePixelRatio,
       pagenumber = doc.getElementById('page'),
       book = doc.getElementById('book0'),
       bookfooter = doc.getElementById('bookfooter'),
       totpages = doc.getElementById('totpages'),
       scroller = doc.getElementById('scroller'),
       bookmark = doc.getElementById('bookmark'),
+      wrapper = doc.getElementById('wrapper'),
+      sH = (isIDevice) ? screen.height : 510,
+      sW = wrapper.offsetWidth,
+      //barsHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50,
+      barsHeight = (isIDevice) ? (( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50) : 0
+      hH = doc.getElementById('header').offsetHeight,
+      fH = doc.getElementById('footer').offsetHeight,
+
       lineHeight = doc.defaultView.getComputedStyle(book,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
       bookHeight = book.offsetHeight, //scrollHeight
       spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
-      debug = true;
+      debug = false;
 
+  // wrapper.style.width = sW + "px";
   book.style.width = sW + "px";
   book.style.height = spaceHeight + "px";
   bookfooter.style.height = bookFooterHeight + "px";
@@ -76,7 +81,7 @@ function book (){
     bookScroll.scrollToPage(0, 0, 1);
   }
   
-  setTimeout(function(){window.scrollTo(0,1);}, 100);
+  setTimeout(function(){window.scrollTo(0,1);}, 200);
   
   if(debug) {
     var errorOutput = document.createElement('div');
@@ -90,6 +95,7 @@ function book (){
     log.error('screen.width: ' + screen.width);
     
     log.error('window.outerHeight: ' + window.outerHeight);
+    log.error('window.innerHeight: ' + window.innerHeight);
 
     log.error('document.height: ' + document.height);
     log.error('document.width: ' + document.width);
@@ -157,8 +163,8 @@ window.onload = function(){
     document.getElementById('footer').style.display = "none";
   }
   
-  document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);
-  document.getElementById('next').addEventListener('touchstart', function(){bookScroll.scrollToPage('next', 0);return false;}, false);
+  //document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);
+  //document.getElementById('next').addEventListener('touchstart', function(){bookScroll.scrollToPage('next', 0);return false;}, false);
   
   document.getElementById('bookmark').addEventListener('touchstart', function bok (e){
     e.preventDefault();

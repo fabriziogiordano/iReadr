@@ -19,6 +19,7 @@
 <script src="./assets/book.js"></script>
 
 <script>
+//alert(window.devicePixelRatio);
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 //document.addEventListener('DOMContentLoaded', loadBook, false);
 </script>
@@ -28,7 +29,7 @@
   <div id="header">
     <span id="bookmark">Bookmark</span>
     <span id="aa">aA</span>
-    <span id="quickbook"><a href="http://google.com">QuickBook</a></span>
+    <span id="logo"><a href="http://google.com">QuickBook</a></span>
     
     <div id="addToHomeScreen">
       <p>Arial</p>
@@ -51,7 +52,7 @@
     <div id="prev" onclick="bookScroll.scrollToPage('prev', 0);return false" style="display:none;" > </div>
     <div id="next" onclick="bookScroll.scrollToPage('next', 0);return false" style="display:none;" > </div>
     <div id="indicator">
-      <span id="indicatorimg" style="left:200px;">&nbsp;</span>
+      <span id="indicatorimg"> </span>
     </div>
     <div id="pagecounter"> page <span id="page"> 1 </span> of <span id="totpages"> 0 </span> </div>
   </div>
