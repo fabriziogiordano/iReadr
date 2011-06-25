@@ -1,19 +1,22 @@
 CACHE MANIFEST
 
 # rev 1
-/assets/120.gif
-/assets/bg-left.png
-/assets/bg-main.png
-/assets/bg-right.png
-/assets/book.js
-/assets/bookmark.png
-/assets/bookmarkideaimg.png
-/assets/cover.jpg
+/assets/images/aa.png
+/assets/images/bg-indicator-span.png
+/assets/images/bg-indicator.png
+/assets/images/bg-left.png
+/assets/images/bg-right.png
+/assets/images/bg-top-left.png
+/assets/images/bg-top-right.png
+/assets/images/bookmark.png
+/assets/images/logo.png
+
 /assets/iscroll.js
 /assets/json.js
 /assets/noclickdelay.js
 /assets/store.js
+/assets/styleswitcher.js
+
 /assets/style.css
 /assets/style1.css
 /assets/style2.css
-/assets/styleswitcher.js

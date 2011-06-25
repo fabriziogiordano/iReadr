@@ -195,5 +195,16 @@ window.onload = function(){
   
 };
 
+window.addEventListener('load', setOrientation, false);
+window.addEventListener('orientationchange', setOrientation, false);
+
+function setOrientation() {
+ var orient = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
+ //var cl = document.body.className;
+ //cl = cl.replace(/portrait|landscape/, orient);
+ //document.body.className = cl;
+ //alert(orient);
+}
+
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 //document.addEventListener('DOMContentLoaded', book, false);
