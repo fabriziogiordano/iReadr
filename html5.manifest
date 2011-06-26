@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#v3
+#v5
 CACHE:
 /quickreader/index.html
 
@@ -14,10 +14,10 @@ CACHE:
 /quickreader/assets/images/logo.png
 
 /quickreader/assets/iscroll.js
-/quickreader/assets/json.js
-/quickreader/assets/noclickdelay.js
-/quickreader/assets/store.js
 /quickreader/assets/styleswitcher.js
+/quickreader/assets/json.js
+/quickreader/assets/store.js
+/quickreader/assets/cache.js
 /quickreader/assets/book.js
 
 /quickreader/assets/style.css
