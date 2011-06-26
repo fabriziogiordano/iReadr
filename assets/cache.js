@@ -39,4 +39,4 @@ window.applicationCache.addEventListener(
     false
 );
 
-setInterval(function(){cache.update()}, 10000);
+setInterval(function(){cache.update()}, 5000);
