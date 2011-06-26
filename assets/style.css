@@ -1,7 +1,7 @@
 * {
   margin: 0px;
   padding: 0px;
-  font-family: Helvetica;
+  font-family: AmericanTypewriter, Helvetica, sans-serif;
 }
 /*
 background:
@@ -113,7 +113,7 @@ body {
   padding:0px 10px 0px 0px;
   overflow:hidden;
   text-align:justify;
-  font-size: 14px;
+  font-size: 15px;
   line-height:25px;
   -webkit-box-sizing:border-box;
 }

@@ -1,7 +1,6 @@
 var bookScroll;
 
 function book (){
-  alert('libro');
   var doc = document,
       isAndroid = (/android/gi).test(navigator.appVersion),
       isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),

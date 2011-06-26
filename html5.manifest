@@ -1,6 +1,6 @@
 CACHE MANIFEST
-
-# rev 1
+#v3
+CACHE:
 /quickreader/index.html
 
 /quickreader/assets/images/aa.png
@@ -18,7 +18,11 @@ CACHE MANIFEST
 /quickreader/assets/noclickdelay.js
 /quickreader/assets/store.js
 /quickreader/assets/styleswitcher.js
+/quickreader/assets/book.js
 
 /quickreader/assets/style.css
 /quickreader/assets/style1.css
 /quickreader/assets/style2.css
+
+NETWORK:
+*
