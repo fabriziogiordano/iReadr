@@ -163,9 +163,6 @@ window.onload = function(){
     document.getElementById('footer').style.display = "none";
   }
   
-  //document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);
-  //document.getElementById('next').addEventListener('touchstart', function(){bookScroll.scrollToPage('next', 0);return false;}, false);
-  
   document.getElementById('bookmark').addEventListener('touchstart', function bok (e){
     e.preventDefault();
     var bookmarkclass = document.getElementById('bookmark').getAttribute("class");
@@ -193,18 +190,41 @@ window.onload = function(){
     return false;
   }, false);
   
+  
+  
+  
+
+  var i, a;
+  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) alert(a.getAttribute("title"));
+  }
+
+  var title = 'default';
+  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+      a.disabled = true;
+      if(a.getAttribute("title") == title) a.disabled = false;
+    }
+  }
+  
+  
 };
 
-window.addEventListener('load', setOrientation, false);
+// window.addEventListener('load', load, false);
 window.addEventListener('orientationchange', setOrientation, false);
 
 function setOrientation() {
  var orient = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
- //var cl = document.body.className;
- //cl = cl.replace(/portrait|landscape/, orient);
- //document.body.className = cl;
- //alert(orient);
 }
 
-//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
 //document.addEventListener('DOMContentLoaded', book, false);
+
+//document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);
+//document.getElementById('next').addEventListener('touchstart', function(){bookScroll.scrollToPage('next', 0);return false;}, false);
+
+//var cl = document.body.className;
+//cl = cl.replace(/portrait|landscape/, orient);
+//document.body.className = cl;
+//alert(orient);

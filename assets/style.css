@@ -50,7 +50,7 @@ body {
   height:45px;
   width:100px;
   text-indent: -9999px;
-  background: orange url('./images/logo.png') no-repeat 0px 8px; /*transparent*/
+  background: transparent url('./images/logo.png') no-repeat 0px 0px; /*transparent*/
 }
 
 #header #logo a{
@@ -72,18 +72,18 @@ body {
 #header #bookmark {
   height:45px;
   width:35px;
-  background: orange url('./images/bookmark.png') no-repeat 0px 0px; /*transparent*/
-  -webkit-transition: all 100ms linear;
+  background: transparent url('./images/bookmark.png') no-repeat 0px 0px; /*transparent*/
+  -webkit-transition: all 100ms ease-out;
 }
 
 #header #bookmark.active {
-  background-position: -18px 0px;
+  background-position: 0px -46px;
 }
   
 #header #aa{
   height:45px;
   width:35px;
-  background: orange url('./images/aa.png') no-repeat 0px 0px; /*transparent*/
+  background: transparent url('./images/aa.png') no-repeat 0px 0px; /*transparent*/
 }
 
 #wrapper {
