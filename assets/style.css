@@ -1,7 +1,62 @@
+<?php
+header('Content-type: text/css');
+
+switch ($_GET['v']) {
+  case 0:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  case 1:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  case 2:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  case 3:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  
+  
+  case 4:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  case 5:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  case 6:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  case 7:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+  break;
+  
+  
+  default:
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+}
+?>
+
 * {
   margin: 0px;
   padding: 0px;
-  font-family: AmericanTypewriter, Helvetica, sans-serif;
+  font-family: <?php echo $fontfamily; ?>;
 }
 /*
 background:
@@ -26,8 +81,8 @@ body {
     url('./images/bg-right.png') right top repeat-y,
     url('./images/.png') left bottom no-repeat;
   padding:0 15px;
-  background-color:#F0E8D1;
-  color:#463220;
+  background-color: <?php echo $backgroundcolor; ?>;
+  color: <?php echo $color; ?>;
   -webkit-perspective: 800;
   -webkit-text-size-adjust: none;
   -webkit-transform-style: preserve-3d;
@@ -59,7 +114,7 @@ body {
   width:100px;
 }
 
-#header #bookmark, #header #aa{
+#header #bookmark, #header #aa, #header #style{
   float:right;
   text-indent: -9999px;
   margin-right:10px;
@@ -84,6 +139,12 @@ body {
   height:45px;
   width:35px;
   background: transparent url('./images/aa.png') no-repeat 0px 0px; /*transparent*/
+}
+
+#header #style{
+  height:45px;
+  width:49px;
+  background: orange url('./images/style.png') no-repeat 0px 0px; /*transparent*/
 }
 
 #wrapper {
@@ -181,7 +242,7 @@ body {
 /*  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;*/
 }
 
-#addToHomeScreen {
+#styles {
   display:none;
   position:absolute;
   top:40px;
@@ -208,7 +269,7 @@ body {
 	line-height:130%;
 	-webkit-box-shadow:0 0 2px rgba(0,0,0,0.5);
 }
-#addToHomeScreen .arrow {
+#styles .arrow {
 	position:absolute;
 	border-width:0 1px 1px 0;
 	border-style:solid;
@@ -218,11 +279,10 @@ body {
 	margin-left:-8px;
 	-webkit-box-shadow:inset -1px -1px 0 #a9a9a9;
 	-webkit-border-bottom-right-radius:2px;
-	
 	-webkit-transform:rotateZ(-135deg);
 	background-image:-webkit-gradient(linear,0 0,100% 100%,color-stop(0,rgba(238,238,238,0)),color-stop(0.4,rgba(238,238,238,0)),color-stop(0.4,#eee));
 	-webkit-box-shadow:inset -1px -1px 0 #fff;
-	top:-9px; bottom:auto; right:40px;
+	top:-9px; bottom:auto; right:100px;
 }
 #errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
 #errorOutput div { color: red; }

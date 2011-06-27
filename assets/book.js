@@ -180,18 +180,25 @@ window.onload = function(){
     return false;
   }, false);
   
-  
-  document.getElementById('aa').addEventListener('touchstart', function bok (e){
+  document.getElementById('style').addEventListener('touchstart', function bok (e){
     e.preventDefault();
-    var aaclass = document.defaultView.getComputedStyle(document.getElementById('addToHomeScreen'), null).getPropertyValue('display');
-    if(aaclass === 'block') {
-      document.getElementById('addToHomeScreen').style.display = "none";
+    var styleclass = document.defaultView.getComputedStyle(document.getElementById('styles'), null).getPropertyValue('display');
+    if(styleclass === 'block') {
+      document.getElementById('styles').style.display = "none";
     }
     else {
-      document.getElementById('addToHomeScreen').style.display = "block";
+      document.getElementById('styles').style.display = "block";
     }
     return false;
   }, false);
+  
+  document.getElementById('aa').addEventListener('touchstart', function bok (e){
+    e.preventDefault();
+    
+  }, false);
+  
+  
+  
   
   //document.getElementsByTagName("link")[1].disabled = false;
   
