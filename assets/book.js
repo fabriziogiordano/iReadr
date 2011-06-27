@@ -156,6 +156,9 @@ function fonts() {
 
 
 window.onload = function(){
+  /*Set CSS*/
+  
+  
   if((/iphone|ipad|android/gi).test(navigator.appVersion)) {
     setTimeout(book, 10);
   }
@@ -190,23 +193,24 @@ window.onload = function(){
     return false;
   }, false);
   
+  //document.getElementsByTagName("link")[1].disabled = false;
   
-  
-  
-
+  /*
   var i, a;
   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) alert(a.getAttribute("title"));
+    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) {
+      a.getAttribute("title");
+    }
   }
 
-  var title = 'default';
+  var title = 'ipad';
   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
     if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
       a.disabled = true;
       if(a.getAttribute("title") == title) a.disabled = false;
     }
   }
-  
+  */
   
 };
 
