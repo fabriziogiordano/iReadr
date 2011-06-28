@@ -2,54 +2,94 @@
 header('Content-type: text/css');
 
 switch ($_GET['v']) {
-  case 0:
+  case 'default':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
-  break;
-  case 1:
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
-  break;
-  case 2:
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
-  break;
-  case 3:
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+    $fontfamily = '"American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '20px';
+    $fontsize['h2'] = '13px';
+    $fontsize['p'] = '11px';
   break;
   
-  
-  case 4:
+  case 'bigdefault':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
-  break;
-  case 5:
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
-  break;
-  case 6:
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
-  break;
-  case 7:
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+    $fontfamily = '"American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '25px';
+    $fontsize['h2'] = '18px';
+    $fontsize['p'] = '16px';
   break;
   
+  case 'courier':
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = '"Courier New", "American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '20px';
+    $fontsize['h2'] = '13px';
+    $fontsize['p'] = '11px';
+  break;
+  
+  case 'bigcourier':
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = '"Courier New", "American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '25px';
+    $fontsize['h2'] = '18px';
+    $fontsize['p'] = '16px';
+  break;
+  
+  case 'helvetica':
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'Helvetica, "American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '20px';
+    $fontsize['h2'] = '13px';
+    $fontsize['p'] = '11px';
+  break;
+  
+  case 'bighelvetica':
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'Helvetica, "American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '25px';
+    $fontsize['h2'] = '18px';
+    $fontsize['p'] = '16px';
+  break;
+  
+  case 'tahoma':
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'Tahoma, "American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '20px';
+    $fontsize['h2'] = '13px';
+    $fontsize['p'] = '11px';
+  break;
+  
+  case 'bigtahoma':
+    $backgroundcolor = '#F0E8D1';
+    $color = '#463220';
+    $fontfamily = 'Tahoma, "American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '25px';
+    $fontsize['h2'] = '18px';
+    $fontsize['p'] = '16px';
+  break;
   
   default:
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
-    $fontfamily = 'AmericanTypewriter, Helvetica, sans-serif';
+    $fontfamily = 'Farizio, "American Typewriter", Helvetica, sans-serif';
+    $lineheight = '25px';
+    $fontsize['h1'] = '20px';
+    $fontsize['h2'] = '11px';
+    $fontsize['p'] = '11px';
 }
 ?>
 
@@ -144,7 +184,7 @@ body {
 #header #style{
   height:45px;
   width:49px;
-  background: orange url('./images/style.png') no-repeat 0px 0px; /*transparent*/
+  background: transparent url('./images/style.png') no-repeat 0px 0px; /*transparent*/
 }
 
 #wrapper {
@@ -174,12 +214,12 @@ body {
   padding:0px 10px 0px 0px;
   overflow:hidden;
   text-align:justify;
-  font-size: 15px;
-  line-height:25px;
+  font-size: <?php echo $fontsize['p']; ?>;
+  line-height:<?php echo $lineheight; ?>;
   -webkit-box-sizing:border-box;
 }
-.pages h1 {font-size: 22px; line-height:25px;}
-.pages h2 {font-size: 12px; line-height:25px;}
+.pages h1 {font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
+.pages h2 {font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
 .pages img {float:right; margin:0 0 0 10px;}
 
 #footer {
@@ -284,5 +324,10 @@ body {
 	-webkit-box-shadow:inset -1px -1px 0 #fff;
 	top:-9px; bottom:auto; right:100px;
 }
+
+#stylesCourier { font-family: 'Courier New'; }
+#stylesHelvetica { font-family: 'Helvetica'; }
+#stylesTahoma { font-family: 'Tahoma'; }
+
 #errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
 #errorOutput div { color: red; }

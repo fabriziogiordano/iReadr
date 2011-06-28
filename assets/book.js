@@ -1,6 +1,15 @@
 var bookScroll;
 
 function book (){
+  if(typeof bookScroll == 'object') bookScroll.destroy();
+
+  if(typeof store.get('style') === 'undefined') {
+    setstyle('default');
+  }
+  else {
+    setstyle(store.get('style'));
+  }
+  
   var doc = document,
       isAndroid = (/android/gi).test(navigator.appVersion),
       isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
@@ -20,7 +29,7 @@ function book (){
       fH = doc.getElementById('footer').offsetHeight,
 
       lineHeight = doc.defaultView.getComputedStyle(book,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
-      bookHeight = book.offsetHeight, //scrollHeight
+      bookHeight = book.scrollHeight, // offsetHeight
       spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
@@ -39,7 +48,7 @@ function book (){
       iW = doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0,
       indicatorstep = iW / numPages;
   
-  bookScroll = new iScroll('wrapper', {
+  var bookScroll = new iScroll('wrapper', {
     snap: true,
     momentum: false,
     hScrollbar: false,
@@ -65,10 +74,16 @@ function book (){
     }
   });
   
+  
+  [].slice.apply(document.querySelectorAll('.pages.added')).forEach(function(element){
+    element.parentNode.removeChild(element)
+  });
+  
   for (i = 1; i < numPages; i++) {
     var clone = book.cloneNode(true);
     var page = book.parentNode.appendChild(clone);
     page.id = "book"+i;
+    page.className = "pages added";
     page.style.height = spaceHeight + "px";
     page.style.width = sW + "px";
     page.scrollTop = i*spaceHeight;
@@ -148,7 +163,7 @@ function fonts() {
       link = options.touchIcon ? document.querySelectorAll('head link[rel=apple-touch-icon],head link[rel=apple-touch-icon-precomposed]') : [],
       sizes, touchIcon = '';
 
-  div.id = 'addToHomeScreen';
+  div.id = 'styles';
   div.style.cssText += 'position:absolute;-webkit-transition-property:-webkit-transform,opacity;-webkit-transition-duration:0;-webkit-transform:translate3d(0,0,0);';
   div.style.left = '-9999px';
   
@@ -157,14 +172,7 @@ function fonts() {
 
 window.onload = function(){
   /*Set CSS*/
-  
-  
-  if((/iphone|ipad|android/gi).test(navigator.appVersion)) {
-    setTimeout(book, 10);
-  }
-  else {
-    document.getElementById('footer').style.display = "none";
-  }
+  setbook();
   
   document.getElementById('bookmark').addEventListener('touchstart', function bok (e){
     e.preventDefault();
@@ -194,10 +202,30 @@ window.onload = function(){
   
   document.getElementById('aa').addEventListener('touchstart', function bok (e){
     e.preventDefault();
-    
+    setsize();
+    setbook();
   }, false);
   
+  document.getElementById('stylesCourier').addEventListener('touchstart', function bok (e){
+    e.preventDefault();
+    setstyle('courier');
+    setbook();
+    document.getElementById('styles').style.display = "none";
+  }, false);
   
+  document.getElementById('stylesHelvetica').addEventListener('touchstart', function bok (e){
+    e.preventDefault();
+    setstyle('helvetica');
+    setbook();
+    document.getElementById('styles').style.display = "none";
+  }, false);
+  
+  document.getElementById('stylesTahoma').addEventListener('touchstart', function bok (e){
+    e.preventDefault();
+    setstyle('tahoma');
+    setbook();
+    document.getElementById('styles').style.display = "none";
+  }, false);
   
   
   //document.getElementsByTagName("link")[1].disabled = false;
@@ -221,6 +249,42 @@ window.onload = function(){
   
 };
 
+
+function setbook () {
+  if((/iphone|ipad|android/gi).test(navigator.appVersion)) {
+    setTimeout(book, 10);
+  }
+  else {
+    document.getElementById('footer').style.display = "none";
+  }
+}
+
+function setsize(){
+  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+      if(!a.disabled) var title = a.getAttribute("title");
+    }
+  }
+  
+  if(title.indexOf("big") === 0) {
+    setstyle(title.substring(3));
+  }
+  else {
+    setstyle("big"+title);
+  }
+return;
+}
+
+function setstyle(style){
+  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+      a.disabled = true;
+      if(a.getAttribute("title") == style) a.disabled = false;
+    }
+  }
+  store.set('style', style);
+}
+
 // window.addEventListener('load', load, false);
 window.addEventListener('orientationchange', setOrientation, false);
 
@@ -228,7 +292,7 @@ function setOrientation() {
  var orient = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
 }
 
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 //document.addEventListener('DOMContentLoaded', book, false);
 
