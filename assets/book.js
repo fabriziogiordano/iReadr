@@ -13,6 +13,7 @@ function book (){
   var doc = document,
       isAndroid = (/android/gi).test(navigator.appVersion),
       isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
+      isIPad = (/ipad/gi).test(navigator.appVersion),
       density = window.devicePixelRatio,
       pagenumber = doc.getElementById('page'),
       book = doc.getElementById('book0'),
@@ -25,6 +26,7 @@ function book (){
       sW = wrapper.offsetWidth,
       //barsHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50,
       barsHeight = (isIDevice) ? (( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50) : 0
+      barsHeight = (isIPad) ? 20 : 0
       hH = doc.getElementById('header').offsetHeight,
       fH = doc.getElementById('footer').offsetHeight,
 
@@ -33,7 +35,7 @@ function book (){
       spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
-      debug = true;
+      debug = false;
 
   // wrapper.style.width = sW + "px";
   book.style.width = sW + "px";
