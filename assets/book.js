@@ -26,7 +26,7 @@ function book (){
       sW = wrapper.offsetWidth,
       //barsHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50,
       barsHeight = (isIDevice) ? (( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50) : 0
-      barsHeight = (isIPad) ? 20 : 0
+      barsHeight += (isIPad) ? 20 : 0
       hH = doc.getElementById('header').offsetHeight,
       fH = doc.getElementById('footer').offsetHeight,
 
