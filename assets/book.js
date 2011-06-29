@@ -33,7 +33,7 @@ function book (){
       spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
-      debug = false;
+      debug = true;
 
   // wrapper.style.width = sW + "px";
   book.style.width = sW + "px";
