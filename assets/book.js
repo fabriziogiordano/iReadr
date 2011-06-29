@@ -4,7 +4,7 @@ function book (){
   if(typeof bookScroll == 'object') bookScroll.destroy();
 
   if(typeof store.get('style') === 'undefined') {
-    setstyle('default');
+    //setstyle('default');
   }
   else {
     setstyle(store.get('style'));
