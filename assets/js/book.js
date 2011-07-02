@@ -2,13 +2,15 @@ var bookScroll;
 
 function book() {
   
-  if(typeof bookScroll == 'object') bookScroll.destroy();
-
-  if(typeof store.get(bookslug+'-style') === 'undefined') {
+  if (typeof bookScroll === 'object') {
+    bookScroll.destroy();
+  }
+  
+  if (typeof store.get(bookslug + '-style') === 'undefined') {
     //setstyle('default');
   }
   else {
-    setstyle(store.get(bookslug+'-style'));
+    setstyle(store.get(bookslug + '-style'));
   }
   
   var doc = document,
@@ -26,7 +28,7 @@ function book() {
       sH = (isIDevice) ? screen.height : 510,
       sW = wrapper.offsetWidth,
       barsHeight = (isIDevice) ? (( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50) : 0
-      barsHeight += (isIPad) ? 20 : 0
+      barsHeight += (isIPad) ? 20 : 0,
       hH = doc.getElementById('header').offsetHeight,
       fH = doc.getElementById('footer').offsetHeight,
 
@@ -62,12 +64,12 @@ function book() {
       //totpages.innerHTML = this.dirX;
     },
     onScrollEnd: function () {
-      pagenumber.innerHTML = this.currPageX+1;
+      pagenumber.innerHTML = this.currPageX + 1;
       store.set(bookslug+'-page', this.currPageX);
       indicatorimg.style.left = Math.floor(indicatorstep * this.currPageX) + "px";
       window.currPage = this.currPageX;
       
-      if(store.get(bookslug+'-bookmark') === this.currPageX) {
+      if (store.get(bookslug + '-bookmark') === this.currPageX) {
         bookmark.setAttribute("class", "active");
       }
       else {
@@ -75,7 +77,6 @@ function book() {
       }
     }
   });
-  
   
   [].slice.apply(document.querySelectorAll('.pages.added')).forEach(function(element){
     element.parentNode.removeChild(element)
@@ -91,16 +92,16 @@ function book() {
     page.scrollTop = i*spaceHeight;
   }
   
-  if(store.get(bookslug+'-page')) {
-    bookScroll.scrollToPage( store.get(bookslug+'-page') , 0, 1);
+  if (store.get(bookslug + '-page')) {
+    bookScroll.scrollToPage( store.get(bookslug + '-page') , 0, 1);
   }
   else {
     bookScroll.scrollToPage(0, 0, 1);
   }
   
-  setTimeout(function(){window.scrollTo(0,1);}, 200);
+  setTimeout( function() { window.scrollTo(0,1); }, 200 );
   
-  if(debug) {
+  if (debug) {
     var errorOutput = document.createElement('div');
     errorOutput.id = "errorOutput";
     errorOutput.style.display = "block";
@@ -133,47 +134,8 @@ function book() {
 
 };
 
-/*
-hideAddressBar = function() {
-
-	console.log('removing android address bar...');
-	console.log(document.height+'');
-
-	window.scrollTo(0,0);
-	var nPageH = document.height;
-        var nViewH = window.outerHeight;
-        if (nViewH > nPageH) {
-            nViewH -= 250;
-            document.body.style.height = nViewH + 'px';
-        }
-
-	window.scrollTo(0,1);
-}
-
-hideAddressBar();
-document.getElementById('book').style.height = document.body.clientHeight;
-*/
-
-var log = (function() {
-  return {  error : function(msg) { document.getElementById('errorOutput').appendChild(document.createElement('div')).innerHTML = msg } }
-})();
-
-
-function fonts() {
-  var div = document.createElement('div'),
-      close,
-      link = options.touchIcon ? document.querySelectorAll('head link[rel=apple-touch-icon],head link[rel=apple-touch-icon-precomposed]') : [],
-      sizes, touchIcon = '';
-
-  div.id = 'styles';
-  div.style.cssText += 'position:absolute;-webkit-transition-property:-webkit-transform,opacity;-webkit-transition-duration:0;-webkit-transform:translate3d(0,0,0);';
-  div.style.left = '-9999px';
-  
-}
-
-
-window.onload = function(){
-  bookslug = slugify(document.getElementById('title').innerHTML);
+window.onload = function() {
+  bookslug = slugify( document.getElementById('title').innerHTML );
     
   /*Set CSS*/
   setbook();
@@ -181,7 +143,7 @@ window.onload = function(){
   document.getElementById('bookmark').addEventListener('touchstart', function bok (e){
     e.preventDefault();
     var bookmarkclass = document.getElementById('bookmark').getAttribute("class");
-    if(bookmarkclass === 'active') {
+    if (bookmarkclass === 'active') {
       store.set(bookslug+'-bookmark', '');
       document.getElementById('bookmark').setAttribute("class", "");
     }
@@ -195,7 +157,7 @@ window.onload = function(){
   document.getElementById('style').addEventListener('touchstart', function bok (e){
     e.preventDefault();
     var styleclass = document.defaultView.getComputedStyle(document.getElementById('styles'), null).getPropertyValue('display');
-    if(styleclass === 'block') {
+    if (styleclass === 'block') {
       document.getElementById('styles').style.display = "none";
     }
     else {
@@ -237,78 +199,30 @@ window.onload = function(){
     setbook();
     document.getElementById('styles').style.display = "none";
   }, false);
-  
-  
-  //document.getElementsByTagName("link")[1].disabled = false;
-  
-  /*
-  var i, a;
-  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) {
-      a.getAttribute("title");
-    }
-  }
 
-  var title = 'ipad';
-  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
-      a.disabled = true;
-      if(a.getAttribute("title") == title) a.disabled = false;
-    }
-  }
-  */
-  
 };
 
+//document.getElementsByTagName("link")[1].disabled = false;
 
-function setbook () {
-  if((/iphone|ipad|android/gi).test(navigator.appVersion)) {
-    setTimeout(book, 10);
-  }
-  else {
-    document.getElementById('footer').style.display = "none";
+/*
+var i, a;
+for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+  if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) {
+    a.getAttribute("title");
   }
 }
 
-function setsize(){
-  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
-      if(!a.disabled) var title = a.getAttribute("title");
-    }
+var title = 'ipad';
+for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+  if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+    a.disabled = true;
+    if (a.getAttribute("title") == title) a.disabled = false;
   }
-  
-  if(title.indexOf("big") === 0) {
-    setstyle(title.substring(3));
-  }
-  else {
-    setstyle("big"+title);
-  }
-return;
 }
+*/
 
-function setstyle(style){
-  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-    if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
-      a.disabled = true;
-      if(a.getAttribute("title") == style) a.disabled = false;
-    }
-  }
-  store.set(bookslug+'-style', style);
-}
 
-// window.addEventListener('load', load, false);
-window.addEventListener('orientationchange', setOrientation, false);
 
-function setOrientation() {
- var orient = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
-}
-
-function slugify(text) {
-  text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
-  text = text.replace(/-/gi, "_");
-  text = text.replace(/\s/gi, "-");
-  return text;
-}
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
