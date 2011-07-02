@@ -18,7 +18,7 @@ function setBook () {
   }
 }
 
-function setsize(){
+function setSize(){
   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
     if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
       if (!a.disabled) var title = a.getAttribute("title");

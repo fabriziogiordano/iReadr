@@ -2,6 +2,7 @@ var bookScroll;
 var bookSlug;
 
 function bookCreate() {
+  document.getElementById('loading').style.display = "block";
   
   if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
   
@@ -115,6 +116,8 @@ function bookCreate() {
   
   setTimeout( function() { window.scrollTo(0,1); }, 200 );
   
+  document.getElementById('loading').style.display = "none";
+  
   if (debug) {
     var errorOutput = document.createElement('div');
     errorOutput.id = "errorOutput";
@@ -145,7 +148,7 @@ function bookCreate() {
     log.error('scroller width: ' + document.getElementById('scroller').style.width);
     log.error('scroller height: ' + document.getElementById('scroller').style.height);
   }
-
+return true;
 };
 
 window.onload = function() {
@@ -159,19 +162,11 @@ window.onload = function() {
       styles = document.getElementById('styles');
   
   if ((/android/gi).test(navigator.appVersion)) {
-    //style.style.display = "none";
-    //aa.style.display = "none";
+    style.style.display = "none";
+    aa.style.display = "none";
   }
   
   setBook();
-  
-  document.getElementById('logo').addEventListener('touchstart', function (e){
-    e.preventDefault();
-    document.getElementById('book').className = "old";
-    bookCreate();
-    return false;
-  }, false);
-  
   
   bookmark.addEventListener('touchstart', function (e){
     e.preventDefault();
@@ -199,10 +194,9 @@ window.onload = function() {
     return false;
   }, false);
   
-  
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
-    setsize();
+    setSize();
     bookCreate();
   }, false);
   
