@@ -9,9 +9,9 @@ function fonts() {
   div.style.left = '-9999px';
 }
 
-function setbook () {
+function setFooter () {
   if ((/iphone|ipad|android/gi).test(navigator.appVersion)) {
-    setTimeout(book, 10);
+    setTimeout(bookCreate, 10);
   }
   else {
     document.getElementById('footer').style.display = "none";
@@ -26,22 +26,22 @@ function setsize(){
   }
   
   if (title.indexOf("big") === 0) {
-    setstyle(title.substring(3));
+    setStyle(title.substring(3));
   }
   else {
-    setstyle("big"+title);
+    setStyle("big"+title);
   }
 return;
 }
 
-function setstyle(style){
+function setStyle(style){
   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
     if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
       a.disabled = true;
       if (a.getAttribute("title") == style) a.disabled = false;
     }
   }
-  store.set(bookslug+'-style', style);
+  store.set(bookSlug+'-style', style);
 }
 
 // window.addEventListener('load', load, false);

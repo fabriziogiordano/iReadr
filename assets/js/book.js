@@ -1,55 +1,52 @@
 var bookScroll;
 
-function book() {
+function bookCreate() {
   
-  if (typeof bookScroll === 'object') {
-    bookScroll.destroy();
-  }
+  if (typeof bookScroll === 'object') bookScroll.destroy();
+  if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
   
-  if (typeof store.get(bookslug + '-style') === 'undefined') {
-    //setstyle('default');
-  }
-  else {
-    setstyle(store.get(bookslug + '-style'));
-  }
-  
+  /*Set genaral variables*/
   var doc = document,
       isAndroid = (/android/gi).test(navigator.appVersion),
       isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
       isIPad = (/ipad/gi).test(navigator.appVersion),
-      density = window.devicePixelRatio,
-      pagenumber = doc.getElementById('page'),
-      book = doc.getElementById('book0'),
-      bookfooter = doc.getElementById('bookfooter'),
-      totpages = doc.getElementById('totpages'),
+      density = window.devicePixelRatio;
+  
+  /*Set genaral elements*/
+  var pagenumber = doc.getElementById('page'),
+      bookMain = doc.getElementById('book0'),
+      bookFooter = doc.getElementById('bookfooter'),
+      totPages = doc.getElementById('totpages'),
       scroller = doc.getElementById('scroller'),
       bookmark = doc.getElementById('bookmark'),
       wrapper = doc.getElementById('wrapper'),
-      sH = (isIDevice) ? screen.height : 510,
+      indicator = doc.getElementById('indicator'),
+      indicatorimg = doc.getElementById('indicatorimg');
+  
+  /*Set genaral elements*/
+  var sH = (isIDevice) ? screen.height : 510,
       sW = wrapper.offsetWidth,
       barsHeight = (isIDevice) ? (( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50) : 0
       barsHeight += (isIPad) ? 20 : 0,
       hH = doc.getElementById('header').offsetHeight,
       fH = doc.getElementById('footer').offsetHeight,
 
-      lineHeight = doc.defaultView.getComputedStyle(book,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
-      bookHeight = book.scrollHeight, // offsetHeight
+      lineHeight = doc.defaultView.getComputedStyle(bookMain,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
+      bookHeight = bookMain.scrollHeight, // offsetHeight
       spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
       debug = false;
 
   // wrapper.style.width = sW + "px";
-  book.style.width = sW + "px";
-  book.style.height = spaceHeight + "px";
-  bookfooter.style.height = bookFooterHeight + "px";
-  totpages.innerHTML = numPages;
+  bookMain.style.width = sW + "px";
+  bookMain.style.height = spaceHeight + "px";
+  bookFooter.style.height = bookFooterHeight + "px";
+  totPages.innerHTML = numPages;
   scroller.style.height = spaceHeight + "px";
   scroller.style.width = sW * numPages + "px";
   
-  var indicator = doc.getElementById('indicator'),
-      indicatorimg = doc.getElementById('indicatorimg'),
-      iW = doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0,
+  var iW = doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0,
       indicatorstep = iW / numPages;
   
   var bookScroll = new iScroll('wrapper', {
@@ -61,15 +58,15 @@ function book() {
       //pagenumber.innerHTML = this.dirX;
     },
     onBeforeScrollMove: function() {
-      //totpages.innerHTML = this.dirX;
+      //totPages.innerHTML = this.dirX;
     },
     onScrollEnd: function () {
       pagenumber.innerHTML = this.currPageX + 1;
-      store.set(bookslug+'-page', this.currPageX);
+      store.set(bookSlug + '-page', this.currPageX);
       indicatorimg.style.left = Math.floor(indicatorstep * this.currPageX) + "px";
       window.currPage = this.currPageX;
       
-      if (store.get(bookslug + '-bookmark') === this.currPageX) {
+      if (store.get(bookSlug + '-bookmark') === this.currPageX) {
         bookmark.setAttribute("class", "active");
       }
       else {
@@ -83,8 +80,8 @@ function book() {
   });
   
   for (i = 1; i < numPages; i++) {
-    var clone = book.cloneNode(true);
-    var page = book.parentNode.appendChild(clone);
+    var clone = bookMain.cloneNode(true);
+    var page = bookMain.parentNode.appendChild(clone);
     page.id = "book"+i;
     page.className = "pages added";
     page.style.height = spaceHeight + "px";
@@ -92,8 +89,8 @@ function book() {
     page.scrollTop = i*spaceHeight;
   }
   
-  if (store.get(bookslug + '-page')) {
-    bookScroll.scrollToPage( store.get(bookslug + '-page') , 0, 1);
+  if (store.get(bookSlug + '-page')) {
+    bookScroll.scrollToPage( store.get(bookSlug + '-page') , 0, 1);
   }
   else {
     bookScroll.scrollToPage(0, 0, 1);
@@ -135,69 +132,72 @@ function book() {
 };
 
 window.onload = function() {
-  bookslug = slugify( document.getElementById('title').innerHTML );
-    
-  /*Set CSS*/
-  setbook();
+  bookSlug = slugify( document.getElementById('title').innerHTML );
   
-  document.getElementById('bookmark').addEventListener('touchstart', function bok (e){
+  var bookmark = document.getElementById('bookmark'),
+      style = document.getElementById('style'),
+      styles = document.getElementById('styles');
+  
+  setFooter();
+  
+  bookmark.addEventListener('touchstart', function (e){
     e.preventDefault();
-    var bookmarkclass = document.getElementById('bookmark').getAttribute("class");
+    var bookmarkclass = bookmark.getAttribute("class");
     if (bookmarkclass === 'active') {
-      store.set(bookslug+'-bookmark', '');
-      document.getElementById('bookmark').setAttribute("class", "");
+      store.set(bookSlug + '-bookmark', '');
+      bookmark.setAttribute("class", "");
     }
     else {
-      store.set(bookslug+'-bookmark', window.currPage);
-      document.getElementById('bookmark').setAttribute("class", "active");
+      store.set(bookSlug+'-bookmark', window.currPage);
+      bookmark.setAttribute("class", "active");
     }
     return false;
   }, false);
   
-  document.getElementById('style').addEventListener('touchstart', function bok (e){
+  style.addEventListener('touchstart', function (e){
     e.preventDefault();
-    var styleclass = document.defaultView.getComputedStyle(document.getElementById('styles'), null).getPropertyValue('display');
+    var styleclass = document.defaultView.getComputedStyle(styles, null).getPropertyValue('display');
     if (styleclass === 'block') {
-      document.getElementById('styles').style.display = "none";
+      styles.style.display = "none";
     }
     else {
-      document.getElementById('styles').style.display = "block";
+      styles.style.display = "block";
     }
     return false;
   }, false);
   
-  document.getElementById('aa').addEventListener('touchstart', function bok (e){
+  document.getElementById('aa').addEventListener('touchstart', function (e){
     e.preventDefault();
     setsize();
-    setbook();
+    bookCreate();
   }, false);
   
-  document.getElementById('stylesDefault').addEventListener('touchstart', function bok (e){
+  document.getElementById('stylesDefault').addEventListener('touchstart', function (e){
     e.preventDefault();
-    setstyle('default');
-    setbook();
-    document.getElementById('styles').style.display = "none";
+    setStyle('default');
+    bookCreate();
+    styles.style.display = "none";
   }, false);
   
-  document.getElementById('stylesOld').addEventListener('touchstart', function bok (e){
+  document.getElementById('stylesOld').addEventListener('touchstart', function (e){
     e.preventDefault();
-    setstyle('old');
-    setbook();
-    document.getElementById('styles').style.display = "none";
+    setStyle('old');
+    bookCreate();
+    styles.style.display = "none";
   }, false);
   
-  document.getElementById('stylesFashion').addEventListener('touchstart', function bok (e){
+  document.getElementById('stylesFashion').addEventListener('touchstart', function (e){
     e.preventDefault();
-    setstyle('fashion');
-    setbook();
-    document.getElementById('styles').style.display = "none";
+    setStyle('fashion');
+    bookCreate();
+    styles.style.display = "none";
   }, false);
   
-  document.getElementById('stylesAntiqua').addEventListener('touchstart', function bok (e){
+  document.getElementById('stylesAntiqua').addEventListener('touchstart', function (e){
     e.preventDefault();
-    setstyle('antiqua');
-    setbook();
-    document.getElementById('styles').style.display = "none";
+    setStyle('antiqua');
+    bookCreate();
+    styles.style.display = "none";
   }, false);
 
 };

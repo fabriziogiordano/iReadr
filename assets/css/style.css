@@ -218,8 +218,8 @@ body {
   line-height:<?php echo $lineheight; ?>;
   -webkit-box-sizing:border-box;
 }
-.pages h1 {font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
-.pages h2 {font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
+.pages h1 {text-align:left; font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
+.pages h2 {text-align:left; font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
 .pages img {float:right; margin:0 0 0 10px;}
 
 #footer {
