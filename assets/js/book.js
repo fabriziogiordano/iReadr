@@ -13,15 +13,16 @@ function bookCreate() {
       density = window.devicePixelRatio;
   
   /*Set genaral elements*/
-  var pagenumber = doc.getElementById('page'),
-      bookMain = doc.getElementById('book0'),
+  var wrapper = doc.getElementById('wrapper'),
+      scroller = wrapper.children[0],
+      bookMain = scroller.children[0], /* doc.getElementById('book0') */
       bookFooter = doc.getElementById('bookfooter'),
       totPages = doc.getElementById('totpages'),
-      scroller = doc.getElementById('scroller'),
+      pagenumber = doc.getElementById('page'),
       bookmark = doc.getElementById('bookmark'),
-      wrapper = doc.getElementById('wrapper'),
-      indicator = doc.getElementById('indicator'),
-      indicatorimg = doc.getElementById('indicatorimg');
+      indicator = doc.getElementById('indicator');
+  
+  //sH
   
   /*Set genaral elements*/
   var sH = (isIDevice) ? screen.height : 510,
@@ -33,10 +34,12 @@ function bookCreate() {
 
       lineHeight = doc.defaultView.getComputedStyle(bookMain,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
       bookHeight = bookMain.scrollHeight, // offsetHeight
+      
       spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
+      
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
-      debug = false;
+      debug = true;
 
   // wrapper.style.width = sW + "px";
   bookMain.style.width = sW + "px";
@@ -63,7 +66,7 @@ function bookCreate() {
     onScrollEnd: function () {
       pagenumber.innerHTML = this.currPageX + 1;
       store.set(bookSlug + '-page', this.currPageX);
-      indicatorimg.style.left = Math.floor(indicatorstep * this.currPageX) + "px";
+      indicator.children[0].style.left = Math.floor(indicatorstep * this.currPageX) + "px";
       window.currPage = this.currPageX;
       
       if (store.get(bookSlug + '-bookmark') === this.currPageX) {
@@ -75,7 +78,7 @@ function bookCreate() {
     }
   });
   
-  [].slice.apply(document.querySelectorAll('.pages.added')).forEach(function(element){
+  [].slice.apply(scroller.querySelectorAll('.pages.added')).forEach(function(element){
     element.parentNode.removeChild(element)
   });
   
@@ -86,7 +89,7 @@ function bookCreate() {
     page.className = "pages added";
     page.style.height = spaceHeight + "px";
     page.style.width = sW + "px";
-    page.scrollTop = i*spaceHeight;
+    page.scrollTop = spaceHeight * i;
   }
   
   if (store.get(bookSlug + '-page')) {

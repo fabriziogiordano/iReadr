@@ -120,7 +120,7 @@ body {
     url('./images/.png') right bottom no-repeat,
     url('./images/bg-right.png') right top repeat-y,
     url('./images/.png') left bottom no-repeat;
-  padding:0 15px;
+  padding:0 20px;
   background-color: <?php echo $backgroundcolor; ?>;
   color: <?php echo $color; ?>;
   -webkit-perspective: 800;
