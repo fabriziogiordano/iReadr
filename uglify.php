@@ -1,16 +1,19 @@
 <?php
-$ch = curl_init();
+/*
+<script src="./assets/js/iscroll.js"></script>
+<script src="./assets/js/json.js"></script>
+<script src="./assets/js/store.js"></script>
+<script src="./assets/js/book.helpers.js"></script>
+<script src="./assets/js/book.js"></script>
+*/
 
-$data = array(
-  'code_url' => 'http://jiffier.com/quickreader/assets/iscroll.js',
-  'code_url' => 'http://jiffier.com/quickreader/assets/json.js',
-  'download' => 'fabrizio.js'
-);
+$ch = curl_init();
 
 $data = '';
 $data .=     'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/iscroll.js');
 $data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/json.js');
 $data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/store.js');
+$data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/book.helpers.js');
 $data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/book.js');
 $data .= '&'.'download=fabrizio.js';
 
