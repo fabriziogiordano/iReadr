@@ -8,9 +8,11 @@ function bookCreate() {
   /*Set genaral variables*/
   var doc = document,
       isAndroid = (/android/gi).test(navigator.appVersion),
-      isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
+      isIPhone = (/iphone/gi).test(navigator.appVersion),
       isIPad = (/ipad/gi).test(navigator.appVersion),
-      density = window.devicePixelRatio;
+      density = window.devicePixelRatio,
+      orientation = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait',
+      standalone = ( ("standalone" in window.navigator) && window.navigator.standalone );
   
   /*Set genaral elements*/
   var wrapper = doc.getElementById('wrapper'),
@@ -22,35 +24,42 @@ function bookCreate() {
       bookmark = doc.getElementById('bookmark'),
       indicator = doc.getElementById('indicator');
   
-  //sH
+  
+  var screenHeight = 510,
+      barsHeight = 0;
+  
+  if(isIPhone) {
+    barsHeight = standalone ? 5 : 50;
+    screenHeight = ( orientation === 'portrait' ) ? 480 : 340;
+  }
+  
+  if(isIPad) {
+    barsHeight = standalone ? 20 : 70;
+    screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
+  }
   
   /*Set genaral elements*/
-  var sH = (isIDevice) ? screen.height : 510,
-      sW = wrapper.offsetWidth,
-      barsHeight = (isIDevice) ? (( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50) : 0
-      barsHeight += (isIPad) ? 20 : 0,
-      hH = doc.getElementById('header').offsetHeight,
-      fH = doc.getElementById('footer').offsetHeight,
-
+  var screenWidth = wrapper.offsetWidth,
+      headerHeight = doc.getElementById('header').offsetHeight,
+      footerHeight = doc.getElementById('footer').offsetHeight,
+      
       lineHeight = doc.defaultView.getComputedStyle(bookMain,null).getPropertyValue('line-height').replace(/px$/, '') | 0,
       bookHeight = bookMain.scrollHeight, // offsetHeight
       
-      spaceHeight = Math.floor( (sH - hH - fH - barsHeight) / lineHeight ) * lineHeight,
+      spaceHeight = Math.floor( (screenHeight - headerHeight - footerHeight - barsHeight) / lineHeight ) * lineHeight,
       numPages = Math.ceil( bookHeight / spaceHeight ),
-      
       bookFooterHeight = spaceHeight * numPages - bookHeight + lineHeight,
-      debug = true;
+      
+      debug = false;
 
-  // wrapper.style.width = sW + "px";
-  bookMain.style.width = sW + "px";
+  // wrapper.style.width = screenWidth + "px";
+  bookMain.style.width = screenWidth + "px";
   bookMain.style.height = spaceHeight + "px";
   bookFooter.style.height = bookFooterHeight + "px";
-  totPages.innerHTML = numPages;
   scroller.style.height = spaceHeight + "px";
-  scroller.style.width = sW * numPages + "px";
-  
-  var iW = doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0,
-      indicatorstep = iW / numPages;
+  scroller.style.width = screenWidth * numPages + "px";
+  totPages.innerHTML = numPages,
+  indicatorStep = (doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0) / numPages;
   
   var bookScroll = new iScroll('wrapper', {
     snap: true,
@@ -66,7 +75,7 @@ function bookCreate() {
     onScrollEnd: function () {
       pagenumber.innerHTML = this.currPageX + 1;
       store.set(bookSlug + '-page', this.currPageX);
-      indicator.children[0].style.left = Math.floor(indicatorstep * this.currPageX) + "px";
+      indicator.children[0].style.left = Math.floor(indicatorStep * this.currPageX) + "px";
       window.currPage = this.currPageX;
       
       if (store.get(bookSlug + '-bookmark') === this.currPageX) {
@@ -78,7 +87,7 @@ function bookCreate() {
     }
   });
   
-  [].slice.apply(scroller.querySelectorAll('.pages.added')).forEach(function(element){
+  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
     element.parentNode.removeChild(element)
   });
   
@@ -88,7 +97,7 @@ function bookCreate() {
     page.id = "book"+i;
     page.className = "pages added";
     page.style.height = spaceHeight + "px";
-    page.style.width = sW + "px";
+    page.style.width = screenWidth + "px";
     page.scrollTop = spaceHeight * i;
   }
   
@@ -204,6 +213,8 @@ window.onload = function() {
   }, false);
 
 };
+
+window.addEventListener('orientationchange', bookCreate, false);
 
 //document.getElementsByTagName("link")[1].disabled = false;
 
