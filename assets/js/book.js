@@ -159,7 +159,7 @@ window.onload = function() {
   
   setFooter();
   
-  document.getElementById('logo').addEventListener('touchstart', function (e){
+  aa.addEventListener('touchstart', function (e){
     e.preventDefault();
     document.getElementById('book').className = "old";
     bookCreate();
@@ -193,11 +193,13 @@ window.onload = function() {
     return false;
   }, false);
   
+  /*
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
     setsize();
     bookCreate();
   }, false);
+  */
   
   document.getElementById('stylesDefault').addEventListener('touchstart', function (e){
     e.preventDefault();
