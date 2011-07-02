@@ -22,7 +22,7 @@ switch ($_GET['v']) {
     $fontsize['p'] = '16px';
   break;
   
-  case 'courier':
+  case 'old':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
     $fontfamily = '"Courier New", "American Typewriter", Helvetica, sans-serif';
@@ -32,7 +32,7 @@ switch ($_GET['v']) {
     $fontsize['p'] = '11px';
   break;
   
-  case 'bigcourier':
+  case 'bigold':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
     $fontfamily = '"Courier New", "American Typewriter", Helvetica, sans-serif';
@@ -42,7 +42,7 @@ switch ($_GET['v']) {
     $fontsize['p'] = '16px';
   break;
   
-  case 'helvetica':
+  case 'fashion':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
     $fontfamily = 'Helvetica, "American Typewriter", Helvetica, sans-serif';
@@ -52,7 +52,7 @@ switch ($_GET['v']) {
     $fontsize['p'] = '11px';
   break;
   
-  case 'bighelvetica':
+  case 'bigfashion':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
     $fontfamily = 'Helvetica, "American Typewriter", Helvetica, sans-serif';
@@ -62,24 +62,24 @@ switch ($_GET['v']) {
     $fontsize['p'] = '16px';
   break;
   
-  case 'tahoma':
+  case 'antiqua':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
-    $fontfamily = 'Tahoma, "American Typewriter", Helvetica, sans-serif';
+    $fontfamily = 'Zapfino, "American Typewriter", Helvetica, sans-serif';
     $lineheight = '25px';
     $fontsize['h1'] = '20px';
     $fontsize['h2'] = '13px';
-    $fontsize['p'] = '11px';
+    $fontsize['p'] = '9px';
   break;
   
-  case 'bigtahoma':
+  case 'bigantiqua':
     $backgroundcolor = '#F0E8D1';
     $color = '#463220';
-    $fontfamily = 'Tahoma, "American Typewriter", Helvetica, sans-serif';
+    $fontfamily = 'Zapfino, "American Typewriter", Helvetica, sans-serif';
     $lineheight = '25px';
     $fontsize['h1'] = '25px';
     $fontsize['h2'] = '18px';
-    $fontsize['p'] = '16px';
+    $fontsize['p'] = '11px';
   break;
   
   default:
@@ -264,10 +264,60 @@ body {
 }
 
 #footerhidden {
-	width:auto;
-/*  height:200px;*/
+  width:auto;
+  height:50px;
 }
 
+#styles {
+  display:none;
+  position:absolute;
+  top:40px;
+  right:20px;
+  z-index:9999;
+  width:208px;
+  font-size:13px;
+  padding:10px;
+  text-align:left;
+  font-family:helvetica;
+  background-image:-webkit-gradient(linear,0 0,0 100%,color-stop(0,#fff),color-stop(0.02,#eee),color-stop(0.98,#ccc),color-stop(1,#a3a3a3));
+  border:1px solid #505050;
+  color:#333;
+  text-shadow:0 1px 0 rgba(255,255,255,0.75);
+  line-height:130%;
+  -webkit-box-shadow:0 0 2px rgba(0,0,0,0.5);
+  -webkit-transition-property:-webkit-transform,opacity;
+  -webkit-transition-duration:0;
+  -webkit-transform:translate3d(0,0,0);
+  -webkit-user-select:none;
+  -webkit-box-sizing:border-box;
+  -webkit-border-radius:4px;
+  -webkit-background-clip:padding-box;
+}
+#styles .arrow {
+  position:absolute;
+  border-width:0 1px 1px 0;
+  border-style:solid;
+  border-color:#505050;
+  width:16px; height:16px;
+  -webkit-transform:rotateZ(45deg);
+  margin-left:-8px;
+  -webkit-box-shadow:inset -1px -1px 0 #a9a9a9;
+  -webkit-border-bottom-right-radius:2px;
+  -webkit-transform:rotateZ(-135deg);
+  background-image:-webkit-gradient(linear,0 0,100% 100%,color-stop(0,rgba(238,238,238,0)),color-stop(0.4,rgba(238,238,238,0)),color-stop(0.4,#eee));
+  -webkit-box-shadow:inset -1px -1px 0 #fff;
+  top:-9px; bottom:auto; right:100px;
+}
+
+#styles p { font-size:14px; padding-top:15px; height:30px; background-color:red; padding-left:5px; }
+
+#stylesDefault { font-family: 'American Typewriter'; }
+#stylesOld { font-family: 'Courier New'; }
+#stylesFashion { font-family: 'Georgia'; }
+#stylesAntiqua { font-family: 'Zapfino'; }
+
+#errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
+#errorOutput div { color: red; }
 #prev, #next {
 	float:left;
 	font-weight:bold;
@@ -276,58 +326,7 @@ body {
 	-webkit-touch-callout: none;
 /*  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;*/
 }
-
 #next {
 	float:right;
 /*  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;*/
 }
-
-#styles {
-  display:none;
-  position:absolute;
-  top:40px;
-  right:20px;
-  /*left:-9999px;*/
-  -webkit-transition-property:-webkit-transform,opacity;
-  -webkit-transition-duration:0;
-  -webkit-transform:translate3d(0,0,0);
-  
-	z-index:9999;
-	-webkit-user-select:none;
-	-webkit-box-sizing:border-box;
-	width:208px;
-	font-size:13px;
-	padding:10px;
-	text-align:left;
-	font-family:helvetica;
-	background-image:-webkit-gradient(linear,0 0,0 100%,color-stop(0,#fff),color-stop(0.02,#eee),color-stop(0.98,#ccc),color-stop(1,#a3a3a3));
-	border:1px solid #505050;
-	-webkit-border-radius:4px;
-	-webkit-background-clip:padding-box;
-	color:#333;
-	text-shadow:0 1px 0 rgba(255,255,255,0.75);
-	line-height:130%;
-	-webkit-box-shadow:0 0 2px rgba(0,0,0,0.5);
-}
-#styles .arrow {
-	position:absolute;
-	border-width:0 1px 1px 0;
-	border-style:solid;
-	border-color:#505050;
-	width:16px; height:16px;
-	-webkit-transform:rotateZ(45deg);
-	margin-left:-8px;
-	-webkit-box-shadow:inset -1px -1px 0 #a9a9a9;
-	-webkit-border-bottom-right-radius:2px;
-	-webkit-transform:rotateZ(-135deg);
-	background-image:-webkit-gradient(linear,0 0,100% 100%,color-stop(0,rgba(238,238,238,0)),color-stop(0.4,rgba(238,238,238,0)),color-stop(0.4,#eee));
-	-webkit-box-shadow:inset -1px -1px 0 #fff;
-	top:-9px; bottom:auto; right:100px;
-}
-
-#stylesCourier { font-family: 'Courier New'; }
-#stylesHelvetica { font-family: 'Helvetica'; }
-#stylesTahoma { font-family: 'Tahoma'; }
-
-#errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
-#errorOutput div { color: red; }

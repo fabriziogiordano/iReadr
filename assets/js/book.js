@@ -1,13 +1,14 @@
 var bookScroll;
 
-function book (){
+function book() {
+  
   if(typeof bookScroll == 'object') bookScroll.destroy();
 
-  if(typeof store.get('style') === 'undefined') {
+  if(typeof store.get(bookslug+'-style') === 'undefined') {
     //setstyle('default');
   }
   else {
-    setstyle(store.get('style'));
+    setstyle(store.get(bookslug+'-style'));
   }
   
   var doc = document,
@@ -24,7 +25,6 @@ function book (){
       wrapper = doc.getElementById('wrapper'),
       sH = (isIDevice) ? screen.height : 510,
       sW = wrapper.offsetWidth,
-      //barsHeight = ( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50,
       barsHeight = (isIDevice) ? (( ("standalone" in window.navigator) && window.navigator.standalone ) ? 0 : 50) : 0
       barsHeight += (isIPad) ? 20 : 0
       hH = doc.getElementById('header').offsetHeight,
@@ -63,11 +63,11 @@ function book (){
     },
     onScrollEnd: function () {
       pagenumber.innerHTML = this.currPageX+1;
-      store.set('page', this.currPageX);
+      store.set(bookslug+'-page', this.currPageX);
       indicatorimg.style.left = Math.floor(indicatorstep * this.currPageX) + "px";
       window.currPage = this.currPageX;
       
-      if(store.get('bookmark') === this.currPageX) {
+      if(store.get(bookslug+'-bookmark') === this.currPageX) {
         bookmark.setAttribute("class", "active");
       }
       else {
@@ -91,8 +91,8 @@ function book (){
     page.scrollTop = i*spaceHeight;
   }
   
-  if(store.get('page')) {
-    bookScroll.scrollToPage( store.get('page') , 0, 1);
+  if(store.get(bookslug+'-page')) {
+    bookScroll.scrollToPage( store.get(bookslug+'-page') , 0, 1);
   }
   else {
     bookScroll.scrollToPage(0, 0, 1);
@@ -173,6 +173,8 @@ function fonts() {
 
 
 window.onload = function(){
+  bookslug = slugify(document.getElementById('title').innerHTML);
+    
   /*Set CSS*/
   setbook();
   
@@ -180,11 +182,11 @@ window.onload = function(){
     e.preventDefault();
     var bookmarkclass = document.getElementById('bookmark').getAttribute("class");
     if(bookmarkclass === 'active') {
-      store.set('bookmark', '');
+      store.set(bookslug+'-bookmark', '');
       document.getElementById('bookmark').setAttribute("class", "");
     }
     else {
-      store.set('bookmark', window.currPage);
+      store.set(bookslug+'-bookmark', window.currPage);
       document.getElementById('bookmark').setAttribute("class", "active");
     }
     return false;
@@ -208,23 +210,30 @@ window.onload = function(){
     setbook();
   }, false);
   
-  document.getElementById('stylesCourier').addEventListener('touchstart', function bok (e){
+  document.getElementById('stylesDefault').addEventListener('touchstart', function bok (e){
     e.preventDefault();
-    setstyle('courier');
+    setstyle('default');
     setbook();
     document.getElementById('styles').style.display = "none";
   }, false);
   
-  document.getElementById('stylesHelvetica').addEventListener('touchstart', function bok (e){
+  document.getElementById('stylesOld').addEventListener('touchstart', function bok (e){
     e.preventDefault();
-    setstyle('helvetica');
+    setstyle('old');
     setbook();
     document.getElementById('styles').style.display = "none";
   }, false);
   
-  document.getElementById('stylesTahoma').addEventListener('touchstart', function bok (e){
+  document.getElementById('stylesFashion').addEventListener('touchstart', function bok (e){
     e.preventDefault();
-    setstyle('tahoma');
+    setstyle('fashion');
+    setbook();
+    document.getElementById('styles').style.display = "none";
+  }, false);
+  
+  document.getElementById('stylesAntiqua').addEventListener('touchstart', function bok (e){
+    e.preventDefault();
+    setstyle('antiqua');
     setbook();
     document.getElementById('styles').style.display = "none";
   }, false);
@@ -284,7 +293,7 @@ function setstyle(style){
       if(a.getAttribute("title") == style) a.disabled = false;
     }
   }
-  store.set('style', style);
+  store.set(bookslug+'-style', style);
 }
 
 // window.addEventListener('load', load, false);
@@ -292,6 +301,13 @@ window.addEventListener('orientationchange', setOrientation, false);
 
 function setOrientation() {
  var orient = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
+}
+
+function slugify(text) {
+  text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
+  text = text.replace(/-/gi, "_");
+  text = text.replace(/\s/gi, "-");
+  return text;
 }
 
 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
