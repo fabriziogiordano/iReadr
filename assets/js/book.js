@@ -66,17 +66,17 @@ function bookCreate() {
   totPages.innerHTML = numPages,
   indicatorStep = (doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0) / numPages;
   
+  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
+    element.parentNode.removeChild(element)
+  });
+  
   var bookScroll = new iScroll('wrapper', {
     snap: true,
     momentum: false,
     hScrollbar: false,
     vScrollbar: false,
-    onScrollStart: function () {
-      //pagenumber.innerHTML = this.dirX;
-    },
-    onBeforeScrollMove: function() {
-      //totPages.innerHTML = this.dirX;
-    },
+    //onScrollStart: function () { //pagenumber.innerHTML = this.dirX; },
+    //onBeforeScrollMove: function() { //totPages.innerHTML = this.dirX; },
     onScrollEnd: function () {
       pagenumber.innerHTML = this.currPageX + 1;
       store.set(bookSlug + '-page', this.currPageX);
@@ -90,10 +90,6 @@ function bookCreate() {
         bookmark.setAttribute("class", "");
       }
     }
-  });
-  
-  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
-    element.parentNode.removeChild(element)
   });
   
   for (i = 1; i < numPages; i++) {
@@ -162,6 +158,14 @@ window.onload = function() {
   }
   
   setFooter();
+  
+  document.getElementById('logo').addEventListener('touchstart', function (e){
+    e.preventDefault();
+    document.getElementById('book').className = 'old';
+    bookCreate();
+    return false;
+  }, false);
+  
   
   bookmark.addEventListener('touchstart', function (e){
     e.preventDefault();
