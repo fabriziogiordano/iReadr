@@ -26,10 +26,9 @@ function bookCreate() {
   
   
   /*Set genaral elements*/
-  var screenHeight = 510,
+  var screenHeight = ( orientation === 'portrait' ) ? 510 : 300,
       barsHeight = 0;
   
-  /*
   if(isIPhone) {
     barsHeight = standalone ? 5 : 50;
     screenHeight = ( orientation === 'portrait' ) ? 480 : 340;
@@ -39,7 +38,6 @@ function bookCreate() {
     barsHeight = standalone ? 20 : 70;
     screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
   }
-  */
   
   var screenWidth = wrapper.offsetWidth,
       headerHeight = doc.getElementById('header').offsetHeight,
