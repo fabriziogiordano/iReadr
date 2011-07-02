@@ -153,7 +153,7 @@ window.onload = function() {
       styles = document.getElementById('styles');
   
   if ((/android/gi).test(navigator.appVersion)) {
-    styles.style.display = "none";
+    style.style.display = "none";
     aa.style.display = "none";
   }
   
@@ -161,7 +161,7 @@ window.onload = function() {
   
   document.getElementById('logo').addEventListener('touchstart', function (e){
     e.preventDefault();
-    document.getElementById('book').className = 'old';
+    document.getElementById('book').className = "old";
     bookCreate();
     return false;
   }, false);
