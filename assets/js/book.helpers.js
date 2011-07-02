@@ -9,7 +9,7 @@ function fonts() {
   div.style.left = '-9999px';
 }
 
-function setFooter () {
+function setBook () {
   if ((/iphone|ipad|android/gi).test(navigator.appVersion)) {
     setTimeout(bookCreate, 10);
   }

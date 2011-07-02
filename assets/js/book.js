@@ -3,7 +3,6 @@ var bookSlug;
 
 function bookCreate() {
   
-  if (typeof bookScroll === 'object') bookScroll.destroy();
   if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
   
   /*Set genaral variables*/
@@ -70,27 +69,32 @@ function bookCreate() {
     element.parentNode.removeChild(element)
   });
   
-  var bookScroll = new iScroll('wrapper', {
-    snap: true,
-    momentum: false,
-    hScrollbar: false,
-    vScrollbar: false,
-    //onScrollStart: function () { //pagenumber.innerHTML = this.dirX; },
-    //onBeforeScrollMove: function() { //totPages.innerHTML = this.dirX; },
-    onScrollEnd: function () {
-      pagenumber.innerHTML = this.currPageX + 1;
-      store.set(bookSlug + '-page', this.currPageX);
-      indicator.children[0].style.left = Math.floor(indicatorStep * this.currPageX) + "px";
-      window.currPage = this.currPageX;
+  if (typeof bookScroll === 'object') {
+    bookScroll.refresh();
+  }
+  else {
+    var bookScroll = new iScroll('wrapper', {
+      snap: true,
+      momentum: false,
+      hScrollbar: false,
+      vScrollbar: false,
+      //onScrollStart: function () { //pagenumber.innerHTML = this.dirX; },
+      //onBeforeScrollMove: function() { //totPages.innerHTML = this.dirX; },
+      onScrollEnd: function () {
+        pagenumber.innerHTML = this.currPageX + 1;
+        store.set(bookSlug + '-page', this.currPageX);
+        indicator.children[0].style.left = Math.floor(indicatorStep * this.currPageX) + "px";
+        window.currPage = this.currPageX;
       
-      if (store.get(bookSlug + '-bookmark') === this.currPageX) {
-        bookmark.setAttribute("class", "active");
+        if (store.get(bookSlug + '-bookmark') === this.currPageX) {
+          bookmark.setAttribute("class", "active");
+        }
+        else {
+          bookmark.setAttribute("class", "");
+        }
       }
-      else {
-        bookmark.setAttribute("class", "");
-      }
-    }
-  });
+    });
+  }
   
   for (i = 1; i < numPages; i++) {
     var clone = bookMain.cloneNode(true);
@@ -145,7 +149,9 @@ function bookCreate() {
 };
 
 window.onload = function() {
-  bookSlug = slugify( document.getElementById('title').innerHTML );
+  var title = document.getElementById('title');
+  document.title = title.innerHTML;
+  bookSlug = slugify( title.innerHTML );
   
   var bookmark = document.getElementById('bookmark'),
       style = document.getElementById('style'),
@@ -157,9 +163,9 @@ window.onload = function() {
     aa.style.display = "none";
   }
   
-  setFooter();
+  setBook();
   
-  aa.addEventListener('touchstart', function (e){
+  document.getElementById('logo').addEventListener('touchstart', function (e){
     e.preventDefault();
     document.getElementById('book').className = "old";
     bookCreate();
@@ -232,6 +238,6 @@ window.onload = function() {
 };
 
 window.addEventListener('orientationchange', bookCreate, false);
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 //document.addEventListener('DOMContentLoaded', book, false);
