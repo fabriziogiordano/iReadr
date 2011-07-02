@@ -117,9 +117,7 @@ background:
 body {
   background:
     url('./images/bg-left.png') left top repeat-y,
-    url('./images/.png') right bottom no-repeat,
-    url('./images/bg-right.png') right top repeat-y,
-    url('./images/.png') left bottom no-repeat;
+    url('./images/bg-right.png') right top repeat-y;
   padding:0 20px;
   background-color: <?php echo $backgroundcolor; ?>;
   color: <?php echo $color; ?>;
@@ -127,7 +125,6 @@ body {
   -webkit-text-size-adjust: none;
   -webkit-transform-style: preserve-3d;
   -webkit-user-select: none;
-/*  -webkit-box-shadow: inset 5px 0px 10px #888888;*/
 }
 
 #header {
@@ -195,8 +192,8 @@ body {
   width:100%;
   overflow:auto;
   margin:5px 0 10px 0;
-/*  border:1px solid red;*/
   -webkit-box-sizing:border-box;
+  /*  border:1px solid red;*/
 }
 
 #scroller {
@@ -232,7 +229,6 @@ body {
   position:relative;
   margin:0 30px 8px 30px;
   height:2px;
-/*  background-image: url('./images/bg-indicator.png');*/
   background-color:#463220;
   border:1px solid white;
   -webkit-border-radius: 3px;
@@ -246,7 +242,6 @@ body {
   top:-4px;
   left:0px;
   margin:0; padding:0;
-/*  background-image: url('./images/bg-indicator-span.png');*/
   background-color:#463220;
   border:2px solid white;
   -webkit-transition: all 100ms ease-in-out;
@@ -318,15 +313,3 @@ body {
 
 #errorOutput { display:none; position:absolute; top:20px; left: 20px; line-height:18px; font-size:10px; background-color:white; z-index:100; }
 #errorOutput div { color: red; }
-#prev, #next {
-	float:left;
-	font-weight:bold;
-	width:50px;
-	height:40px;
-	-webkit-touch-callout: none;
-/*  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;*/
-}
-#next {
-	float:right;
-/*  background: url('http://dummyimage.com/30x10/4e9e06/4e9e06') no-repeat 10px 5px;*/
-}

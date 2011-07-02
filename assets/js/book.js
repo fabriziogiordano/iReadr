@@ -1,4 +1,5 @@
 var bookScroll;
+var bookSlug;
 
 function bookCreate() {
   
@@ -7,7 +8,6 @@ function bookCreate() {
   
   /*Set genaral variables*/
   var doc = document,
-      isAndroid = (/android/gi).test(navigator.appVersion),
       isIPhone = (/iphone/gi).test(navigator.appVersion),
       isIPad = (/ipad/gi).test(navigator.appVersion),
       density = window.devicePixelRatio,
@@ -32,6 +32,11 @@ function bookCreate() {
   if(isIPhone) {
     barsHeight = standalone ? 5 : 50;
     screenHeight = ( orientation === 'portrait' ) ? 480 : 340;
+  }
+  
+  if(isIPad) {
+    barsHeight = standalone ? 20 : 70;
+    screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
   }
   
   if(isIPad) {
@@ -148,7 +153,13 @@ window.onload = function() {
   
   var bookmark = document.getElementById('bookmark'),
       style = document.getElementById('style'),
+      aa = document.getElementById('aa'),
       styles = document.getElementById('styles');
+  
+  if ((/android/gi).test(navigator.appVersion)) {
+    styles.style.display = "none";
+    aa.style.display = "none";
+  }
   
   setFooter();
   
@@ -178,7 +189,7 @@ window.onload = function() {
     return false;
   }, false);
   
-  document.getElementById('aa').addEventListener('touchstart', function (e){
+  aa.addEventListener('touchstart', function (e){
     e.preventDefault();
     setsize();
     bookCreate();
@@ -215,37 +226,6 @@ window.onload = function() {
 };
 
 window.addEventListener('orientationchange', bookCreate, false);
-
-//document.getElementsByTagName("link")[1].disabled = false;
-
-/*
-var i, a;
-for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-  if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) {
-    a.getAttribute("title");
-  }
-}
-
-var title = 'ipad';
-for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-  if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
-    a.disabled = true;
-    if (a.getAttribute("title") == title) a.disabled = false;
-  }
-}
-*/
-
-
-
-
-//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 //document.addEventListener('DOMContentLoaded', book, false);
-
-//document.getElementById('prev').addEventListener('touchstart', function(){bookScroll.scrollToPage('prev', 0);return false;}, false);
-//document.getElementById('next').addEventListener('touchstart', function(){bookScroll.scrollToPage('next', 0);return false;}, false);
-
-//var cl = document.body.className;
-//cl = cl.replace(/portrait|landscape/, orient);
-//document.body.className = cl;
-//alert(orient);
