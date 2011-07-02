@@ -159,8 +159,8 @@ window.onload = function() {
       styles = document.getElementById('styles');
   
   if ((/android/gi).test(navigator.appVersion)) {
-    style.style.display = "none";
-    aa.style.display = "none";
+    //style.style.display = "none";
+    //aa.style.display = "none";
   }
   
   setBook();
@@ -199,13 +199,12 @@ window.onload = function() {
     return false;
   }, false);
   
-  /*
+  
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
     setsize();
     bookCreate();
   }, false);
-  */
   
   document.getElementById('stylesDefault').addEventListener('touchstart', function (e){
     e.preventDefault();
