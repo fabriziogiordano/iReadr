@@ -214,6 +214,7 @@ body {
   font-size: <?php echo $fontsize['p']; ?>;
   line-height:<?php echo $lineheight; ?>;
   -webkit-box-sizing:border-box;
+  -webkit-font-smoothing: antialiased;
 }
 .pages h1 {text-align:left; font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
 .pages h2 {text-align:left; font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
