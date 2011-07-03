@@ -9,7 +9,7 @@ switch ($_GET['v']) {
     $lineheight = '25px';
     $fontsize['h1'] = '20px';
     $fontsize['h2'] = '13px';
-    $fontsize['p'] = '11px';
+    $fontsize['p'] = '13px';
   break;
   
   case 'bigdefault':
