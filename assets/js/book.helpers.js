@@ -19,11 +19,15 @@ function setBook () {
 }
 
 function setSize(){
-  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-    if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
-      if (!a.disabled) var title = a.getAttribute("title");
-    }
-  }
+  document.getElementById('loading').style.display = "block";
+  
+  // for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+  //   if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+  //     if (!a.disabled) var title = a.getAttribute("title");
+  //   }
+  // }
+  
+  
   
   if (title.indexOf("big") === 0) {
     setStyle(title.substring(3));

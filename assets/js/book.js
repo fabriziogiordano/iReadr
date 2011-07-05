@@ -2,9 +2,6 @@ var bookScroll;
 var bookSlug;
 
 function bookCreate() {
-  document.getElementById('loading').style.display = "block";
-  
-  if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
   
   /*Set genaral variables*/
   var doc = document,
@@ -22,25 +19,32 @@ function bookCreate() {
       totPages = doc.getElementById('totpages'),
       pagenumber = doc.getElementById('page'),
       bookmark = doc.getElementById('bookmark'),
-      indicator = doc.getElementById('indicator');
+      indicator = doc.getElementById('indicator'),
+      loading = doc.getElementById('loading');
   
+  loading.style.display = "block";
+  
+  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
+    element.parentNode.removeChild(element)
+  });
+
+  if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
+  
+  if (typeof store.get(bookSlug + '-size') !== 'undefined') {
+    bookMain.style.fontSize = store.get(bookSlug + '-size') + "%";
+  }
   
   /*Set genaral elements*/
   var screenHeight = ( orientation === 'portrait' ) ? 510 : 300,
       barsHeight = 0;
   
   if(isIPhone) {
-    barsHeight = standalone ? 5 : 50;
+    barsHeight = standalone ? 10 : 50;
     screenHeight = ( orientation === 'portrait' ) ? 480 : 340;
   }
   
   if(isIPad) {
-    barsHeight = standalone ? 20 : 70;
-    screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
-  }
-  
-  if(isIPad) {
-    barsHeight = standalone ? 20 : 70;
+    barsHeight = standalone ? 25 : 70;
     screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
   }
   
@@ -65,10 +69,6 @@ function bookCreate() {
   scroller.style.width = screenWidth * numPages + "px";
   totPages.innerHTML = numPages,
   indicatorStep = (doc.defaultView.getComputedStyle(indicator,null).getPropertyValue('width').replace(/px$/, '') | 0) / numPages;
-  
-  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
-    element.parentNode.removeChild(element)
-  });
   
   if (typeof bookScroll === 'object') {
     bookScroll.refresh();
@@ -116,7 +116,9 @@ function bookCreate() {
   
   setTimeout( function() { window.scrollTo(0,1); }, 200 );
   
-  document.getElementById('loading').style.display = "none";
+  setTimeout( function() { loading.style.display = "none"; }, 100 );
+  
+  setTimeout( function() { window.scrollTo(0,1); }, 1000 );
   
   if (debug) {
     var errorOutput = document.createElement('div');
@@ -196,7 +198,15 @@ window.onload = function() {
   
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
-    setSize();
+    
+    if (typeof store.get(bookSlug + '-size') !== 'undefined') {
+      var fontsize = ( store.get(bookSlug + '-size') == 100 ) ? 130 : 100;
+      store.set(bookSlug + '-size', fontsize)
+    }
+    else {
+      store.set(bookSlug + '-size', 100);
+    }
+    
     bookCreate();
   }, false);
   

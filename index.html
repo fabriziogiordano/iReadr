@@ -8,31 +8,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
 
-<link title="default" rel="stylesheet" type="text/css" href="./assets/css/style.css?v=default" />
-<link title="bigdefault" rel="alternate stylesheet" type="text/css" href="./assets/css/style.css?v=bigdefault" />
-<link title="old" rel="alternate stylesheet" type="text/css" href="./assets/css/style.css?v=old" />
-<link title="bigold" rel="alternate stylesheet" type="text/css" href="./assets/css/style.css?v=bigold" />
-<link title="fashion" rel="alternate stylesheet" type="text/css" href="./assets/css/style.css?v=fashion" />
-<link title="bigfashion" rel="alternate stylesheet" type="text/css" href="./assets/css/style.css?v=bigfashion" />
-<link title="antiqua" rel="alternate stylesheet" type="text/css" href="./assets/css/style.css?v=antiqua" />
-<link title="bigantiqua" rel="alternate stylesheet" type="text/css" href="./assets/css/style.css?v=bigantiqua" />
+<!-- http://jiffier.com/quickreader/ -->
+
+<link title="default" rel="stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=default" />
+<link title="bigdefault" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigdefault" />
+<link title="old" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=old" />
+<link title="bigold" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigold" />
+<link title="fashion" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=fashion" />
+<link title="bigfashion" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigfashion" />
+<link title="antiqua" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=antiqua" />
+<link title="bigantiqua" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigantiqua" />
 
 
-<!-- <script src="./assets/js/iscroll.js"></script>
-<script src="./assets/js/json.js"></script>
-<script src="./assets/js/store.js"></script>
-<script src="./assets/js/book.helpers.js"></script>
-<script src="./assets/js/book.js"></script> -->
+<script src="/quickreader/assets/js/iscroll.js"></script>
+<script src="/quickreader/assets/js/json.js"></script>
+<script src="/quickreader/assets/js/store.js"></script>
+<script src="/quickreader/assets/js/book.helpers.js"></script>
+<script src="/quickreader/assets/js/book.js"></script>
 
-<script src="./assets/js/reader.min.js"></script>
+<!-- <script src="/quickreader/assets/js/reader.min.js"></script> -->
 
 </head>
 <body id="book" class="default">
   <div id="header">
     <span id="bookmark"><span>Bookmark</span></span>
     <span id="aa">aA</span>
-    <span id="style">Style</span>
-    <span id="logo"><a href="http://google.com">Fingerbooks</a></span>
+    <span id="style" style="display:none;">Style</span>
+    <span id="logo"><a href="http://www.playmobile.it/web/fb/home">Fingerbooks</a></span>
     
     <div id="styles">
       <p id="stylesDefault">Default</p>
@@ -56,39 +58,8 @@
     <div id="indicator"> <span id="indicatorimg"> </span> </div>
     <div id="pagecounter"> page <span id="page"> 1 </span> of <span id="totpages"> 0 </span> </div>
   </div>
-  
+
+  <div id="loading">Loading...</div>
   <div id="footerhidden">&nbsp;</div>
-  <style>
-  #loading {
-    
-    display:none;
-    position:absolute;
-    top:0px;
-    left:0px;
-    z-index:9999;
-    width:100%;
-    height:100%;
-    font-size:13px;
-    padding:10px;
-    text-align:center;
-    font-family:helvetica;
-    background-image:-webkit-gradient(linear,0 0,0 100%,color-stop(0,#fff),color-stop(0.02,#eee),color-stop(0.98,#ccc),color-stop(1,#a3a3a3));
-    border:1px solid #505050;
-    color:#333;
-    text-shadow:0 1px 0 rgba(255,255,255,0.75);
-    line-height:130%;
-    -webkit-box-shadow:0 0 2px rgba(0,0,0,0.5);
-    -webkit-transition-property:-webkit-transform,opacity;
-    -webkit-transition-duration:0;
-    -webkit-transform:translate3d(0,0,0);
-    -webkit-user-select:none;
-    -webkit-box-sizing:border-box;
-    -webkit-border-radius:4px;
-    -webkit-background-clip:padding-box;
-    
-    
-  }
-  </style>
-  <div id="loading">Loading</div>
 </body>
 </html>
