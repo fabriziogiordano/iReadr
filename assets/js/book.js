@@ -116,7 +116,7 @@ function bookCreate() {
   
   setTimeout( function() { window.scrollTo(0,1); }, 200 );
   
-  setTimeout( function() { loading.style.display = "none"; }, 100 );
+  setTimeout( function() { loading.style.display = "none"; }, 500 );
   
   setTimeout( function() { window.scrollTo(0,1); }, 1000 );
   
@@ -184,20 +184,9 @@ window.onload = function() {
     return false;
   }, false);
   
-  style.addEventListener('touchstart', function (e){
-    e.preventDefault();
-    var styleclass = document.defaultView.getComputedStyle(styles, null).getPropertyValue('display');
-    if (styleclass === 'block') {
-      styles.style.display = "none";
-    }
-    else {
-      styles.style.display = "block";
-    }
-    return false;
-  }, false);
-  
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
+    document.getElementById('loading').style.display = "block";
     
     if (typeof store.get(bookSlug + '-size') !== 'undefined') {
       var fontsize = ( store.get(bookSlug + '-size') == 100 ) ? 130 : 100;
@@ -208,6 +197,18 @@ window.onload = function() {
     }
     
     bookCreate();
+  }, false);
+  
+  style.addEventListener('touchstart', function (e){
+    e.preventDefault();
+    var styleclass = document.defaultView.getComputedStyle(styles, null).getPropertyValue('display');
+    if (styleclass === 'block') {
+      styles.style.display = "none";
+    }
+    else {
+      styles.style.display = "block";
+    }
+    return false;
   }, false);
   
   document.getElementById('stylesDefault').addEventListener('touchstart', function (e){
