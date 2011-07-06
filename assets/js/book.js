@@ -187,6 +187,7 @@ window.onload = function() {
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
     document.getElementById('loading').style.display = "block";
+    return false;
     
     if (typeof store.get(bookSlug + '-size') !== 'undefined') {
       var fontsize = ( store.get(bookSlug + '-size') == 100 ) ? 130 : 100;
@@ -245,3 +246,23 @@ window.addEventListener('orientationchange', bookCreate, false);
 // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 //document.addEventListener('DOMContentLoaded', book, false);
+
+/*
+
+*
+  font-family: <?php echo $fontfamily; ?>;
+
+body
+  background-color: <?php echo $backgroundcolor; ?>;
+  color: <?php echo $color; ?>;
+
+.pages
+  text-align:justify;
+  font-size: <?php echo $fontsize['p']; ?>;
+  line-height:<?php echo $lineheight; ?>;
+
+.pages h1 {text-align:left; font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
+.pages h2 {text-align:left; font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
+
+
+*/
