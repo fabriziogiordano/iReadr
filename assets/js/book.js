@@ -24,7 +24,12 @@ function bookCreate() {
   
   loading.style.display = "block";
   
-  //if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
+  if (typeof store.get(bookSlug + '-size') !== 'undefined') {
+    var size =  store.get(bookSlug + '-size') * ( (isIPad) ? 1.5 : 1 ) + '%';
+    bookMain.style.fontSize = size;
+    doc.getElementById('title').style.fontSize = size;
+    doc.getElementById('author').style.fontSize = size;
+  }
   
   /*
   store.set(bookSlug + '-style', 'red');
@@ -42,6 +47,10 @@ function bookCreate() {
     doc.getElementById('author').style.fontSize = designs[bookStyle].authorfontsize;
   }
   */
+  
+  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
+    element.parentNode.removeChild(element)
+  });
   
   /*Set genaral elements*/
   var screenHeight = ( orientation === 'portrait' ) ? 510 : 300,
@@ -147,6 +156,7 @@ function scroll() {
 window.onload = function() {
   var title = document.getElementById('title');
   var styles = document.getElementById('styles');
+  var loading = document.getElementById('loading');
   
   document.title = title.innerHTML;
   bookSlug = slugify( title.innerHTML ) + 'f';
@@ -187,6 +197,24 @@ window.onload = function() {
     }
   }, false);
   
+  [].slice.apply(document.querySelectorAll('.size span')).forEach(function(element){
+    element.addEventListener('touchstart', function (e){
+      e.preventDefault();
+      loading.style.display = "block";
+      styles.style.display = "none";
+
+      if (typeof store.get(bookSlug + '-size') !== 'undefined') {
+        var fontsize = ( store.get(bookSlug + '-size') == 100 ) ? 130 : 100;
+        store.set(bookSlug + '-size', fontsize)
+      }
+      else {
+        store.set(bookSlug + '-size', 100);
+      }
+
+      bookCreate();
+    }, false);
+    
+  });
   /*
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
