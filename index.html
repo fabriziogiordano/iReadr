@@ -16,14 +16,6 @@
 <!-- http://jiffier.com/quickreader/ -->
 
 <link title="default" rel="stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=default" />
-<link title="bigdefault" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigdefault" />
-<link title="old" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=old" />
-<link title="bigold" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigold" />
-<link title="fashion" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=fashion" />
-<link title="bigfashion" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigfashion" />
-<link title="antiqua" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=antiqua" />
-<link title="bigantiqua" rel="alternate stylesheet" type="text/css" href="/quickreader/assets/css/style.css?v=bigantiqua" />
-
 
 <script src="/quickreader/assets/js/iscroll.js"></script>
 <script src="/quickreader/assets/js/json.js"></script>
@@ -38,14 +30,20 @@
   <div id="header">
     <span id="bookmark"><span>Bookmark</span></span>
     <span id="aa">aA</span>
-    <span id="style" style="display:none;">Style</span>
     <span id="logo"><a href="http://www.playmobile.it/web/fb/home">Fingerbooks</a></span>
     
     <div id="styles">
-      <p id="stylesDefault">Default</p>
-      <p id="stylesOld">Old</p>
-      <p id="stylesFashion">Fashion</p>
-      <p id="stylesAntiqua">Antiqua</p>
+      <div class="size">
+        <span class="big">A</span>
+        <span class="small">A</span>
+      </div>
+      <ul class="style">
+        <li id="stylesDefault">Default</li>
+        <li id="stylesNight">Night</li>
+        <li id="stylesBeach">Beach</li>
+        <li id="stylesOld">Old</li>
+        <li id="stylesGeek">Geek</li>
+      </ul>
       <span class="arrow"></span>
     </div>
   </div>
@@ -61,7 +59,7 @@
 
   <div id="footer">
     <div id="indicator"> <span id="indicatorimg"> </span> </div>
-    <div id="pagecounter"> page <span id="page"> 1 </span> of <span id="totpages"> 0 </span> </div>
+    <div id="pagecounter"> <span id="page"> 1 </span> / <span id="totpages"> 0 </span> </div>
   </div>
 
   <div id="loading">Loading...</div>

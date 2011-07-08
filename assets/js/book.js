@@ -2,7 +2,6 @@ var bookScroll;
 var bookSlug;
 
 function bookCreate() {
-  
   /*Set genaral variables*/
   var doc = document,
       isIPhone = (/iphone/gi).test(navigator.appVersion),
@@ -20,19 +19,29 @@ function bookCreate() {
       pagenumber = doc.getElementById('page'),
       bookmark = doc.getElementById('bookmark'),
       indicator = doc.getElementById('indicator'),
+      footer = doc.getElementById('footer'),
       loading = doc.getElementById('loading');
   
   loading.style.display = "block";
   
-  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
-    element.parentNode.removeChild(element)
-  });
-
-  if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
+  //if (typeof store.get(bookSlug + '-style') !== 'undefined') setStyle(store.get(bookSlug + '-style'));
   
-  if (typeof store.get(bookSlug + '-size') !== 'undefined') {
-    bookMain.style.fontSize = store.get(bookSlug + '-size') + "%";
+  /*
+  store.set(bookSlug + '-style', 'red');
+  if (typeof store.get(bookSlug + '-style') !== 'undefined') {
+    //bookMain.style.fontSize = store.get(bookSlug + '-size') + "%";
+    var bookStyle = store.get(bookSlug + '-style');
+    bookStyle = 'test';
+    doc.getElementById('book').style.backgroundColor = designs[bookStyle].bgcolor;
+    bookMain.style.fontFamily = designs[bookStyle].fontfamily;
+    bookMain.style.color = designs[bookStyle].color;
+    bookMain.style.fontSize = designs[bookStyle].fontsize;
+    bookMain.style.lineHeight = designs[bookStyle].lineheight;
+    footer.style.color = designs[bookStyle].footer;
+    doc.getElementById('title').style.fontSize = designs[bookStyle].titlefontsize;
+    doc.getElementById('author').style.fontSize = designs[bookStyle].authorfontsize;
   }
+  */
   
   /*Set genaral elements*/
   var screenHeight = ( orientation === 'portrait' ) ? 510 : 300,
@@ -85,6 +94,7 @@ function bookCreate() {
         pagenumber.innerHTML = this.currPageX + 1;
         store.set(bookSlug + '-page', this.currPageX);
         indicator.children[0].style.left = Math.floor(indicatorStep * this.currPageX) + "px";
+        //alert(indicator.children[0].style.left);
         window.currPage = this.currPageX;
       
         if (store.get(bookSlug + '-bookmark') === this.currPageX) {
@@ -114,49 +124,32 @@ function bookCreate() {
     bookScroll.scrollToPage(0, 0, 1);
   }
   
-  setTimeout( function() { window.scrollTo(0,1); }, 200 );
-  
+  setTimeout( scroll, 200 );
   setTimeout( function() { loading.style.display = "none"; }, 500 );
   
-  setTimeout( function() { window.scrollTo(0,1); }, 1000 );
-  
-  if (debug) {
-    var errorOutput = document.createElement('div');
-    errorOutput.id = "errorOutput";
-    errorOutput.style.display = "block";
-    document.getElementById('book').appendChild(errorOutput);
-    
-    log.error('lineHeight: ' + lineHeight);
 
-    log.error('screen.height: ' + screen.height);
-    log.error('screen.width: ' + screen.width);
-    
-    log.error('window.outerHeight: ' + window.outerHeight);
-    log.error('window.innerHeight: ' + window.innerHeight);
-
-    log.error('document.height: ' + document.height);
-    log.error('document.width: ' + document.width);
-
-    log.error('window.height: ' + window.height);
-    log.error('window.width: ' + window.width);
-
-    log.error('header offsetHeight: '+ document.getElementById('header').offsetHeight);
-    log.error('footer offsetHeight: '+ document.getElementById('footer').offsetHeight);
-    log.error('numPages: ' + numPages);
-    log.error('spaceHeight: ' + spaceHeight);
-    log.error('bookHeight: ' + bookHeight);
-    log.error('bookHeight2: ' + book.offsetHeight);
-    log.error('spaceHeight: ' + spaceHeight);
-    log.error('scroller width: ' + document.getElementById('scroller').style.width);
-    log.error('scroller height: ' + document.getElementById('scroller').style.height);
-  }
 return true;
 };
 
+function setBook() {
+  if ((/iphone|ipad|android/gi).test(navigator.appVersion)) {
+    setTimeout(bookCreate, 10);
+  }
+  else {
+    document.getElementById('footer').style.display = "none";
+  }
+}
+
+function scroll() {
+  window.scrollTo(0,1);
+}
+
 window.onload = function() {
   var title = document.getElementById('title');
+  var styles = document.getElementById('styles');
+  
   document.title = title.innerHTML;
-  bookSlug = slugify( title.innerHTML );
+  bookSlug = slugify( title.innerHTML ) + 'f';
   
   var bookmark = document.getElementById('bookmark'),
       style = document.getElementById('style'),
@@ -186,8 +179,18 @@ window.onload = function() {
   
   aa.addEventListener('touchstart', function (e){
     e.preventDefault();
+    if( styles.style.display === "block") {
+      styles.style.display = 'none';
+    }
+    else {
+      styles.style.display = 'block';
+    }
+  }, false);
+  
+  /*
+  aa.addEventListener('touchstart', function (e){
+    e.preventDefault();
     document.getElementById('loading').style.display = "block";
-    return false;
     
     if (typeof store.get(bookSlug + '-size') !== 'undefined') {
       var fontsize = ( store.get(bookSlug + '-size') == 100 ) ? 130 : 100;
@@ -199,7 +202,9 @@ window.onload = function() {
     
     bookCreate();
   }, false);
+  */
   
+  /*
   style.addEventListener('touchstart', function (e){
     e.preventDefault();
     var styleclass = document.defaultView.getComputedStyle(styles, null).getPropertyValue('display');
@@ -239,14 +244,47 @@ window.onload = function() {
     bookCreate();
     styles.style.display = "none";
   }, false);
-
+  */
 };
 
 window.addEventListener('orientationchange', bookCreate, false);
-// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('touchmove', function (e) { e.preventDefault(); scroll(); }, false);
 
-//document.addEventListener('DOMContentLoaded', book, false);
+var designs = {
+  'old': {
+    'fontfamily':'American Typewriter',
+    'bgcolor':'#F0E8D1',
+    'color':'#463220',
+    'titlefontsize':'20px',
+    'authorfontsize':'13px',
+    'pfontsize':'13px',
+    'lineheight':'25px',
+    'footer':'black'
+  },
+  'fashion': {
+    'font':'Marker Felt',
+    'bgcolor':'',
+    'color':'',
+    'titlefontsize':'',
+    'authorfontsize':'',
+    'pfontsize':'',
+    'lineheight':'',
+    'footer':'black'
+  },
+  'test': {
+    'font':'Courier New',
+    'bgcolor':'red',
+    'color':'black',
+    'titlefontsize':'40px',
+    'authorfontsize':'30px',
+    'pfontsize':'9px',
+    'lineheight':'10px',
+    'footer':'black'
+  }
 
+};
+
+//alert(designs.old.fontfamily);
 /*
 
 *
@@ -264,5 +302,39 @@ body
 .pages h1 {text-align:left; font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
 .pages h2 {text-align:left; font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
 
+//document.addEventListener('DOMContentLoaded', book, false);
 
+*/
+
+/*
+if (debug) {
+  var errorOutput = document.createElement('div');
+  errorOutput.id = "errorOutput";
+  errorOutput.style.display = "block";
+  document.getElementById('book').appendChild(errorOutput);
+
+  log.error('lineHeight: ' + lineHeight);
+
+  log.error('screen.height: ' + screen.height);
+  log.error('screen.width: ' + screen.width);
+
+  log.error('window.outerHeight: ' + window.outerHeight);
+  log.error('window.innerHeight: ' + window.innerHeight);
+
+  log.error('document.height: ' + document.height);
+  log.error('document.width: ' + document.width);
+
+  log.error('window.height: ' + window.height);
+  log.error('window.width: ' + window.width);
+
+  log.error('header offsetHeight: '+ document.getElementById('header').offsetHeight);
+  log.error('footer offsetHeight: '+ document.getElementById('footer').offsetHeight);
+  log.error('numPages: ' + numPages);
+  log.error('spaceHeight: ' + spaceHeight);
+  log.error('bookHeight: ' + bookHeight);
+  log.error('bookHeight2: ' + book.offsetHeight);
+  log.error('spaceHeight: ' + spaceHeight);
+  log.error('scroller width: ' + document.getElementById('scroller').style.width);
+  log.error('scroller height: ' + document.getElementById('scroller').style.height);
+}
 */

@@ -9,16 +9,7 @@ function fonts() {
   div.style.left = '-9999px';
 }
 
-function setBook () {
-  if ((/iphone|ipad|android/gi).test(navigator.appVersion)) {
-    setTimeout(bookCreate, 10);
-  }
-  else {
-    document.getElementById('footer').style.display = "none";
-  }
-}
-
-function setStyle(style){
+function setStyles(style){
   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
     if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
       a.disabled = true;
