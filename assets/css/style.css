@@ -1,98 +1,3 @@
-<?php
-header('Content-type: text/css');
-
-switch ($_GET['v']) {
-  case 'default':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = '"American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '20px';
-    $fontsize['h2'] = '13px';
-    $fontsize['p'] = '13px';
-  break;
-  
-  case 'bigdefault':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = '"American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '25px';
-    $fontsize['h2'] = '18px';
-    $fontsize['p'] = '16px';
-  break;
-  
-  case 'old':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = '"Courier New", "American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '20px';
-    $fontsize['h2'] = '13px';
-    $fontsize['p'] = '11px';
-  break;
-  
-  case 'bigold':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = '"Courier New", "American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '25px';
-    $fontsize['h2'] = '18px';
-    $fontsize['p'] = '16px';
-  break;
-  
-  case 'fashion':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'Helvetica, "American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '20px';
-    $fontsize['h2'] = '13px';
-    $fontsize['p'] = '11px';
-  break;
-  
-  case 'bigfashion':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'Helvetica, "American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '25px';
-    $fontsize['h2'] = '18px';
-    $fontsize['p'] = '16px';
-  break;
-  
-  case 'antiqua':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'Zapfino, "American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '20px';
-    $fontsize['h2'] = '13px';
-    $fontsize['p'] = '9px';
-  break;
-  
-  case 'bigantiqua':
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'Zapfino, "American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '25px';
-    $fontsize['h2'] = '18px';
-    $fontsize['p'] = '11px';
-  break;
-  
-  default:
-    $backgroundcolor = '#F0E8D1';
-    $color = '#463220';
-    $fontfamily = 'Farizio, "American Typewriter", Helvetica, sans-serif';
-    $lineheight = '25px';
-    $fontsize['h1'] = '20px';
-    $fontsize['h2'] = '11px';
-    $fontsize['p'] = '11px';
-}
-?>
-
 * {
   margin: 0px;
   padding: 0px;
@@ -111,15 +16,16 @@ background:
   url(bg-left.png) left top repeat-y,
   url(bg-right.png) right top repeat-y,
   url(bg-main.png) left top;
-  */
+  
+url('./images/bg-left.png') left top repeat-y,  
+*/
   
 body {
   background:
-    url('./images/bg-left.png') left top repeat-y,
     url('./images/bg-right.png') right top repeat-y;
   padding:0 20px;
-  background-color: <?php echo $backgroundcolor; ?>;
-  color: <?php echo $color; ?>;
+  background-color: #F0E8D1;
+  color: #463220;
   -webkit-perspective: 800;
   -webkit-text-size-adjust: none;
   -webkit-transform-style: preserve-3d;
@@ -211,13 +117,13 @@ body {
   overflow:hidden;
   text-align:justify;
   font-family: Georgia, "American Typewriter", Helvetica, sans-serif;
-  font-size: <?php echo $fontsize['p']; ?>;
-  line-height:<?php echo $lineheight; ?>;
+  font-size:13px;
+  line-height:25px;
   -webkit-box-sizing:border-box;
   -webkit-font-smoothing: antialiased;
 }
-.pages h1 {text-align:left; font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
-.pages h2 {text-align:left; font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
+.pages h1 {text-align:left; font-size:20px; line-height:25px;}
+.pages h2 {text-align:left; font-size:13px; line-height:25px;}
 .pages img {float:right; margin:0 0 0 10px;}
 
 #footer {
@@ -333,18 +239,16 @@ body {
 }
 
 #styles ul.style li { 
-  height:40px;
+  height:30px;
   padding:8px 5px 0 5px;
   -webkit-box-sizing:border-box;
 }
 
 #loading {
   display:none;
-  background:
-    url('./images/bg-left.png') left top repeat-y,
-    url('./images/bg-right.png') right top repeat-y;
+  background: -webkit-gradient(radial, center center, 0, center center, 200, from(#707070), to(#424242));
   position:absolute;
-  top:45px;
+  top:0px;
   left:0px;
   z-index:9999;
   width:100%;

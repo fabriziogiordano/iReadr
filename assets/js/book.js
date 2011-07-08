@@ -31,12 +31,9 @@ function bookCreate() {
     doc.getElementById('author').style.fontSize = size;
   }
   
-  /*
-  store.set(bookSlug + '-style', 'red');
   if (typeof store.get(bookSlug + '-style') !== 'undefined') {
-    //bookMain.style.fontSize = store.get(bookSlug + '-size') + "%";
     var bookStyle = store.get(bookSlug + '-style');
-    bookStyle = 'test';
+    // alert(bookStyle);
     doc.getElementById('book').style.backgroundColor = designs[bookStyle].bgcolor;
     bookMain.style.fontFamily = designs[bookStyle].fontfamily;
     bookMain.style.color = designs[bookStyle].color;
@@ -46,10 +43,9 @@ function bookCreate() {
     doc.getElementById('title').style.fontSize = designs[bookStyle].titlefontsize;
     doc.getElementById('author').style.fontSize = designs[bookStyle].authorfontsize;
   }
-  */
   
-  [].slice.apply(scroller.querySelectorAll('.added')).forEach(function(element){
-    element.parentNode.removeChild(element)
+  [].slice.apply(scroller.querySelectorAll('.pages.added')).forEach(function(element){
+    element.parentNode.removeChild(element);
   });
   
   /*Set genaral elements*/
@@ -103,7 +99,6 @@ function bookCreate() {
         pagenumber.innerHTML = this.currPageX + 1;
         store.set(bookSlug + '-page', this.currPageX);
         indicator.children[0].style.left = Math.floor(indicatorStep * this.currPageX) + "px";
-        //alert(indicator.children[0].style.left);
         window.currPage = this.currPageX;
       
         if (store.get(bookSlug + '-bookmark') === this.currPageX) {
@@ -153,13 +148,24 @@ function scroll() {
   window.scrollTo(0,1);
 }
 
+String.prototype.slugify = function() {
+  text = this.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
+  text = text.replace(/-/gi, "_");
+  text = text.replace(/\s/gi, "-");
+  return text;
+}
+
+var log = (function() {
+  return {  error : function(msg) { document.getElementById('errorOutput').appendChild(document.createElement('div')).innerHTML = msg } }
+})();
+
 window.onload = function() {
   var title = document.getElementById('title');
   var styles = document.getElementById('styles');
   var loading = document.getElementById('loading');
   
   document.title = title.innerHTML;
-  bookSlug = slugify( title.innerHTML ) + 'f';
+  bookSlug = title.innerHTML.slugify() + 'f';
   
   var bookmark = document.getElementById('bookmark'),
       style = document.getElementById('style'),
@@ -198,6 +204,7 @@ window.onload = function() {
   }, false);
   
   [].slice.apply(document.querySelectorAll('.size span')).forEach(function(element){
+    
     element.addEventListener('touchstart', function (e){
       e.preventDefault();
       loading.style.display = "block";
@@ -215,71 +222,33 @@ window.onload = function() {
     }, false);
     
   });
-  /*
-  aa.addEventListener('touchstart', function (e){
-    e.preventDefault();
-    document.getElementById('loading').style.display = "block";
-    
-    if (typeof store.get(bookSlug + '-size') !== 'undefined') {
-      var fontsize = ( store.get(bookSlug + '-size') == 100 ) ? 130 : 100;
-      store.set(bookSlug + '-size', fontsize)
-    }
-    else {
-      store.set(bookSlug + '-size', 100);
-    }
-    
-    bookCreate();
-  }, false);
-  */
   
-  /*
-  style.addEventListener('touchstart', function (e){
-    e.preventDefault();
-    var styleclass = document.defaultView.getComputedStyle(styles, null).getPropertyValue('display');
-    if (styleclass === 'block') {
+  [].slice.apply(document.querySelectorAll('.style li')).forEach(function(element){
+    
+    element.addEventListener('touchstart', function (e){
+      e.preventDefault();
+      loading.style.display = "block";
       styles.style.display = "none";
-    }
-    else {
-      styles.style.display = "block";
-    }
-    return false;
-  }, false);
+
+      if (typeof store.get(bookSlug + '-style') !== 'undefined') {
+        store.set(bookSlug + '-style', element.className)
+      }
+      else {
+        store.set(bookSlug + '-style', element.className);
+      }
+
+      bookCreate();
+    }, false);
+    
+  });
   
-  document.getElementById('stylesDefault').addEventListener('touchstart', function (e){
-    e.preventDefault();
-    setStyle('default');
-    bookCreate();
-    styles.style.display = "none";
-  }, false);
-  
-  document.getElementById('stylesOld').addEventListener('touchstart', function (e){
-    e.preventDefault();
-    setStyle('old');
-    bookCreate();
-    styles.style.display = "none";
-  }, false);
-  
-  document.getElementById('stylesFashion').addEventListener('touchstart', function (e){
-    e.preventDefault();
-    setStyle('fashion');
-    bookCreate();
-    styles.style.display = "none";
-  }, false);
-  
-  document.getElementById('stylesAntiqua').addEventListener('touchstart', function (e){
-    e.preventDefault();
-    setStyle('antiqua');
-    bookCreate();
-    styles.style.display = "none";
-  }, false);
-  */
 };
 
 window.addEventListener('orientationchange', bookCreate, false);
 document.addEventListener('touchmove', function (e) { e.preventDefault(); scroll(); }, false);
 
 var designs = {
-  'old': {
+  'default': {
     'fontfamily':'American Typewriter',
     'bgcolor':'#F0E8D1',
     'color':'#463220',
@@ -289,18 +258,49 @@ var designs = {
     'lineheight':'25px',
     'footer':'black'
   },
-  'fashion': {
-    'font':'Marker Felt',
-    'bgcolor':'',
-    'color':'',
-    'titlefontsize':'',
-    'authorfontsize':'',
-    'pfontsize':'',
-    'lineheight':'',
+  'night': {
+    'fontfamily':'Times New Roman',
+    'bgcolor':'black',
+    'color':'white',
+    'titlefontsize':'20px',
+    'authorfontsize':'13px',
+    'pfontsize':'13px',
+    'lineheight':'25px',
     'footer':'black'
   },
+  'beach': {
+    'fontfamily':'Times New Roman',
+    'bgcolor':'#F0E8D1',
+    'color':'#463220',
+    'titlefontsize':'20px',
+    'authorfontsize':'13px',
+    'pfontsize':'13px',
+    'lineheight':'25px',
+    'footer':'black'
+  },
+  'old': {
+    'fontfamily':'Georgia',
+    'bgcolor':'#463220',
+    'color':'white',
+    'titlefontsize':'20px',
+    'authorfontsize':'13px',
+    'pfontsize':'13px',
+    'lineheight':'25px',
+    'footer':'white'
+  },
+  'geek': {
+    'fontfamily':'Courier New',
+    'bgcolor':'#000',
+    'color':'green',
+    'titlefontsize':'20px',
+    'authorfontsize':'18px',
+    'pfontsize':'16px',
+    'lineheight':'25px',
+    'footer':'#FFF'
+  },
+  
   'test': {
-    'font':'Courier New',
+    'fontfamily':'Courier New',
     'bgcolor':'red',
     'color':'black',
     'titlefontsize':'40px',

@@ -2,7 +2,7 @@ DirectoryIndex home.html
 
 RemoveHandler .html .htm
 AddType application/x-httpd-php .php .htm .html
-AddType application/x-httpd-php .css
+# AddType application/x-httpd-php .css
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
