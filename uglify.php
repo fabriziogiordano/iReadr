@@ -13,7 +13,6 @@ $data = '';
 $data .=     'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/iscroll.js');
 $data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/json.js');
 $data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/store.js');
-$data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/book.helpers.js');
 $data .= '&'.'code_url='.urlencode('http://jiffier.com/quickreader/assets/js/book.js');
 $data .= '&'.'download=fabrizio.js';
 
