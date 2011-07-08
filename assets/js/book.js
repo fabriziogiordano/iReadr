@@ -25,7 +25,7 @@ function bookCreate() {
   loading.style.display = "block";
   
   if (typeof store.get(bookSlug + '-size') !== 'undefined') {
-    var size =  store.get(bookSlug + '-size') * ( (isIPad) ? 1.5 : 1 ) + '%';
+    var size = store.get(bookSlug + '-size') * ( (isIPad) ? 1.5 : 1 ) + '%';
     bookMain.style.fontSize = size;
     doc.getElementById('title').style.fontSize = size;
     doc.getElementById('author').style.fontSize = size;
@@ -60,6 +60,9 @@ function bookCreate() {
   if(isIPad) {
     barsHeight = standalone ? 25 : 70;
     screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
+    bookMain.style.lineHeight = '40px';
+    doc.getElementById('title').style.lineHeight = '40px';
+    doc.getElementById('author').style.lineHeight = '40px';
   }
   
   var screenWidth = wrapper.offsetWidth,
@@ -148,8 +151,8 @@ function scroll() {
   window.scrollTo(0,1);
 }
 
-String.prototype.slugify = function() {
-  text = this.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
+function slugify(text) {
+  text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
   text = text.replace(/-/gi, "_");
   text = text.replace(/\s/gi, "-");
   return text;
@@ -165,7 +168,7 @@ window.onload = function() {
   var loading = document.getElementById('loading');
   
   document.title = title.innerHTML;
-  bookSlug = title.innerHTML.slugify() + 'f';
+  bookSlug = slugify(title.innerHTML) + 'f';
   
   var bookmark = document.getElementById('bookmark'),
       style = document.getElementById('style'),

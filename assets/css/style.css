@@ -246,6 +246,7 @@ body {
 
 #loading {
   display:none;
+  background-color:#F0E8D1;
   background: -webkit-gradient(radial, center center, 0, center center, 200, from(#707070), to(#424242));
   position:absolute;
   top:0px;
@@ -257,7 +258,7 @@ body {
   padding-top:100px;
   text-align:center;
   font-family:helvetica;
-  background-color:#F0E8D1;
+  color:#e2e2e2;
   text-shadow:0 1px 0 rgba(255,255,255,0.75);
   -webkit-transition-property:-webkit-transform,opacity;
   -webkit-transition-duration:0;
