@@ -28,7 +28,7 @@ function bookCreate() {
     var size = store.get(bookSlug + '-size') * ( (isIPad) ? 1.5 : 1 ) + '%';
     bookMain.style.fontSize = size;
     doc.getElementById('title').style.fontSize = size;
-    doc.getElementById('author').style.fontSize = size;
+    //doc.getElementById('author').style.fontSize = size;
   }
   
   if (typeof store.get(bookSlug + '-style') !== 'undefined') {
@@ -41,7 +41,7 @@ function bookCreate() {
     bookMain.style.lineHeight = designs[bookStyle].lineheight;
     footer.style.color = designs[bookStyle].footer;
     doc.getElementById('title').style.fontSize = designs[bookStyle].titlefontsize;
-    doc.getElementById('author').style.fontSize = designs[bookStyle].authorfontsize;
+    //doc.getElementById('author').style.fontSize = designs[bookStyle].authorfontsize;
   }
   
   [].slice.apply(scroller.querySelectorAll('.pages.added')).forEach(function(element){
@@ -62,7 +62,7 @@ function bookCreate() {
     screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
     bookMain.style.lineHeight = '40px';
     doc.getElementById('title').style.lineHeight = '40px';
-    doc.getElementById('author').style.lineHeight = '40px';
+    //doc.getElementById('author').style.lineHeight = '40px';
   }
   
   var screenWidth = wrapper.offsetWidth,
