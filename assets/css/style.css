@@ -247,7 +247,7 @@ body {
 #loading {
   display:none;
   background-color:#F0E8D1;
-  background: -webkit-gradient(radial, center center, 0, center center, 200, from(#707070), to(#424242));
+  background: -webkit-gradient(radial, center center, 0, center center, 200, from(rgb(59, 80, 119)), to(rgba(59, 80, 119, 0.9)));
   position:absolute;
   top:0px;
   left:0px;
