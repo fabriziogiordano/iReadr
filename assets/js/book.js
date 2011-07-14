@@ -28,7 +28,7 @@ function bookCreate() {
     var size = store.get(bookSlug + '-size') * ( (isIPad) ? 1.5 : 1 ) + '%';
     bookMain.style.fontSize = size;
     doc.getElementById('title').style.fontSize = size;
-    //doc.getElementById('author').style.fontSize = size;
+    doc.getElementById('author').style.fontSize = size;
   }
   
   if (typeof store.get(bookSlug + '-style') !== 'undefined') {
@@ -41,7 +41,9 @@ function bookCreate() {
     bookMain.style.lineHeight = designs[bookStyle].lineheight;
     footer.style.color = designs[bookStyle].footer;
     doc.getElementById('title').style.fontSize = designs[bookStyle].titlefontsize;
-    //doc.getElementById('author').style.fontSize = designs[bookStyle].authorfontsize;
+    doc.getElementById('author').style.fontSize = designs[bookStyle].authorfontsize;
+    doc.getElementById('aa').style.color = designs[bookStyle].aa;
+    doc.getElementById('logolink').style.color = designs[bookStyle].logolink;
   }
   
   [].slice.apply(scroller.querySelectorAll('.pages.added')).forEach(function(element){
@@ -62,7 +64,7 @@ function bookCreate() {
     screenHeight = ( orientation === 'portrait' ) ? 1024 : 768;
     bookMain.style.lineHeight = '40px';
     doc.getElementById('title').style.lineHeight = '40px';
-    //doc.getElementById('author').style.lineHeight = '40px';
+    doc.getElementById('author').style.lineHeight = '40px';
   }
   
   var screenWidth = wrapper.offsetWidth,
@@ -259,7 +261,9 @@ var designs = {
     'authorfontsize':'13px',
     'pfontsize':'13px',
     'lineheight':'25px',
-    'footer':'black'
+    'footer':'black',
+    'aa':'#463220',
+    'logolink':'#463220'
   },
   'night': {
     'fontfamily':'Times New Roman',
@@ -269,17 +273,21 @@ var designs = {
     'authorfontsize':'13px',
     'pfontsize':'13px',
     'lineheight':'25px',
-    'footer':'black'
+    'footer':'black',
+    'aa':'#463220',
+    'logolink':'#463220'
   },
   'beach': {
-    'fontfamily':'Times New Roman',
+    'fontfamily':'Marker Felt',
     'bgcolor':'#F0E8D1',
     'color':'#463220',
     'titlefontsize':'20px',
     'authorfontsize':'13px',
     'pfontsize':'13px',
     'lineheight':'25px',
-    'footer':'black'
+    'footer':'black',
+    'aa':'#463220',
+    'logolink':'#463220'
   },
   'old': {
     'fontfamily':'Georgia',
@@ -289,17 +297,21 @@ var designs = {
     'authorfontsize':'13px',
     'pfontsize':'13px',
     'lineheight':'25px',
-    'footer':'white'
+    'footer':'white',
+    'aa':'#463220',
+    'logolink':'#463220'
   },
   'geek': {
-    'fontfamily':'Courier New',
+    'fontfamily':'Kailasa',
     'bgcolor':'#000',
     'color':'green',
     'titlefontsize':'20px',
     'authorfontsize':'18px',
     'pfontsize':'16px',
     'lineheight':'25px',
-    'footer':'#FFF'
+    'footer':'#FFF',
+    'aa':'#463220',
+    'logolink':'#463220'
   },
   
   'test': {
@@ -310,62 +322,9 @@ var designs = {
     'authorfontsize':'30px',
     'pfontsize':'9px',
     'lineheight':'10px',
-    'footer':'black'
+    'footer':'black',
+    'aa':'#463220',
+    'logolink':'#463220'
   }
 
 };
-
-//alert(designs.old.fontfamily);
-/*
-
-*
-  font-family: <?php echo $fontfamily; ?>;
-
-body
-  background-color: <?php echo $backgroundcolor; ?>;
-  color: <?php echo $color; ?>;
-
-.pages
-  text-align:justify;
-  font-size: <?php echo $fontsize['p']; ?>;
-  line-height:<?php echo $lineheight; ?>;
-
-.pages h1 {text-align:left; font-size: <?php echo $fontsize['h1']; ?>; line-height:<?php echo $lineheight; ?>;}
-.pages h2 {text-align:left; font-size: <?php echo $fontsize['h2']; ?>; line-height:<?php echo $lineheight; ?>;}
-
-//document.addEventListener('DOMContentLoaded', book, false);
-
-*/
-
-/*
-if (debug) {
-  var errorOutput = document.createElement('div');
-  errorOutput.id = "errorOutput";
-  errorOutput.style.display = "block";
-  document.getElementById('book').appendChild(errorOutput);
-
-  log.error('lineHeight: ' + lineHeight);
-
-  log.error('screen.height: ' + screen.height);
-  log.error('screen.width: ' + screen.width);
-
-  log.error('window.outerHeight: ' + window.outerHeight);
-  log.error('window.innerHeight: ' + window.innerHeight);
-
-  log.error('document.height: ' + document.height);
-  log.error('document.width: ' + document.width);
-
-  log.error('window.height: ' + window.height);
-  log.error('window.width: ' + window.width);
-
-  log.error('header offsetHeight: '+ document.getElementById('header').offsetHeight);
-  log.error('footer offsetHeight: '+ document.getElementById('footer').offsetHeight);
-  log.error('numPages: ' + numPages);
-  log.error('spaceHeight: ' + spaceHeight);
-  log.error('bookHeight: ' + bookHeight);
-  log.error('bookHeight2: ' + book.offsetHeight);
-  log.error('spaceHeight: ' + spaceHeight);
-  log.error('scroller width: ' + document.getElementById('scroller').style.width);
-  log.error('scroller height: ' + document.getElementById('scroller').style.height);
-}
-*/

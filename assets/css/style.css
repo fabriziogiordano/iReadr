@@ -39,6 +39,7 @@ body {
   height:45px;
   line-height:45px;
   height:45px;
+  font-family: Helvetica, Georgia, "American Typewriter", sans-serif;
   -webkit-box-sizing:border-box;
 }
 
@@ -46,17 +47,20 @@ body {
   float:left;
   height:45px;
   width:100px;
-  text-indent: -9999px;
-  background: transparent url('./images/logo.png') no-repeat 0px 0px; /*transparent*/
 }
 
 #header #logo a{
   display:block;
   height:45px;
   width:100px;
+  color: #463220;
+  text-decoration:none;
+  position:relative;
+  top:-5px;
+  font-size:18px;
 }
 
-#header #bookmark, #header #aa, #header #style{
+#header #bookmark, #header #aa{
   float:right;
   text-indent: -9999px;
   margin-right:10px;
@@ -80,13 +84,10 @@ body {
 #header #aa{
   height:45px;
   width:35px;
-  background: transparent url('./images/aa.png') no-repeat 0px 0px; /*transparent*/
-}
-
-#header #style{
-  height:45px;
-  width:49px;
-  background: transparent url('./images/style.png') no-repeat 0px 0px; /*transparent*/
+  text-indent: 0px;
+  position:relative;
+  top:-5px;
+  font-size:18px;
 }
 
 #wrapper {
@@ -129,6 +130,7 @@ body {
 #footer {
 	width:auto;
 	height:40px;
+  font-family: Helvetica, Georgia, "American Typewriter", sans-serif;
 }
 
 #footer #indicator {
@@ -247,7 +249,7 @@ body {
 #loading {
   display:none;
   background-color:#F0E8D1;
-  background: -webkit-gradient(radial, center center, 0, center center, 200, from(rgb(59, 80, 119)), to(rgba(59, 80, 119, 0.9)));
+  background: -webkit-gradient(radial, center center, 0, center center, 400, from(rgba(59, 80, 119, 0.4)), to(rgba(59, 80, 119, 0.9)));
   position:absolute;
   top:0px;
   left:0px;
