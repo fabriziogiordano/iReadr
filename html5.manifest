@@ -1,28 +1,17 @@
 CACHE MANIFEST
-#v5
+#v6
 CACHE:
-/quickreader/index.html
+/index.html
 
-/quickreader/assets/images/aa.png
-/quickreader/assets/images/bg-indicator-span.png
-/quickreader/assets/images/bg-indicator.png
-/quickreader/assets/images/bg-left.png
-/quickreader/assets/images/bg-right.png
-/quickreader/assets/images/bg-top-left.png
-/quickreader/assets/images/bg-top-right.png
-/quickreader/assets/images/bookmark.png
-/quickreader/assets/images/logo.png
+/assets/images/bookmark.png
 
-/quickreader/assets/iscroll.js
-/quickreader/assets/styleswitcher.js
-/quickreader/assets/json.js
-/quickreader/assets/store.js
-/quickreader/assets/cache.js
-/quickreader/assets/book.js
+/assets/iscroll.js
+/assets/json.js
+/assets/store.js
+/assets/cache.js
+/assets/book.js
 
-/quickreader/assets/style.css
-/quickreader/assets/style1.css
-/quickreader/assets/style2.css
+/assets/style.css
 
 NETWORK:
 *
